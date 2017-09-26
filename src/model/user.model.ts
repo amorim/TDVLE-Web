@@ -1,7 +1,7 @@
 /**
  * Created by lucas on 25/09/2017.
  */
-export class CuteUser {
+export class User {
   id: number;
   name: string;
   avatar: string;
