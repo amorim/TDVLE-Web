@@ -3,8 +3,11 @@
 <div>
   <form class="example-form">
     <md-form-field class="example-full-width">
-      <input mdInput placeholder="Name" [(ngModel)]="user.name" name="inputName">
+      <input mdInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
     </md-form-field>
   </form>
-  <button md-button (click)="sendUser()">Click me, Senpai!</button>
+  <button md-button (click)="login()">Click me, Senpai!</button>
 </div>

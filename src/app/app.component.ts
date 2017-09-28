@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../model/user.model';
 import {HttpClient, HttpClientModule, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {Headers, RequestOptions} from '@angular/http';
+import {UserLogin} from '../model/user-login.model';
 
 @Component({
   selector: 'app-root',
@@ -11,22 +12,17 @@ import {Headers, RequestOptions} from '@angular/http';
 export class AppComponent {
   title = 'app';
 
-  user: User = new User();
+  userLogin: UserLogin = new UserLogin();
 
   constructor (private http: HttpClient) {
   }
 
-  sendUser() {
-    // headers.append;
-    // let options = new RequestOptions({headers: headers});
-    const header = new HttpHeaders({'Authorization' : 'Bearer 0398fb67-7dff-4616-a446-a697921a18c4'});
-    console.log(header);
-
+  login() {
+    console.log(this.userLogin);
     this.http
-      .get('http://localhost:8080/profile', {headers: header})
+      .post('http://localhost:8080/api/login', this.userLogin)
       .subscribe(data => {
         console.log(data);
       });
-    console.log(this.user);
   }
 }
