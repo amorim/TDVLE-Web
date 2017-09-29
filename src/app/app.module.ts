@@ -8,22 +8,25 @@ import {MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdInputModule} from
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'welcome', component: WelcomeComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+      { enableTracing: false }
     ),
     HttpClientModule,
     BrowserAnimationsModule,
