@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {UserLogin} from '../../model/user-login.model';
 import {HttpClient} from '@angular/common/http';
-import {UserLogin} from '../model/user-login.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class LoginComponent implements OnInit {
+  title = 'login';
 
   userLogin: UserLogin = new UserLogin();
 
@@ -23,4 +23,8 @@ export class AppComponent {
         console.log(data);
       });
   }
+
+  ngOnInit() {
+  }
+
 }
