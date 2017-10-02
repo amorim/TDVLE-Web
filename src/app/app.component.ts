@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserLogin} from '../model/user-login.model';
+import {MdSidenav} from "@angular/material";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import {UserLogin} from '../model/user-login.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  @ViewChild('sidenav') sidenav: MdSidenav;
 
   userLogin: UserLogin = new UserLogin();
 
@@ -22,5 +23,9 @@ export class AppComponent {
       .subscribe(data => {
         console.log(data);
       });
+  }
+
+  toggleSidenav() {
+    this.sidenav.toggle();
   }
 }

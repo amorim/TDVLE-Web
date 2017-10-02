@@ -1,0 +1,12 @@
+.fill-space {
+  flex: 1 1 auto;
+}
+.space-left {
+  margin-left: 15px;
+}
+.content-container {
+  height: 700px;
+}
+.sidenav-menu {
+}
+
