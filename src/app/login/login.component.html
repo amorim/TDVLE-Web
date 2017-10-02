@@ -1,4 +1,4 @@
-<h2>Let's have fun, nil</h2>
+<h2>Login</h2>
 <br>
 <div>
   <form class="example-form">
@@ -6,8 +6,9 @@
       <input mdInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
     </md-form-field>
     <md-form-field class="example-full-width">
-      <input mdInput placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
+      <input mdInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
     </md-form-field>
   </form>
   <button md-button (click)="login()">Click me, Senpai!</button>
+  <md-card>{{token}}</md-card>
 </div>

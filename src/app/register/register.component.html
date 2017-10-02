@@ -1,0 +1,24 @@
+<h2>Register</h2>
+<br>
+<div>
+  <form class="example-form" name="form">
+    <md-form-field class="example-full-width">
+      <input mdInput required placeholder="Name" [(ngModel)]="this.userRegister.name" name="inputName" #inputName="ngModel">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput required placeholder="User Name" [(ngModel)]="this.userRegister.username" name="inputUserName" #inputUserName="ngModel">
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput required type="password" placeholder="Password" [(ngModel)]="this.userRegister.password" name="inputPassword" #inputPassword="ngModel">
+    </md-form-field>
+    <md-form-field>
+      <input mdInput required [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="this.userRegister.bornDate" name="inputBornDate" #inputBornDate="ngModel">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
+    <md-form-field class="example-full-width">
+      <input mdInput required type="email" placeholder="Email" [(ngModel)]="this.userRegister.email" name="inputEmail" #inputEmail="ngModel">
+    </md-form-field>
+  </form>
+  <button md-button [disabled]="inputName.invalid || inputUserName.invalid || inputPassword.invalid || inputBornDate.invalid || inputEmail.invalid" (click)="login()">Click me, Senpai!</button>
+</div>

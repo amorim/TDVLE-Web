@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserLogin} from '../../model/user-login.model';
+import {User} from '../../model/user.model';
 import {HttpClient} from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import {HttpClient} from '@angular/common/http';
 export class LoginComponent implements OnInit {
   title = 'login';
 
-  userLogin: UserLogin = new UserLogin();
+  userLogin: User = new User();
+  token = '';
 
   constructor (private http: HttpClient) {
   }
@@ -21,10 +23,10 @@ export class LoginComponent implements OnInit {
       .post('http://localhost:8080/api/login', this.userLogin)
       .subscribe(data => {
         console.log(data);
+        this.token = data['access_token'];
       });
   }
 
   ngOnInit() {
   }
-
 }
