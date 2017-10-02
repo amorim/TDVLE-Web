@@ -4,9 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdFormFieldModule, MdInputModule, MdNativeDateModule
-} from '@angular/material';
+import { MdDatepickerModule, MdNativeDateModule, MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdIconModule, MdInputModule, MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -40,7 +38,13 @@ const appRoutes: Routes = [
     MdFormFieldModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdInputModule
+    MdInputModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdTooltipModule,
+    MdSidenavModule,
+    MdMenuModule,
+    MdListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
