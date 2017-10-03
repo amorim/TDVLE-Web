@@ -1,0 +1,16 @@
+<br>
+<div>
+  <md-card class="post-form">
+    <h1>Post</h1>
+    <form>
+      <md-form-field class="example-full-width">
+        <input mdInput required placeholder="Title" [(ngModel)]="this.postObj.title" name="inputTitle" #inputTitle="ngModel">
+      </md-form-field>
+      <md-form-field class="example-full-width">
+        <input mdInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel">
+      </md-form-field>
+      <button md-raised-button (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
+      <a routerLink="/welcome">Welcome</a>
+    </form>
+  </md-card>
+</div>

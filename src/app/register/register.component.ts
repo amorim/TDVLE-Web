@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../model/user.model';
 import {HttpClient} from '@angular/common/http';
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-register',
@@ -12,10 +13,10 @@ export class RegisterComponent implements OnInit {
 
   userRegister: User = new User();
 
-  constructor (private http: HttpClient) {
+  constructor (private http: Http) {
   }
 
-  login() {
+  register() {
     console.log(this.userRegister);
     this.http
       .post('http://localhost:8080/api/register', this.userRegister)
@@ -25,5 +26,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onKeyPress($event) {
+    if ($event.keyCode === 13) {
+      this.register();
+    }
   }
 }

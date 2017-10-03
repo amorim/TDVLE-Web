@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {UserLogin} from '../model/user-login.model';
-import {MdSidenav} from "@angular/material";
+import {MdSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,10 @@ import {MdSidenav} from "@angular/material";
 })
 export class AppComponent {
   @ViewChild('sidenav') sidenav: MdSidenav;
+  constructor () {
+  }
 
-  constructor (private http: HttpClient) {
+  toggleSidenav() {
+    this.sidenav.toggle();
   }
 }
