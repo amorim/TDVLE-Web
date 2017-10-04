@@ -8,3 +8,7 @@
 .example-full-width {
   width: 100%;
 }
+
+:host >>> .mat-snack-bar-container {
+  margin-left: -1000px !important;
+}

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MdDatepickerModule, MdNativeDateModule, MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdIconModule, MdInputModule,
-  MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule, MdCardModule
+  MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule, MdCardModule, MdSnackBarModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -47,6 +47,7 @@ const appRoutes: Routes = [
     ),
     HttpModule,
     BrowserAnimationsModule,
+    MdSnackBarModule,
     MdCardModule,
     MdButtonModule,
     MdCheckboxModule,

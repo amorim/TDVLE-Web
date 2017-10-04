@@ -6,6 +6,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {AuthHttp} from '../auth/auth.http';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   userLogin: User = new User();
 
-  constructor (private authHttp: AuthHttp, private authService: AuthService, private router: Router) {
+  constructor (private authHttp: AuthHttp, private authService: AuthService, private router: Router, private snackBar: MdSnackBar) {
     if (this.authService.hasToken()) {
       this.router.navigate(['/welcome']);
     }
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
   callback(logged, code) {
     console.log(logged);
     console.log(code);
-    alert('LOGOU');
+    this.snackBar.open('Logged', 'Dismiss', {
+
+    });
     this.router.navigate(['/welcome']);
   }
 
