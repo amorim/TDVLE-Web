@@ -3,8 +3,14 @@
   max-width: 500px;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .example-full-width {
   width: 100%;
+}
+
+.example-header-image {
+  background-image: url('http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png');
+  background-size: cover;
 }

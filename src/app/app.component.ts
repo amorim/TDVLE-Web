@@ -10,9 +10,12 @@ import {MdSidenav} from '@angular/material';
 export class AppComponent {
   @ViewChild('sidenav') sidenav: MdSidenav;
   constructor () {
+
   }
 
   toggleSidenav() {
     this.sidenav.toggle();
   }
+
+
 }

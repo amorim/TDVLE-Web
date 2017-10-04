@@ -11,7 +11,12 @@ import {AuthHttp} from '../auth/auth.http';
 export class PostComponent implements OnInit {
 
   postObj: Post = new Post();
-  constructor(private http: AuthHttp) { }
+  posts: Post[] = [];
+  constructor(private http: AuthHttp) {
+    http.get('http://localhost:8080/api/user/post').map(res => res.json()).subscribe((json: Post[]) => {
+      this.posts = json;
+    });
+  }
 
   post() {
     console.log(this.postObj);
@@ -20,6 +25,7 @@ export class PostComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
       });
+    this.posts.unshift(this.postObj);
   }
 
   ngOnInit() {

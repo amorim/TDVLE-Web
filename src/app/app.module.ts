@@ -23,7 +23,7 @@ import {UserService} from './user/user.service';
 import { PostComponent } from './post/post.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },

@@ -13,4 +13,13 @@
       <a routerLink="/welcome">Welcome</a>
     </form>
   </md-card>
+
+  <md-card *ngFor="let post of posts" class="post-form">
+    <md-card-header>
+      <div md-card-avatar class="example-header-image"></div>
+      <md-card-title>{{post.title}}</md-card-title>
+      <md-card-subtitle>04/10/2017</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>{{post.description}}</md-card-content>
+  </md-card>
 </div>
