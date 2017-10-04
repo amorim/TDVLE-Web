@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "ngx-cookie-service": "^1.0.9",
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",

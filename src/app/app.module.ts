@@ -5,18 +5,29 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdFormFieldModule, MdInputModule, MdNativeDateModule
+  MdDatepickerModule, MdNativeDateModule, MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdIconModule, MdInputModule,
+  MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule, MdCardModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
+import {CookieService} from 'ngx-cookie-service';
+import {AuthGuard} from './auth/auth.guard';
+import {AuthHttp} from './auth/auth.http';
+import {Http, HttpModule} from '@angular/http';
+import {AuthService} from './auth/auth.service';
+import {AuthModule} from './auth/auth.module';
+import {UserService} from './user/user.service';
+import { PostComponent } from './post/post.component';
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent },
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -24,7 +35,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     WelcomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -33,16 +45,23 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false }
     ),
-    HttpClientModule,
+    HttpModule,
     BrowserAnimationsModule,
+    MdCardModule,
     MdButtonModule,
     MdCheckboxModule,
     MdFormFieldModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdInputModule
+    MdInputModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdTooltipModule,
+    MdSidenavModule,
+    MdMenuModule,
+    MdListModule
   ],
-  providers: [],
+  providers: [CookieService, AuthHttp, UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

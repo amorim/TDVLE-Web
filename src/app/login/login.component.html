@@ -1,14 +1,16 @@
-<h2>Login</h2>
 <br>
 <div>
-  <form class="example-form">
-    <md-form-field class="example-full-width">
-      <input mdInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
-    </md-form-field>
-    <md-form-field class="example-full-width">
-      <input mdInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
-    </md-form-field>
-  </form>
-  <button md-button (click)="login()">Click me, Senpai!</button>
-  <md-card>{{token}}</md-card>
+  <md-card class="login-form">
+    <h3>Sign In</h3>
+    <form>
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
+      </md-form-field>
+      <md-form-field class="example-full-width">
+        <input mdInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
+      </md-form-field>
+      <button md-raised-button (click)="login()" (onkeypress)="onKeyPress($event)" color="accent">Login</button>
+      <a routerLink="/register">Register</a>
+    </form>
+  </md-card>
 </div>
