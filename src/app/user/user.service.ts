@@ -8,9 +8,9 @@ import {Constants} from '../shared/constants';
 @Injectable()
 export class UserService {
 
-  constructor() { }
+  constructor(private http: AuthHttp) { }
 
   getAuthenticatedUser(): Observable<User> {
-    return new Observable();
+    return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 }

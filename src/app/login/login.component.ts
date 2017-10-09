@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   userLogin: User = new User();
 
   constructor (private authHttp: AuthHttp, private authService: AuthService, private router: Router, private snackBar: MdSnackBar) {
-    if (this.authService.hasToken()) {
+    if (this.authService.getAccessToken()) {
       this.router.navigate(['/welcome']);
     }
   }

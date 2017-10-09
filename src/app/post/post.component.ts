@@ -19,13 +19,13 @@ export class PostComponent implements OnInit {
   }
 
   post() {
-    console.log(this.postObj);
     this.http
       .post('http://localhost:8080/api/user/post', this.postObj)
       .subscribe(data => {
         console.log(data);
       });
-    this.posts.unshift(this.postObj);
+    this.postObj.date = new Date();
+    this.posts.unshift(JSON.parse(JSON.stringify(this.postObj)));
   }
 
   ngOnInit() {

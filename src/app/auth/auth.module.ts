@@ -11,6 +11,6 @@ import {AuthHttp} from './auth.http';
     CommonModule
   ],
   declarations: [],
-  providers: [ ]
+  providers: [CookieService, AuthService, AuthGuard, AuthHttp]
 })
 export class AuthModule { }

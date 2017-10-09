@@ -21,6 +21,9 @@ import {AuthService} from './auth/auth.service';
 import {AuthModule} from './auth/auth.module';
 import {UserService} from './user/user.service';
 import { PostComponent } from './post/post.component';
+import {MaterialModule} from "./material.module";
+import {UserModule} from "./user/user.module";
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -36,7 +39,8 @@ const appRoutes: Routes = [
     LoginComponent,
     WelcomeComponent,
     RegisterComponent,
-    PostComponent
+    PostComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -47,22 +51,11 @@ const appRoutes: Routes = [
     ),
     HttpModule,
     BrowserAnimationsModule,
-    MdSnackBarModule,
-    MdCardModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdFormFieldModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdInputModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTooltipModule,
-    MdSidenavModule,
-    MdMenuModule,
-    MdListModule
+    MaterialModule,
+    AuthModule,
+    UserModule
   ],
-  providers: [CookieService, AuthHttp, UserService, AuthService, AuthGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 
