@@ -5,8 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MdDatepickerModule, MdNativeDateModule, MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdIconModule, MdInputModule,
-  MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule, MdCardModule, MdSnackBarModule
+  MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule,
+  MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatCardModule, MatSnackBarModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';

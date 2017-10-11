@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MdSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import {MdSidenav} from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('sidenav') sidenav: MdSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
   constructor () {
 
   }

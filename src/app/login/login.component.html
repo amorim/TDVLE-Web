@@ -1,16 +1,16 @@
 <br>
 <div>
-  <md-card class="login-form">
+  <mat-card class="login-form">
     <h3>Sign In</h3>
     <form>
-      <md-form-field class="example-full-width">
-        <input mdInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
-      </md-form-field>
-      <button md-raised-button (click)="login()" (onkeypress)="onKeyPress($event)" color="accent">Login</button>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="User Name" [(ngModel)]="this.userLogin.username" name="inputUserName">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
+      </mat-form-field>
+      <button mat-raised-button (click)="login()" (onkeypress)="onKeyPress($event)" color="accent">Login</button>
       <a routerLink="/register">Register</a>
     </form>
-  </md-card>
+  </mat-card>
 </div>

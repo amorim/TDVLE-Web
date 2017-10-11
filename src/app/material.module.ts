@@ -1,48 +1,48 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MdButtonModule, MdCardModule, MdCheckboxModule, MdDatepickerModule, MdFormFieldModule, MdIconModule, MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule, MdSidenavModule,
-  MdSnackBarModule, MdToolbarModule, MdTooltipModule
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule, MatSidenavModule,
+  MatSnackBarModule, MatToolbarModule, MatTooltipModule
 } from "@angular/material";
 
 @NgModule({
   imports: [
     CommonModule,
-    MdSnackBarModule,
-    MdCardModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdFormFieldModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdInputModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTooltipModule,
-    MdSidenavModule,
-    MdMenuModule,
-    MdListModule
+    MatSnackBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatListModule
   ],
   declarations: [],
   exports: [
     CommonModule,
-    MdSnackBarModule,
-    MdCardModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdFormFieldModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdInputModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTooltipModule,
-    MdSidenavModule,
-    MdMenuModule,
-    MdListModule
+    MatSnackBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    MatMenuModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

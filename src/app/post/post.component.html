@@ -1,25 +1,25 @@
 <br>
 <div>
-  <md-card class="post-form">
+  <mat-card class="post-form">
     <h1>Post</h1>
     <form>
-      <md-form-field class="example-full-width">
-        <input mdInput required placeholder="Title" [(ngModel)]="this.postObj.title" name="inputTitle" #inputTitle="ngModel">
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel">
-      </md-form-field>
-      <button md-raised-button (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="Title" [(ngModel)]="this.postObj.title" name="inputTitle" #inputTitle="ngModel">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel">
+      </mat-form-field>
+      <button mat-raised-button (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
       <a routerLink="/welcome">Welcome</a>
     </form>
-  </md-card>
+  </mat-card>
 
-  <md-card *ngFor="let post of posts" class="post-form">
-    <md-card-header>
-      <div md-card-avatar class="example-header-image"></div>
-      <md-card-title>{{post.title}}</md-card-title>
-      <md-card-subtitle>{{post.date | timeAgo }}</md-card-subtitle>
-    </md-card-header>
-    <md-card-content>{{post.description}}</md-card-content>
-  </md-card>
+  <mat-card *ngFor="let post of posts" class="post-form">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{post.title}}</mat-card-title>
+      <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>{{post.description}}</mat-card-content>
+  </mat-card>
 </div>
