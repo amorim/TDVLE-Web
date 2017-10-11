@@ -8,5 +8,5 @@ In this project we aim to create a solution for intercommunication between vario
 
 This project uses [Angular CLI](https://github.com/angular/angular-cli) to automate all the build process. So after checking out, just run `npm install` and then `ng serve` and you're pretty much ready. You can access the app at `http://localhost:4200`. 
 
-##API
+## API
 This project depends on a Web API, it's available at [TDN-API](https://github.com/The-Dank-Network/TDN-API). Follow the instructions there to get the API up and running.
