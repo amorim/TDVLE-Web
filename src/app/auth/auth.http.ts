@@ -29,14 +29,6 @@ export class AuthHttp {
     return this.http.delete(url, this.setAuthHeader(options));
   }
 
-  patch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.patch(url, body, this.setAuthHeader(options));
-  }
-
-  head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    return this.http.head(url, this.setAuthHeader(options));
-  }
-
   setAuthHeader(options: RequestOptionsArgs): RequestOptionsArgs {
     options = options || {};
     options.headers = options.headers || new Headers();

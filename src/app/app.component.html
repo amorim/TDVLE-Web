@@ -1,20 +1,20 @@
-<md-toolbar color="primary">
-  <button md-icon-button (click)="toggleSidenav()">
-    <md-icon class="md-24" aria-label="Menu">menu</md-icon>
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon class="mat-24" aria-label="Menu">menu</mat-icon>
   </button>
   <span class="space-left">The Dank Network</span>
   <span class="fill-space"></span>
-  <button md-icon-button>
-    <md-icon class="md-24" mdTooltip="Notifications" aria-label="Notifications">notifications</md-icon>
+  <button mat-icon-button>
+    <mat-icon class="mat-24" matTooltip="Notifications" aria-label="Notifications">notifications</mat-icon>
   </button>
-</md-toolbar>
-<md-sidenav-container class="content-container">
-  <md-sidenav #sidenav class="sidenav-menu">
-    <md-nav-list>
-      <a md-list-item routerLink="/post"><md-icon>home</md-icon><span style="width: 20px;"></span>Home<span style="width: 20px;"></span></a>
-      <a md-list-item routerLink="/user"><md-icon>person</md-icon><span style="width: 20px;"></span>Profile<span style="width: 20px;"></span></a>
-      <a md-list-item href="#"><md-icon>home</md-icon><span style="width: 20px;"></span>Home<span style="width: 20px;"></span></a>
-    </md-nav-list>
-  </md-sidenav>
+</mat-toolbar>
+<mat-sidenav-container class="content-container">
+  <mat-sidenav #sidenav class="sidenav-menu">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/post"><mat-icon>home</mat-icon><span style="width: 20px;"></span>Home<span style="width: 20px;"></span></a>
+      <a mat-list-item href="#"><mat-icon>person</mat-icon><span style="width: 20px;"></span>Profile<span style="width: 20px;"></span></a>
+      <a mat-list-item href="#"><mat-icon>home</mat-icon><span style="width: 20px;"></span>Home<span style="width: 20px;"></span></a>
+    </mat-nav-list>
+  </mat-sidenav>
   <router-outlet></router-outlet>
-</md-sidenav-container>
+</mat-sidenav-container>

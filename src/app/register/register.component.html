@@ -1,27 +1,27 @@
 <br>
 <div>
-  <md-card class="register-form">
+  <mat-card class="register-form">
     <h3>Register</h3>
     <form>
-      <md-form-field class="example-full-width">
-        <input mdInput required placeholder="Name" [(ngModel)]="this.userRegister.name" name="inputName" #inputName="ngModel">
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput required placeholder="User Name" [(ngModel)]="this.userRegister.username" name="inputUserName" #inputUserName="ngModel">
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput required type="password" placeholder="Password" [(ngModel)]="this.userRegister.password" name="inputPassword" #inputPassword="ngModel">
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput required [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="this.userRegister.bornDate" name="inputBornDate" #inputBornDate="ngModel">
-        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-        <md-datepicker #picker></md-datepicker>
-      </md-form-field>
-      <md-form-field class="example-full-width">
-        <input mdInput required type="email" placeholder="Email" [(ngModel)]="this.userRegister.email" name="inputEmail" #inputEmail="ngModel">
-      </md-form-field>
-      <button md-raised-button [disabled]="inputName.invalid || inputUserName.invalid || inputPassword.invalid || inputBornDate.invalid || inputEmail.invalid" (click)="register()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="Name" [(ngModel)]="this.userRegister.name" name="inputName" #inputName="ngModel">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="User Name" [(ngModel)]="this.userRegister.username" name="inputUserName" #inputUserName="ngModel">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput required type="password" placeholder="Password" [(ngModel)]="this.userRegister.password" name="inputPassword" #inputPassword="ngModel">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput required [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="this.userRegister.bornDate" name="inputBornDate" #inputBornDate="ngModel">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput required type="email" placeholder="Email" [(ngModel)]="this.userRegister.email" name="inputEmail" #inputEmail="ngModel">
+      </mat-form-field>
+      <button mat-raised-button [disabled]="inputName.invalid || inputUserName.invalid || inputPassword.invalid || inputBornDate.invalid || inputEmail.invalid" (click)="register()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
       <a routerLink="/login">Login</a>
     </form>
-  </md-card>
+  </mat-card>
 </div>

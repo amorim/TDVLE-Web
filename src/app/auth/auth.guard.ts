@@ -5,17 +5,18 @@ import {AuthService} from './auth.service';
 import {Observer} from 'rxjs/Observer';
 import {Constants} from '../shared/constants';
 import {RequestOptionsArgs, Headers, Http} from '@angular/http';
+import {UserService} from "../user/user.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private http: Http, private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {
 
   }
 
   canActivate(route, state) {
     return Observable.create((observer: Observer<boolean>) => {
-      this.http.get(Constants.url + '/user', this.setAuthHeader(null)).map(res => res.json()).subscribe(data => {
+      this.userService.getAuthenticatedUser().subscribe(data => {
         observer.next(true);
         observer.complete();
       }, error => {
@@ -27,14 +28,5 @@ export class AuthGuard implements CanActivate {
         observer.complete();
       });
     });
-  }
-
-  setAuthHeader(options: RequestOptionsArgs): RequestOptionsArgs {
-    options = options || {};
-    options.headers = options.headers || new Headers();
-
-    options.headers.append('Authorization', 'Bearer ' + this.authService.getAccessToken());
-
-    return options;
   }
 }
