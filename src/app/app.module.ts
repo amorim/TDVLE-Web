@@ -21,13 +21,15 @@ import {AuthService} from './auth/auth.service';
 import {AuthModule} from './auth/auth.module';
 import {UserService} from './user/user.service';
 import { PostComponent } from './post/post.component';
+import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'post', component: PostComponent, canActivate: [AuthGuard] }
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     LoginComponent,
     WelcomeComponent,
     RegisterComponent,
-    PostComponent
+    PostComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

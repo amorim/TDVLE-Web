@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
   callback(logged, code) {
     console.log(logged);
     console.log(code);
-    this.snackBar.open('Logged', 'Dismiss', {
-
-    });
+    if (code === 0) {
+      this.snackBar.open('Logged In', 'Dismiss', {});
+    }
     this.router.navigate(['/welcome']);
   }
 

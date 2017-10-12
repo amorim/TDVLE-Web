@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
       });
-    this.posts.unshift(this.postObj);
+    this.posts.unshift(JSON.parse(JSON.stringify(this.postObj)));
   }
 
   ngOnInit() {
