@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Post} from '../../model/post.model';
-import {Http} from '@angular/http';
 import {AuthHttp} from '../auth/auth.http';
 
 @Component({
