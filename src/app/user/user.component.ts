@@ -14,9 +14,22 @@ import {Observable} from 'rxjs/Observable';
 export class UserComponent implements OnInit {
 
   user: User = new User();
+  followers: User[] = [];
+  following: User[] = [];
 
   constructor(private http: AuthHttp, private userService: UserService) {
-    console.log(this.userService.getAuthenticatedUser());
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      console.log(user);
+      this.user = user;
+      this.userService.getFollowers(this.user.id).subscribe(followers => {
+        console.log(followers);
+        this.followers = followers;
+      });
+      this.userService.getFollowing(this.user.id).subscribe(following => {
+        console.log(following);
+        this.following = following;
+      });
+    });
   }
 
   ngOnInit() {

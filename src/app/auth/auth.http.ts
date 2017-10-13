@@ -25,7 +25,7 @@ export class AuthHttp {
     return this.http.put(url, body, this.setAuthHeader(options));
   }
 
-  delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  del(url: string, options?: RequestOptionsArgs): Observable<Response> {
     return this.http.delete(url, this.setAuthHeader(options));
   }
 

@@ -6,7 +6,7 @@ import {
   MatMenuModule,
   MatNativeDateModule, MatSidenavModule,
   MatSnackBarModule, MatToolbarModule, MatTooltipModule
-} from "@angular/material";
+} from '@angular/material';
 
 @NgModule({
   imports: [

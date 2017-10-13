@@ -24,13 +24,15 @@ import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
+import {UserComponent} from "./user/user.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'post', component: PostComponent, canActivate: [AuthGuard] }
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
