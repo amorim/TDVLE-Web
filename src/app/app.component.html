@@ -4,9 +4,24 @@
   </button>
   <span class="space-left">The Dank Network</span>
   <span class="fill-space"></span>
-  <button mat-icon-button>
+  <button mat-icon-button [matMenuTriggerFor]="notifications">
     <mat-icon class="mat-24" matTooltip="Notifications" aria-label="Notifications">notifications</mat-icon>
+    <mat-menu #notifications="matMenu">
+      <mat-card *ngFor="let user of this.users" class="post-form">
+        <mat-card-header>
+          <!--<div mat-card-avatar class="example-header-image"></div>-->
+          <mat-card-title>{{user.name}}</mat-card-title>
+          <!--<mat-card-subtitle>{{user.id}}</mat-card-subtitle>-->
+        </mat-card-header>
+        <!--<mat-card-content>{{post.description}}</mat-card-content>-->
+      </mat-card>
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
   </button>
+  <!--<button mat-icon-button>-->
+    <!--<mat-icon class="mat-24" matTooltip="Notifications" aria-label="Notifications">notifications</mat-icon>-->
+  <!--</button>-->
 </mat-toolbar>
 <mat-sidenav-container class="content-container">
   <mat-sidenav #sidenav class="sidenav-menu">
