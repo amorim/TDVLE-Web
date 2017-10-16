@@ -4,10 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule,
-  MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatTooltipModule, MatCardModule, MatSnackBarModule
-} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -25,6 +21,7 @@ import {MaterialModule} from "./material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {UserComponent} from "./user/user.component";
+import {AvatarModule} from "ngx-avatar";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -33,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
-]
+];
 
 @NgModule({
   declarations: [
@@ -55,7 +52,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     AuthModule,
-    UserModule
+    UserModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
