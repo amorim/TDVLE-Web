@@ -4,10 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MdDatepickerModule, MdNativeDateModule, MdButtonModule, MdCheckboxModule, MdFormFieldModule, MdIconModule, MdInputModule,
-  MdListModule, MdMenuModule, MdSidenavModule, MdToolbarModule, MdTooltipModule, MdCardModule
-} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -21,14 +17,20 @@ import {AuthService} from './auth/auth.service';
 import {AuthModule} from './auth/auth.module';
 import {UserService} from './user/user.service';
 import { PostComponent } from './post/post.component';
+import {MaterialModule} from "./material.module";
+import {UserModule} from "./user/user.module";
+import {TimeAgoPipe} from 'time-ago-pipe';
+import {UserComponent} from "./user/user.component";
+import {AvatarModule} from "ngx-avatar";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'post', component: PostComponent, canActivate: [AuthGuard] }
-]
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
+];
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     LoginComponent,
     WelcomeComponent,
     RegisterComponent,
-    PostComponent
+    PostComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -47,21 +50,12 @@ const appRoutes: Routes = [
     ),
     HttpModule,
     BrowserAnimationsModule,
-    MdCardModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdFormFieldModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
-    MdInputModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdTooltipModule,
-    MdSidenavModule,
-    MdMenuModule,
-    MdListModule
+    MaterialModule,
+    AuthModule,
+    UserModule,
+    AvatarModule
   ],
-  providers: [CookieService, AuthHttp, UserService, AuthService, AuthGuard],
+  providers: [],
   bootstrap: [AppComponent]
 })
 

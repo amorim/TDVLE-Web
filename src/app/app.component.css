@@ -1,3 +1,8 @@
+.post-form {
+  /*width: 100%;*/
+  margin: 0 auto;
+}
+
 .fill-space {
   flex: 1 1 auto;
 }

@@ -1,0 +1,26 @@
+<mat-card class="post-form">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{user.name}}</mat-card-title>
+    <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content></mat-card-content>
+  <a routerLink="/welcome">Welcome</a>
+  <router-outlet></router-outlet>
+</mat-card>
+
+<h1>Followers</h1>
+<mat-card *ngFor="let follower of followers" class="post-form">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{follower.name}}</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+<h1>Following</h1>
+<mat-card *ngFor="let following of following" class="post-form">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{following.name}}</mat-card-title>
+  </mat-card-header>
+</mat-card>

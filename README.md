@@ -1,28 +1,12 @@
-# DankNetwork
+# The Dank Network
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.1.
+Welcome to The Dank Network, a simple social network site, built primarily, but not exclusively, for Software Project subject.
+In this project we aim to create a solution for intercommunication between various other projects. These projects shall soon be listed here.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Running the project
 
-## Code scaffolding
+This project uses [Angular CLI](https://github.com/angular/angular-cli) to automate all the build process. So after checking out, just run `npm install` and then `ng serve` and you're pretty much ready. You can access the app at `http://localhost:4200`. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## API
+This project depends on a Web API, it's available at [TDN-API](https://github.com/The-Dank-Network/TDN-API). Follow the instructions there to get the API up and running.
