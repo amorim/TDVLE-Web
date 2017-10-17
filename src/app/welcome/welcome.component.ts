@@ -30,21 +30,24 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  sameId(a: User, b: User): boolean {
-    return a.id === b.id;
-  }
-
   logout() {
     this.authService.logout();
     this.snackBar.open('Logged Out', 'Dismiss', {});
     this.router.navigate(['/login']);
   }
 
-  follow(id) {
-    this.userService.setFollow(id);
+  toggleFollow(user: User) {
+    if (this.following.findIndex(u => u.id === user.id) !== -1) {
+      console.log("should now unfollow user");
+      return;
+    }
+    console.log("should now follow user");
   }
 
-  unfollow(id) {
-    this.userService.deleteFollow(id);
+  getFollowingText(user: User) {
+    if (this.following.findIndex(u => u.id === user.id) !== -1) {
+      return "Unfollow";
+    }
+    return "Follow";
   }
 }
