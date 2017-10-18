@@ -52,7 +52,7 @@ export class WelcomeComponent implements OnInit {
       this.userService.getAuthenticatedUser().subscribe(user => {
         this.userService.getFollowing(user.id).subscribe(following => {
           this.following = following;
-        })
+        });
       });
     });
   }
@@ -77,11 +77,11 @@ export class WelcomeComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.snackBar.open('Logged Out', 'Dismiss', {});
+    this.snackBar.open('Logged Out', 'Dismiss', {duration: 500});
     this.router.navigate(['/login']);
   }
 
-  toogleFollow(user) {
+  toggleFollow(user) {
     if (this.isFollowing(user)) {
       this.following.splice(this.getPosition(user), 1);
       this.userService.deleteFollow(user.id);

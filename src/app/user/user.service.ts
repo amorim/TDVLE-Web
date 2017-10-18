@@ -5,6 +5,7 @@ import {AuthHttp} from '../auth/auth.http';
 import {AppComponent} from '../app.component';
 import {Constants} from '../shared/constants';
 import {Notification} from "../../model/notification.model";
+import {ObjectUnsubscribedError} from 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
@@ -13,6 +14,14 @@ export class UserService {
 
   getNotifications(): Observable<Notification[]> {
     return this.http.get(Constants.url + '/notifications').map(res => res.json());
+  }
+
+  getNotificationsCount(): Observable<number> {
+    return this.http.get(Constants.url + '/notifications/count').map(res => res.json());
+  }
+
+  setReadNotifications(): Observable<Object> {
+    return this.http.post(Constants.url + '/notifications/read', null).map(res => res.json());
   }
 
   getUsers(): Observable<User[]> {
@@ -31,8 +40,12 @@ export class UserService {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
-  getFollowers(id): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/' + id + '/followers').map(res => res.json());
+  getFollowers(id, max, offset): Observable<User[]> {
+    return this.http.get(Constants.url + '/users/' + id + '/followers?max=' + max + '&offset=' + offset).map(res => res.json());
+  }
+
+  getFollowerCount(): Observable<number> {
+    return this.http.get(Constants.url + '/users/follower/count').map(res => res.json());
   }
 
   getFollowing(id): Observable<User[]> {

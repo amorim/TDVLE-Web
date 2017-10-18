@@ -22,13 +22,9 @@ export class PostComponent implements OnInit {
   }
 
   post() {
-    this.http
-      .post('http://localhost:8080/api/user/post', this.postObj).map(res => res.json())
-      .subscribe((json: Post) => {
-        console.log(json);
-        this.postObj = json;
-        this.posts.unshift(JSON.parse(JSON.stringify(this.postObj)));
-      });
+    this.http.post('http://localhost:8080/api/user/post', this.postObj).map(res => res.json()).subscribe((post: Post) => {
+      this.posts.unshift(JSON.parse(JSON.stringify(post)));
+    });
   }
 
   ngOnInit() {
