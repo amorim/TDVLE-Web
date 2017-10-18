@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUsersPage(max, offset): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/max=' + max + '&offset=' + offset).map(res => res.json());
+    return this.http.get(Constants.url + '/users?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
   getAuthenticatedUser(): Observable<User> {
