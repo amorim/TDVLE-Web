@@ -4,14 +4,23 @@ import {User} from '../../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
 import {AppComponent} from '../app.component';
 import {Constants} from '../shared/constants';
+import {Notification} from "../../model/notification.model";
 
 @Injectable()
 export class UserService {
 
   constructor(private http: AuthHttp) { }
 
+  getNotifications(): Observable<Notification[]> {
+    return this.http.get(Constants.url + '/notifications').map(res => res.json());
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get(Constants.url + '/users/').map(res => res.json());
+  }
+
+  getUsersCount(): Observable<number> {
+    return this.http.get(Constants.url + '/users/count').map(res => res.json());
   }
 
   getUsersPage(max, offset): Observable<User[]> {
