@@ -12,19 +12,23 @@ export class PostComponent implements OnInit {
   postObj: Post = new Post();
   posts: Post[] = [];
   constructor(private http: AuthHttp) {
-    http.get('http://localhost:8080/api/user/post').map(res => res.json()).subscribe((json: Post[]) => {
+    http.get('http://localhost:8080/api/users/posts').map(res => res.json()).subscribe((json: Post[]) => {
+      console.log(json);
       this.posts = json;
+      http.get('http://localhost:8080/api/users/posts/count').subscribe(postCount => {
+        console.log(postCount);
+      });
     });
   }
 
   post() {
     this.http
-      .post('http://localhost:8080/api/user/post', this.postObj)
-      .subscribe(data => {
-        console.log(data);
+      .post('http://localhost:8080/api/user/post', this.postObj).map(res => res.json())
+      .subscribe((json: Post) => {
+        console.log(json);
+        this.postObj = json;
+        this.posts.unshift(JSON.parse(JSON.stringify(this.postObj)));
       });
-    this.postObj.date = new Date();
-    this.posts.unshift(JSON.parse(JSON.stringify(this.postObj)));
   }
 
   ngOnInit() {

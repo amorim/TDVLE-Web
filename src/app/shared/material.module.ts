@@ -6,7 +6,8 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule, MatPaginator, MatPaginatorModule, MatSidenavModule,
-  MatSnackBarModule, MatToolbarModule, MatTooltipModule
+  MatSnackBarModule, MatToolbarModule, MatTooltipModule,
+   MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,7 +27,8 @@ import {
     MatSidenavModule,
     MatMenuModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTabsModule
   ],
   declarations: [],
   exports: [
@@ -45,7 +47,8 @@ import {
     MatSidenavModule,
     MatMenuModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule { }

@@ -4,12 +4,9 @@
     <h1>Post</h1>
     <form>
       <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Title" [(ngModel)]="this.postObj.title" name="inputTitle" #inputTitle="ngModel">
+        <textarea matInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel"></textarea>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel">
-      </mat-form-field>
-      <button mat-raised-button (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
+      <button mat-raised-button [disabled]="inputDescription.invalid" (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
       <a routerLink="/welcome">Welcome</a>
     </form>
   </mat-card>
@@ -17,7 +14,7 @@
   <mat-card *ngFor="let post of posts" class="post-form">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{post.title}}</mat-card-title>
+      <mat-card-title>{{post.user.name}}</mat-card-title>
       <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>{{post.description}}</mat-card-content>

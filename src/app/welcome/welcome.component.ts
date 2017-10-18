@@ -23,10 +23,12 @@ export class WelcomeComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private userService: UserService) {
     this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
-      console.log('There are ', users.length, ' users');
       this.users = users;
-      this.length = this.users.length;
-      this.pageEvent.length = this.length;
+      this.userService.getUsersCount().subscribe(quantity => {
+        this.length = quantity['userCount'];
+        this.pageEvent.length = this.length;
+        console.log('There are: ', this.length, ' users');
+      });
       this.pageEvent.pageSize = this.pageSize;
       this.pageEvent.pageIndex = this.pageIndex;
       this.userService.getAuthenticatedUser().subscribe(user => {
@@ -35,24 +37,24 @@ export class WelcomeComponent implements OnInit {
         });
       });
     });
+
+
   }
 
   ngOnInit() {
   }
 
-  paginationFrom(pageEvent) {
-    console.log(pageEvent);
-    if (pageEvent) {
-      // console.log(pageEvent.pageIndex * pageEvent.pageSize);
-      return(pageEvent.pageIndex * pageEvent.pageSize);
-    }
-  }
-
-  paginationTo(pageEvent) {
-    if (pageEvent) {
-      // console.log((pageEvent.pageIndex * pageEvent.pageSize) + pageEvent.pageSize);
-      return((pageEvent.pageIndex * pageEvent.pageSize) + pageEvent.pageSize);
-    }
+  alterPage() {
+    console.log('Getting new page');
+    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
+      console.log('fock', users);
+      this.users = users;
+      this.userService.getAuthenticatedUser().subscribe(user => {
+        this.userService.getFollowing(user.id).subscribe(following => {
+          this.following = following;
+        })
+      });
+    });
   }
 
   getPosition(user) {

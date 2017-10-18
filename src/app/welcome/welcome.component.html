@@ -8,7 +8,7 @@
 </div>
 
 <h1>Users</h1>
-<mat-card *ngFor="let user of this.users.slice(paginationFrom(pageEvent), paginationTo(pageEvent))" class="welcome-form">
+<mat-card *ngFor="let user of this.users" class="welcome-form">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{user.name}}</mat-card-title>
@@ -16,7 +16,7 @@
   </mat-card-header>
 </mat-card>
 
-<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event"></mat-paginator>
+<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
 
 <!--<div *ngIf="pageEvent">-->
   <!--<h5>Page Change Event Properties</h5>-->
