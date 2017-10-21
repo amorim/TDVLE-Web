@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
-import {AppComponent} from '../app.component';
 import {Constants} from '../shared/constants';
 import {Notification} from "../../model/notification.model";
-import {ObjectUnsubscribedError} from 'rxjs/Rx';
 
 @Injectable()
 export class UserService {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Post} from '../../model/post.model';
-import {AuthHttp} from '../auth/auth.http';
 import {PostService} from "./post.service";
+import {PageEvent} from "@angular/material";
 
 @Component({
   selector: 'app-post',
@@ -10,18 +10,23 @@ import {PostService} from "./post.service";
 })
 export class PostComponent implements OnInit {
 
+  length = 0;
+  pageSize = 5;
+  pageSizeOptions = [5, 10, 25, 100];
+  pageIndex = 0;
+  pageEvent: PageEvent = new PageEvent;
+
   postObj: Post = new Post();
   posts: Post[] = [];
-  postCount = 0;
 
   constructor(private postService: PostService) {
-    this.postService.getPosts().subscribe(posts => {
-      console.log(posts);
-      this.posts = posts;
-    });
     this.postService.getPostCount().subscribe(postCount => {
-      console.log('There are:', postCount['postCount'], 'posts');
-      this.postCount = postCount;
+      this.length = postCount['postCount'];
+      console.log('There are:', this.length, 'posts');
+    });
+    this.postService.getPosts(this.pageSize, this.pageIndex * this.pageSize).subscribe(posts => {
+      console.log('Posts:', posts);
+      this.posts = posts;
     });
   }
 
@@ -29,10 +34,17 @@ export class PostComponent implements OnInit {
     this.postService.setPost(this.postObj).subscribe(post => {
       this.posts.unshift(post);
     });
-      // this.posts.unshift(JSON.parse(JSON.stringify(post)));
   }
 
   ngOnInit() {
+  }
+
+  alterPage() {
+    console.log('Getting new page');
+    this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(posts => {
+      console.log('Posts:', posts);
+      this.posts = posts;
+    });
   }
 
   onKeyPress($event) {

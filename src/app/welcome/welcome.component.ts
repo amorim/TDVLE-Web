@@ -22,23 +22,18 @@ export class WelcomeComponent implements OnInit {
   following: User[] = [];
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private userService: UserService) {
+    this.userService.getUsersCount().subscribe(quantity => {
+      this.length = quantity['userCount'];
+      console.log('There are:', this.length, ' users');
+    });
     this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
       this.users = users;
-      this.userService.getUsersCount().subscribe(quantity => {
-        this.length = quantity['userCount'];
-        this.pageEvent.length = this.length;
-        console.log('There are:', this.length, ' users');
-      });
-      this.pageEvent.pageSize = this.pageSize;
-      this.pageEvent.pageIndex = this.pageIndex;
-      this.userService.getAuthenticatedUser().subscribe(user => {
-        this.userService.getFollowing(user.id).subscribe(following => {
-          this.following = following;
-        });
+    });
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.userService.getFollowing(user.id).subscribe(following => {
+        this.following = following;
       });
     });
-
-
   }
 
   ngOnInit() {

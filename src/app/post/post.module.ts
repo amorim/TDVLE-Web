@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule} from "@angular/router";
-import {MaterialModule} from "../shared/material.module";
-import {PostComponent} from "./post.component";
 import {PostService} from "./post.service";
+import {PostComponent} from "./post.component";
+import {MaterialModule} from "../shared/material.module";
+import {RouterModule} from "@angular/router";
+import {TimeAgoPipe} from "time-ago-pipe";
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import {PostService} from "./post.service";
     RouterModule,
     MaterialModule
   ],
-  declarations: [PostComponent],
+  declarations: [],
   providers: [PostService]
 })
 export class PostModule { }

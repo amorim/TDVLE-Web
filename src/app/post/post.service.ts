@@ -9,8 +9,8 @@ export class PostService {
 
   constructor(private http: AuthHttp) { }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get(Constants.url + '/users/posts').map(res => res.json());
+  getPosts(max, offset): Observable<Post[]> {
+    return this.http.get(Constants.url + '/users/posts?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
   getPostCount(): Observable<number> {
@@ -18,7 +18,7 @@ export class PostService {
   }
 
   setPost(postObj: Post): Observable<Post> {
-    return this.http.post('/user/post', postObj).map(res => res.json());
+    return this.http.post(Constants.url + '/user/post', postObj).map(res => res.json());
   }
 
 }
