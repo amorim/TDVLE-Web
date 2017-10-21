@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor (private userService: UserService) {
     this.userService.getNotificationsCount().subscribe(notificationCount => {
-      console.log('There are', notificationCount['notificationCount'], 'notifications');
+      console.log('There are:', notificationCount['notificationCount'], 'notifications');
       this.notificationCount = notificationCount['notificationCount'];
     });
 

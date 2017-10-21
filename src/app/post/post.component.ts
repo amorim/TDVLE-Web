@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Post} from '../../model/post.model';
 import {AuthHttp} from '../auth/auth.http';
+import {PostService} from "./post.service";
 
 @Component({
   selector: 'app-post',
@@ -11,20 +12,24 @@ export class PostComponent implements OnInit {
 
   postObj: Post = new Post();
   posts: Post[] = [];
-  constructor(private http: AuthHttp) {
-    http.get('http://localhost:8080/api/users/posts').map(res => res.json()).subscribe((json: Post[]) => {
-      console.log(json);
-      this.posts = json;
-      http.get('http://localhost:8080/api/users/posts/count').subscribe(postCount => {
-        console.log(postCount);
-      });
+  postCount = 0;
+
+  constructor(private postService: PostService) {
+    this.postService.getPosts().subscribe(posts => {
+      console.log(posts);
+      this.posts = posts;
+    });
+    this.postService.getPostCount().subscribe(postCount => {
+      console.log('There are:', postCount['postCount'], 'posts');
+      this.postCount = postCount;
     });
   }
 
   post() {
-    this.http.post('http://localhost:8080/api/user/post', this.postObj).map(res => res.json()).subscribe((post: Post) => {
-      this.posts.unshift(JSON.parse(JSON.stringify(post)));
+    this.postService.setPost(this.postObj).subscribe(post => {
+      this.posts.unshift(post);
     });
+      // this.posts.unshift(JSON.parse(JSON.stringify(post)));
   }
 
   ngOnInit() {

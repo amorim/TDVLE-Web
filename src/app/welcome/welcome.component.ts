@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit {
       this.userService.getUsersCount().subscribe(quantity => {
         this.length = quantity['userCount'];
         this.pageEvent.length = this.length;
-        console.log('There are: ', this.length, ' users');
+        console.log('There are:', this.length, ' users');
       });
       this.pageEvent.pageSize = this.pageSize;
       this.pageEvent.pageIndex = this.pageIndex;
@@ -47,7 +47,7 @@ export class WelcomeComponent implements OnInit {
   alterPage() {
     console.log('Getting new page');
     this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
-      console.log('fock', users);
+      console.log(users);
       this.users = users;
       this.userService.getAuthenticatedUser().subscribe(user => {
         this.userService.getFollowing(user.id).subscribe(following => {

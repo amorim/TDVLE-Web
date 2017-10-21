@@ -21,6 +21,7 @@ import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
 import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
+import {PostModule} from "./post/post.module";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
     MaterialModule,
     AuthModule,
     UserModule,
+    PostModule,
     AvatarModule
   ],
   providers: [],
