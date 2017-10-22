@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from '../../model/post.model';
 import {PostService} from "./post.service";
 import {PageEvent} from "@angular/material";
+import {User} from "../../model/user.model";
+import {UserService} from "../user/user.service";
+import {Like} from "../../model/like.model";
 
 @Component({
   selector: 'app-post',
@@ -16,10 +19,14 @@ export class PostComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
 
+  authenticatedUser: User = new User();
   postObj: Post = new Post();
   posts: Post[] = [];
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private userService: UserService) {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.authenticatedUser = user;
+    });
     this.postService.getPostCount().subscribe(postCount => {
       this.length = postCount['postCount'];
       console.log('There are:', this.length, 'posts');
@@ -32,7 +39,7 @@ export class PostComponent implements OnInit {
 
   post() {
     this.postService.setPost(this.postObj).subscribe((newPost: Post) => {
-      console.log('Creating...', newPost.date, this.postObj.date);
+      console.log('NewPost', newPost);
       this.posts.unshift(newPost);
       this.length ++;
     });
@@ -50,12 +57,36 @@ export class PostComponent implements OnInit {
   }
 
   toggleLike(post: Post) {
-    console.log('Likeing...', post.date);
-    this.postService.setLike(post).subscribe((newPost: Post) => {
-      console.log('newPost', newPost);
-      const idx = this.posts.indexOf(post, 0);
-      console.log('Liked:', newPost, this.posts[idx]);
+    this.postService.getPost(post.id).subscribe((refreshedPost: Post) => {
+      console.log('Refeshed:', refreshedPost);
+      this.postService.setLike(refreshedPost).subscribe((newPost: Post) => {
+        const idx = this.posts.indexOf(post, 0);
+        this.posts[idx] = newPost;
+        console.log('Liked:', this.posts[idx]);
+      });
     });
+  }
+
+  hasLiked(post) {
+    return (post.likes.findIndex((currLike: Like) => {
+      return (this.authenticatedUser.id === currLike.user.id);
+    }) > -1);
+  }
+
+  getLikeCount(post: Post) {
+    if (post.likes == null) {
+      return 0;
+    } else {
+      return post.likes.length;
+    }
+  }
+
+  getLikeText(post: Post) {
+    if (this.hasLiked(post)) {
+      return 'Dislike';
+    } else {
+      return 'Like';
+    }
   }
 
   onKeyPress($event) {

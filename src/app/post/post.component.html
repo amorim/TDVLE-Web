@@ -19,7 +19,10 @@
       <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>{{post.description}}</mat-card-content>
-    <button mat-raised-button (click)="this.toggleLike(post)">Like</button>
+    <div class="like">
+      <h3>{{this.getLikeCount(post)}}</h3>
+      <button mat-raised-button (click)="this.toggleLike(post)">{{this.getLikeText(post)}}</button>
+    </div>
   </mat-card>
 </div>
 

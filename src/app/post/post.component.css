@@ -34,6 +34,12 @@
   background-size: cover;
 }
 
+.like {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+}
+
 .bottom {
   position: fixed;
   width: 100%;
