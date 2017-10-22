@@ -72,7 +72,7 @@ export class WelcomeComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.snackBar.open('Logged Out', 'Dismiss', {duration: 500});
+    this.snackBar.open('Logged Out', 'Dismiss', {duration: 2000});
     this.router.navigate(['/login']);
   }
 

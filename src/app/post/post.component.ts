@@ -31,8 +31,10 @@ export class PostComponent implements OnInit {
   }
 
   post() {
-    this.postService.setPost(this.postObj).subscribe(post => {
-      this.posts.unshift(post);
+    this.postService.setPost(this.postObj).subscribe((newPost: Post) => {
+      console.log('Creating...', newPost.date, this.postObj.date);
+      this.posts.unshift(newPost);
+      this.length ++;
     });
   }
 
@@ -44,6 +46,15 @@ export class PostComponent implements OnInit {
     this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(posts => {
       console.log('Posts:', posts);
       this.posts = posts;
+    });
+  }
+
+  toggleLike(post: Post) {
+    console.log('Likeing...', post.date);
+    this.postService.setLike(post).subscribe((newPost: Post) => {
+      console.log('newPost', newPost);
+      const idx = this.posts.indexOf(post, 0);
+      console.log('Liked:', newPost, this.posts[idx]);
     });
   }
 

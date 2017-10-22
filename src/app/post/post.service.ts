@@ -21,4 +21,8 @@ export class PostService {
     return this.http.post(Constants.url + '/user/post', postObj).map(res => res.json());
   }
 
+  setLike(post: Post): Observable<Post> {
+    return this.http.put(Constants.url + '/posts/like', post).map(res => res.json());
+  }
+
 }
