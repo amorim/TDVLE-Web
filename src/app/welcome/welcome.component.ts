@@ -3,7 +3,7 @@ import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {MatSnackBar, PageEvent} from "@angular/material";
 import {UserService} from "../user/user.service";
-import {User} from "../../model/user.model";
+import {User} from "../model/user.model";
 
 @Component({
   selector: 'app-welcome',

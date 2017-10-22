@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '@angular/material';
-import {User} from '../../../model/user.model';
+import {User} from '../../model/user.model';
 import {UserService} from '../../user/user.service';
 
 @Component({

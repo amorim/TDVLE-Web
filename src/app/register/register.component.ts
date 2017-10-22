@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Http} from '@angular/http';
 

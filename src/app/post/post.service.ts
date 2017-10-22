@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AuthHttp} from "../auth/auth.http";
 import {Observable} from "rxjs/Observable";
-import {Post} from "../../model/post.model";
+import {Post} from "../model/post.model";
 import {Constants} from "../shared/constants";
 
 @Injectable()

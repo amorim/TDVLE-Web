@@ -8,4 +8,5 @@ export class User {
   password: String;
   bornDate: Date;
   email: String;
+  isFollowing: boolean;
 }

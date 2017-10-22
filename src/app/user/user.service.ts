@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
 import {Constants} from '../shared/constants';
-import {Notification} from "../../model/notification.model";
+import {Notification} from "../model/notification.model";
 
 @Injectable()
 export class UserService {

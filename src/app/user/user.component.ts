@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthHttp} from '../auth/auth.http';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {Constants} from '../shared/constants';
 import {UserService} from './user.service';
 import {Observable} from 'rxjs/Observable';

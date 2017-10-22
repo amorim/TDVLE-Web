@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from '../../model/post.model';
+import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {PageEvent} from "@angular/material";
 
