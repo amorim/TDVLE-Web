@@ -1,0 +1,6 @@
+nav {
+  white-space: nowrap;
+}
+nav a {
+  width: calc(100%/3);
+}

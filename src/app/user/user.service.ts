@@ -1,29 +1,53 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
-import {AppComponent} from '../app.component';
 import {Constants} from '../shared/constants';
+import {Notification} from "../model/notification.model";
 
 @Injectable()
 export class UserService {
 
   constructor(private http: AuthHttp) { }
 
+  getNotifications(): Observable<Notification[]> {
+    return this.http.get(Constants.url + '/notifications').map(res => res.json());
+  }
+
+  getNotificationsCount(): Observable<number> {
+    return this.http.get(Constants.url + '/notifications/count').map(res => res.json());
+  }
+
+  setReadNotifications(): Observable<Object> {
+    return this.http.post(Constants.url + '/notifications/read', null).map(res => res.json());
+  }
+
+  deleteNotification(id: number): Observable<any> {
+    return this.http.del(Constants.url + '/notifications/' + id).map(res => res.json());
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get(Constants.url + '/users/').map(res => res.json());
   }
 
+  getUsersCount(): Observable<number> {
+    return this.http.get(Constants.url + '/users/count').map(res => res.json());
+  }
+
   getUsersPage(max, offset): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/max=' + max + '&offset=' + offset).map(res => res.json());
+    return this.http.get(Constants.url + '/users?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
   getAuthenticatedUser(): Observable<User> {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
-  getFollowers(id): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/' + id + '/followers').map(res => res.json());
+  getFollowers(max, offset): Observable<User[]> {
+    return this.http.get(Constants.url + '/user/followers?max=' + max + '&offset=' + offset).map(res => res.json());
+  }
+
+  getFollowerCount(): Observable<number> {
+    return this.http.get(Constants.url + '/users/follower/count').map(res => res.json());
   }
 
   getFollowing(id): Observable<User[]> {

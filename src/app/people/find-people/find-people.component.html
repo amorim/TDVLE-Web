@@ -1,0 +1,18 @@
+<div class="users">
+  <mat-card *ngFor="let user of this.users" class="usercard">
+    <div class="avatar">
+      <ngx-avatar name={{user.name}} initialsSize="1" src="" size="100">
+      </ngx-avatar>
+    </div>
+    <div class="username">{{user.name}}</div>
+    <div class="action">
+      <button mat-raised-button (click)="this.toggleFollow(user)" color="accent">{{this.getFollowingText(user)}}</button>
+    </div>
+  </mat-card>
+</div>
+
+<div class="mat-paginator">
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
+</div>
+
+
