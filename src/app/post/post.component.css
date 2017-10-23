@@ -6,6 +6,25 @@
   margin-bottom: 50px;
 }
 
+.posts {
+  height: auto;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.postcard {
+  margin: 0.5%;
+  width: 20%;
+  flex-direction: column;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  float: left;
+}
+
 .example-full-width {
   width: 100%;
 }
@@ -13,4 +32,16 @@
 .example-header-image {
   background-image: url('http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png');
   background-size: cover;
+}
+
+.like {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }

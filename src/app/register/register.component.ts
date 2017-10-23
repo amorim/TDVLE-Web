@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Http} from '@angular/http';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   userRegister: User = new User();
 
-  constructor (private http: Http) {
+  constructor (private http: Http, private snackBar: MatSnackBar) {
   }
 
   register() {

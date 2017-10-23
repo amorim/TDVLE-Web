@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {PageEvent} from "@angular/material";
+import {User} from "../../model/user.model";
+import {UserService} from "../user/user.service";
+import {Like} from "../../model/like.model";
 
 @Component({
   selector: 'app-post',
@@ -16,10 +19,14 @@ export class PostComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
 
+  authenticatedUser: User = new User();
   postObj: Post = new Post();
   posts: Post[] = [];
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private userService: UserService) {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.authenticatedUser = user;
+    });
     this.postService.getPostCount().subscribe(postCount => {
       this.length = postCount['postCount'];
       console.log('There are:', this.length, 'posts');
@@ -31,8 +38,10 @@ export class PostComponent implements OnInit {
   }
 
   post() {
-    this.postService.setPost(this.postObj).subscribe(post => {
-      this.posts.unshift(post);
+    this.postService.setPost(this.postObj).subscribe((newPost: Post) => {
+      console.log('NewPost', newPost);
+      this.posts.unshift(newPost);
+      this.length ++;
     });
   }
 
@@ -45,6 +54,25 @@ export class PostComponent implements OnInit {
       console.log('Posts:', posts);
       this.posts = posts;
     });
+  }
+
+  toggleLike(post: Post) {
+    let like = new Like();
+    like.post = post;
+    console.log(like);
+    this.postService.setLike(like).subscribe((newPost: Post) => {
+      const idx = this.posts.indexOf(post, 0);
+      this.posts[idx] = newPost;
+      console.log('Liked:', this.posts[idx]);
+    });
+  }
+
+  getLikeText(post: Post) {
+    if (post.hasLiked) {
+      return 'Dislike';
+    } else {
+      return 'Like';
+    }
   }
 
   onKeyPress($event) {

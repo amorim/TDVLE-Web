@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
     console.log(code);
     if (code === 0) {
       this.snackBar.open('Logged In', 'Dismiss', {duration: 2000});
+    } else if (code === 401) {
+      this.snackBar.open('Wrong password or User not found', 'Dismiss', {duration: 2000});
     }
     this.router.navigate(['/welcome']);
   }

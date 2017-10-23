@@ -22,6 +22,10 @@ export class AppComponent {
     {path: 'post', icon: 'forum', desc: 'Posts'}];
 
   constructor (private userService: UserService) {
+    setInterval(() => { this.getNotifications(); }, 10000);
+  }
+
+  getNotifications() {
     this.userService.getNotificationsCount().subscribe(notificationCount => {
       console.log('There are:', notificationCount['notificationCount'], 'notifications');
       this.notificationCount = notificationCount['notificationCount'];

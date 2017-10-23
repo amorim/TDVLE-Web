@@ -5,6 +5,7 @@ import {PostComponent} from "./post.component";
 import {MaterialModule} from "../shared/material.module";
 import {RouterModule} from "@angular/router";
 import {TimeAgoPipe} from "time-ago-pipe";
+import {UserService} from "../user/user.service";
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import {TimeAgoPipe} from "time-ago-pipe";
     MaterialModule
   ],
   declarations: [],
-  providers: [PostService]
+  providers: [PostService, UserService]
 })
 export class PostModule { }
