@@ -5,17 +5,33 @@
     </button>
     <span class="space-left">The Dank Network</span>
     <span class="fill-space"></span>
+
+
     <button mat-icon-button [matMenuTriggerFor]="notifications" (click)="readNotifications()">
-      <mat-icon *ngIf="this.notificationCount == 0" class="mat-24" matTooltip="Notifications" aria-label="Notifications">notifications</mat-icon>
+      <mat-icon *ngIf="this.notificationCount == 0" class="mat-24" matTooltip="Notifications"
+                aria-label="Notifications">notifications
+      </mat-icon>
       <div *ngIf="this.notificationCount > 0" class="notificationCircle">{{this.notificationCount}}</div>
-      <mat-menu #notifications="matMenu">
-        <mat-card *ngFor="let notification of notificationsList" class="post-form">
-          <mat-card-title>{{notification.fromUser.name}}</mat-card-title>
-          <mat-card-subtitle>{{notification.message}}</mat-card-subtitle>
-          <mat-card-subtitle>{{notification.date | timeAgo}}</mat-card-subtitle>
-        </mat-card>
+      <mat-menu style="width: 80vw; max-width: 400px;" #notifications="matMenu">
+        <div class="notificationHolder">
+
+          <div class="noNotifications" *ngIf="notificationsList.length === 0">
+            <div class="noNotifText">No notifications here, senpai</div>
+          </div>
+          <mat-card *ngFor="let notification of notificationsList; let i = index" class="notificationCard">
+            <mat-card-title class="notificationCardTitle">{{notification.fromUser.name}}</mat-card-title>
+            <div class="notificationCardTitle" style="float: right;">
+              <button style="line-height: 28px; height: auto; width: 26px;" (click)="deleteNotif(i, $event)" mat-icon-button color="warn">
+                <mat-icon aria-label="Delete notification">clear</mat-icon>
+              </button>
+            </div>
+            <mat-card-subtitle>{{notification.message}}</mat-card-subtitle>
+            <mat-card-subtitle>{{notification.date | timeAgo}}</mat-card-subtitle>
+          </mat-card>
+        </div>
       </mat-menu>
     </button>
+    <ngx-avatar  size="35" textSizeRatio="2" name="Lucas" initialsSize="1" src=""></ngx-avatar>
   </mat-toolbar>
   <mat-sidenav-container class="content-container">
     <mat-sidenav #sidenav class="sidenav-menu">

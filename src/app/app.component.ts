@@ -8,7 +8,7 @@ import {Notification} from "./model/notification.model";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -44,6 +44,14 @@ export class AppComponent {
 
   toggleSidenav() {
     this.sidenav.toggle();
+  }
+
+  deleteNotif(i: number, $event) {
+    let notif = this.notificationsList[i];
+    this.userService.deleteNotification(notif.id).subscribe();
+    this.notificationsList.splice(i, 1);
+    $event.stopPropagation();
+    return false;
   }
 
 }

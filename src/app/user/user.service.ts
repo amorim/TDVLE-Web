@@ -22,6 +22,10 @@ export class UserService {
     return this.http.post(Constants.url + '/notifications/read', null).map(res => res.json());
   }
 
+  deleteNotification(id: number): Observable<any> {
+    return this.http.del(Constants.url + '/notifications/' + id).map(res => res.json());
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get(Constants.url + '/users/').map(res => res.json());
   }
