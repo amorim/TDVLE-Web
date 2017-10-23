@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {Http} from '@angular/http';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 
 @Injectable()
 export class AuthService {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthHttp} from '../auth/auth.http';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {Constants} from '../shared/constants';
 import {UserService} from './user.service';
 import {Observable} from 'rxjs/Observable';
@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
     this.userService.getAuthenticatedUser().subscribe(user => {
       console.log(user);
       this.user = user;
-      this.userService.getFollowers(this.user.id).subscribe(followers => {
+      this.userService.getFollowers(0, 100).subscribe(followers => {
         console.log(followers);
         this.followers = followers;
       });

@@ -21,6 +21,8 @@ import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
 import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
+import {PostModule} from "./post/post.module";
+import { AppsComponent } from './apps/apps.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     {path: 'find', component: FindPeopleComponent},
     {path: 'followers', component: FollowersComponent},
     {path: 'following', component: FollowingComponent}
-  ]}
+  ]},
+  { path: 'apps', component: AppsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -48,7 +51,8 @@ const appRoutes: Routes = [
     PeopleComponent,
     FindPeopleComponent,
     FollowersComponent,
-    FollowingComponent
+    FollowingComponent,
+    AppsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,7 @@ const appRoutes: Routes = [
     MaterialModule,
     AuthModule,
     UserModule,
+    PostModule,
     AvatarModule
   ],
   providers: [],

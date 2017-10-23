@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../model/user.model';
+import {User} from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {CookieService} from 'ngx-cookie-service';
@@ -35,7 +35,9 @@ export class LoginComponent implements OnInit {
     console.log(logged);
     console.log(code);
     if (code === 0) {
-      this.snackBar.open('Logged In', 'Dismiss', {});
+      this.snackBar.open('Logged In', 'Dismiss', {duration: 2000});
+    } else if (code === 401) {
+      this.snackBar.open('Wrong password or User not found', 'Dismiss', {duration: 2000});
     }
     this.router.navigate(['/welcome']);
   }

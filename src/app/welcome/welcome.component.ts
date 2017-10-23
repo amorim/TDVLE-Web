@@ -3,7 +3,7 @@ import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {MatSnackBar, PageEvent} from "@angular/material";
 import {UserService} from "../user/user.service";
-import {User} from "../../model/user.model";
+import {User} from "../model/user.model";
 
 @Component({
   selector: 'app-welcome',
@@ -22,17 +22,16 @@ export class WelcomeComponent implements OnInit {
   following: User[] = [];
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private userService: UserService) {
+    this.userService.getUsersCount().subscribe(quantity => {
+      this.length = quantity['userCount'];
+      console.log('There are:', this.length, ' users');
+    });
     this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
-      console.log('There are ', users.length, ' users');
       this.users = users;
-      this.length = this.users.length;
-      this.pageEvent.length = this.length;
-      this.pageEvent.pageSize = this.pageSize;
-      this.pageEvent.pageIndex = this.pageIndex;
-      this.userService.getAuthenticatedUser().subscribe(user => {
-        this.userService.getFollowing(user.id).subscribe(following => {
-          this.following = following;
-        });
+    });
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.userService.getFollowing(user.id).subscribe(following => {
+        this.following = following;
       });
     });
   }
@@ -40,19 +39,17 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  paginationFrom(pageEvent) {
-    console.log(pageEvent);
-    if (pageEvent) {
-      // console.log(pageEvent.pageIndex * pageEvent.pageSize);
-      return(pageEvent.pageIndex * pageEvent.pageSize);
-    }
-  }
-
-  paginationTo(pageEvent) {
-    if (pageEvent) {
-      // console.log((pageEvent.pageIndex * pageEvent.pageSize) + pageEvent.pageSize);
-      return((pageEvent.pageIndex * pageEvent.pageSize) + pageEvent.pageSize);
-    }
+  alterPage() {
+    console.log('Getting new page');
+    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
+      console.log(users);
+      this.users = users;
+      this.userService.getAuthenticatedUser().subscribe(user => {
+        this.userService.getFollowing(user.id).subscribe(following => {
+          this.following = following;
+        });
+      });
+    });
   }
 
   getPosition(user) {
@@ -67,7 +64,7 @@ export class WelcomeComponent implements OnInit {
 
   getFollowingText(user) {
     if (this.isFollowing(user)) {
-      return ('Unfolow');
+      return ('Unfollow');
     } else {
       return('Follow');
     }
@@ -75,11 +72,11 @@ export class WelcomeComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.snackBar.open('Logged Out', 'Dismiss', {});
+    this.snackBar.open('Logged Out', 'Dismiss', {duration: 2000});
     this.router.navigate(['/login']);
   }
 
-  toogleFollow(user) {
+  toggleFollow(user) {
     if (this.isFollowing(user)) {
       this.following.splice(this.getPosition(user), 1);
       this.userService.deleteFollow(user.id);
