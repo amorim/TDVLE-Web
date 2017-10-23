@@ -23,11 +23,8 @@ export class FindPeopleComponent implements OnInit {
       this.users = users;
       this.userService.getUsersCount().subscribe(userCount => {
         this.length = userCount['userCount'];
-        this.pageEvent.length = this.length;
         console.log('There are:', userCount['userCount'], 'users');
       });
-      this.pageEvent.pageSize = this.pageSize;
-      this.pageEvent.pageIndex = this.pageIndex;
     });
   }
 
@@ -40,12 +37,8 @@ export class FindPeopleComponent implements OnInit {
     });
   }
 
-  isFollowing(user: User) {
-    return user.isFollowing;
-  }
-
   getFollowingText(user: User) {
-    if (this.isFollowing(user)) {
+    if (user.isFollowing) {
       return ('Unfollow');
     } else {
       return('Follow');
@@ -53,7 +46,7 @@ export class FindPeopleComponent implements OnInit {
   }
 
   toggleFollow(user: User) {
-    if (this.isFollowing(user)) {
+    if (user.isFollowing) {
       this.userService.deleteFollow(user.id);
       user.isFollowing = false;
     } else {

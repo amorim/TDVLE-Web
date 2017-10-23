@@ -23,6 +23,7 @@ import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { AppsComponent } from './apps/apps.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -31,6 +32,8 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'people', component: PeopleComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'find', pathMatch: 'full'},
     {path: 'find', component: FindPeopleComponent},
@@ -52,7 +55,8 @@ const appRoutes: Routes = [
     FindPeopleComponent,
     FollowersComponent,
     FollowingComponent,
-    AppsComponent
+    AppsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

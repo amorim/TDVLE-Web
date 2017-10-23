@@ -13,19 +13,19 @@ import {Observable} from 'rxjs/Observable';
 
 export class UserComponent implements OnInit {
 
-  user: User = new User();
+  autheticatedUser: User = new User();
   followers: User[] = [];
   following: User[] = [];
 
   constructor(private http: AuthHttp, private userService: UserService) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       console.log(user);
-      this.user = user;
-      this.userService.getFollowers(0, 100).subscribe(followers => {
+      this.autheticatedUser = user;
+      this.userService.getFollowers(this.autheticatedUser.id, 0, 100).subscribe(followers => {
         console.log(followers);
         this.followers = followers;
       });
-      this.userService.getFollowing(this.user.id).subscribe(following => {
+      this.userService.getFollowing(this.autheticatedUser.id, 0, 100).subscribe(following => {
         console.log(following);
         this.following = following;
       });

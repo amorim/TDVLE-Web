@@ -17,13 +17,13 @@ export class AppComponent {
   notificationCount = 0;
 
   urls = [{path: 'welcome', icon: 'home', desc: 'Home'},
-    {path: 'user', icon: 'person', desc: 'Profile'},
+    {path: 'profile', icon: 'person', desc: 'Profile'},
     {path: 'people', icon: 'people', desc: 'People'},
     {path: 'post', icon: 'forum', desc: 'Posts'},
     {path: 'apps', icon: 'apps', desc: 'Apps'}];
 
   constructor (private userService: UserService) {
-    setInterval(() => { this.getNotifications(); }, 30000);
+    setInterval(() => { this.getNotifications(); }, 10000);
   }
 
   getNotifications() {
