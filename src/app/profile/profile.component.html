@@ -1,0 +1,13 @@
+<img class="background" src="{{this.user.background}}">
+<mat-card class="usercard">
+  <div class="avatar">
+    <ngx-avatar name={{this.user.name}} initialsSize="1" src="" size="100">
+    </ngx-avatar>
+  </div>
+  <div class="username">{{this.user.name}}</div>
+  <div class="action">
+    <button mat-raised-button (click)="this.toggleFollow()" color="accent">{{this.getFollowingText()}}</button>
+  </div>
+</mat-card>
+
+
