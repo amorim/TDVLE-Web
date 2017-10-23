@@ -20,7 +20,7 @@
     </mat-card-header>
     <mat-card-content>{{post.description}}</mat-card-content>
     <div class="like">
-      <h3>{{this.getLikeCount(post)}}</h3>
+      <h3>{{post.likeCount}}</h3>
       <button mat-raised-button (click)="this.toggleLike(post)">{{this.getLikeText(post)}}</button>
     </div>
   </mat-card>

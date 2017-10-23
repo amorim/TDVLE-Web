@@ -9,4 +9,6 @@ export class Post {
   image: String;
   date: Date;
   likes: Like[];
+  likeCount: number;
+  hasLiked: boolean;
 }

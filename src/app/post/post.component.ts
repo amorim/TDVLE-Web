@@ -57,32 +57,18 @@ export class PostComponent implements OnInit {
   }
 
   toggleLike(post: Post) {
-    this.postService.getPost(post.id).subscribe((refreshedPost: Post) => {
-      console.log('Refeshed:', refreshedPost);
-      this.postService.setLike(refreshedPost).subscribe((newPost: Post) => {
-        const idx = this.posts.indexOf(post, 0);
-        this.posts[idx] = newPost;
-        console.log('Liked:', this.posts[idx]);
-      });
+    let like = new Like();
+    like.post = post;
+    console.log(like);
+    this.postService.setLike(like).subscribe((newPost: Post) => {
+      const idx = this.posts.indexOf(post, 0);
+      this.posts[idx] = newPost;
+      console.log('Liked:', this.posts[idx]);
     });
   }
 
-  hasLiked(post) {
-    return (post.likes.findIndex((currLike: Like) => {
-      return (this.authenticatedUser.id === currLike.user.id);
-    }) > -1);
-  }
-
-  getLikeCount(post: Post) {
-    if (post.likes == null) {
-      return 0;
-    } else {
-      return post.likes.length;
-    }
-  }
-
   getLikeText(post: Post) {
-    if (this.hasLiked(post)) {
+    if (post.hasLiked) {
       return 'Dislike';
     } else {
       return 'Like';
