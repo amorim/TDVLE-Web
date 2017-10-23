@@ -42,8 +42,8 @@ export class UserService {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
-  getFollowers(id, max, offset): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/' + id + '/followers?max=' + max + '&offset=' + offset).map(res => res.json());
+  getFollowers(max, offset): Observable<User[]> {
+    return this.http.get(Constants.url + '/user/followers?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
   getFollowerCount(): Observable<number> {

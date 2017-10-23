@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
     this.userService.getAuthenticatedUser().subscribe(user => {
       console.log(user);
       this.user = user;
-      this.userService.getFollowers(this.user.id, 0, 100).subscribe(followers => {
+      this.userService.getFollowers(0, 100).subscribe(followers => {
         console.log(followers);
         this.followers = followers;
       });

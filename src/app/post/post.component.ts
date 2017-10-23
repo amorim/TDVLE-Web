@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {PageEvent} from "@angular/material";
-import {User} from "../../model/user.model";
+import {User} from "../model/user.model";
 import {UserService} from "../user/user.service";
-import {Like} from "../../model/like.model";
+import {Like} from "../model/like.model";
 
 @Component({
   selector: 'app-post',

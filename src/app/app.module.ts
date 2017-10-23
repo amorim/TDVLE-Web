@@ -36,7 +36,8 @@ const appRoutes: Routes = [
     {path: 'find', component: FindPeopleComponent},
     {path: 'followers', component: FollowersComponent},
     {path: 'following', component: FollowingComponent}
-  ]}
+  ]},
+  { path: 'apps', component: AppsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

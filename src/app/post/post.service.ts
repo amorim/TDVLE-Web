@@ -3,7 +3,7 @@ import {AuthHttp} from "../auth/auth.http";
 import {Observable} from "rxjs/Observable";
 import {Post} from "../model/post.model";
 import {Constants} from "../shared/constants";
-import {Like} from "../../model/like.model";
+import {Like} from "../model/like.model";
 
 @Injectable()
 export class PostService {
