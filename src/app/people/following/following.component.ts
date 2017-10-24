@@ -17,7 +17,7 @@ export class FollowingComponent implements OnInit {
   pageEvent: PageEvent = new PageEvent;
 
   authenticatedUser: User = new User();
-  following: User[] = []
+  following: User[] = [];
 
   constructor(private userService: UserService) {
     this.userService.getAuthenticatedUser().subscribe(au => {
@@ -35,7 +35,7 @@ export class FollowingComponent implements OnInit {
   }
 
   alterPage() {
-    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(following => {
+    this.userService.getFollowing(this.authenticatedUser.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(following => {
       this.following = following;
     });
   }

@@ -51,11 +51,3 @@
 .uppercase {
   text-transform: uppercase;
 }
-
-.mat-paginator {
-  width: 100%;
-  bottom: 0;
-  position: fixed;
-  padding: 0 0;
-  float: left;
-}

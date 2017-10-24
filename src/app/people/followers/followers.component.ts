@@ -16,16 +16,16 @@ export class FollowersComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
 
-  autheticatedUser: User = new User();
+  authenticatedUser: User = new User();
   followers: User[] = [];
 
   constructor(private userService: UserService) {
     this.userService.getAuthenticatedUser().subscribe(au => {
-      this.autheticatedUser = au;
-      this.userService.getFollowers(this.autheticatedUser.id, this.pageSize, this.pageIndex * this.pageSize).subscribe(followers => {
+      this.authenticatedUser = au;
+      this.userService.getFollowers(this.authenticatedUser.id, this.pageSize, this.pageIndex * this.pageSize).subscribe(followers => {
         this.followers = followers;
       });
-      this.userService.getFollowerCount(this.autheticatedUser.id).subscribe(userCount => {
+      this.userService.getFollowerCount(this.authenticatedUser.id).subscribe(userCount => {
         this.length = userCount['followerCount'];
       });
     });
@@ -35,8 +35,8 @@ export class FollowersComponent implements OnInit {
   }
 
   alterPage() {
-    this.userService.getFollowers(this.autheticatedUser.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
-      this.followers = users;
+    this.userService.getFollowers(this.authenticatedUser.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(followers => {
+      this.followers = followers;
     });
   }
 

@@ -13,6 +13,7 @@ import {Notification} from "./model/notification.model";
 export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
+  authenticatedUser: User = new User();
   notificationsList: Notification[] = [];
   notificationCount = 0;
 
@@ -23,7 +24,10 @@ export class AppComponent {
     {path: 'apps', icon: 'apps', desc: 'Apps'}];
 
   constructor (private userService: UserService) {
-    setInterval(() => { this.getNotifications(); }, 10000);
+    this.userService.getAuthenticatedUser().subscribe(au => {
+      this.authenticatedUser = au;
+    });
+    setInterval(() => { this.getNotifications(); }, 100000);
   }
 
   getNotifications() {

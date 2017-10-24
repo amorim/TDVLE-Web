@@ -12,62 +12,10 @@ import {User} from "../model/user.model";
 })
 export class WelcomeComponent implements OnInit {
 
-  length = 14;
-  pageSize = 5;
-  pageSizeOptions = [5, 10, 25, 100];
-  pageIndex = 0;
-  pageEvent: PageEvent = new PageEvent;
-
-  users: User[] = [];
-  following: User[] = [];
-
-  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private userService: UserService) {
-    this.userService.getUsersCount().subscribe(quantity => {
-      this.length = quantity['userCount'];
-      console.log('There are:', this.length, ' users');
-    });
-    this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
-      this.users = users;
-    });
-    this.userService.getAuthenticatedUser().subscribe(user => {
-      this.userService.getFollowing(user.id).subscribe(following => {
-        this.following = following;
-      });
-    });
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
-  }
-
-  alterPage() {
-    console.log('Getting new page');
-    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
-      console.log(users);
-      this.users = users;
-      this.userService.getAuthenticatedUser().subscribe(user => {
-        this.userService.getFollowing(user.id).subscribe(following => {
-          this.following = following;
-        });
-      });
-    });
-  }
-
-  getPosition(user) {
-    return (this.following.findIndex(currUser => {
-      return (user.id === currUser.id);
-    }));
-  }
-
-  isFollowing(user) {
-    return(this.getPosition(user) > - 1);
-  }
-
-  getFollowingText(user) {
-    if (this.isFollowing(user)) {
-      return ('Unfollow');
-    } else {
-      return('Follow');
-    }
   }
 
   logout() {
@@ -76,13 +24,4 @@ export class WelcomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  toggleFollow(user) {
-    if (this.isFollowing(user)) {
-      this.following.splice(this.getPosition(user), 1);
-      this.userService.deleteFollow(user.id);
-    } else {
-      this.following.push(user);
-      this.userService.setFollow(user.id);
-    }
-  }
 }
