@@ -31,7 +31,9 @@
         </div>
       </mat-menu>
     </button>
-    <ngx-avatar routerLink="/profile" style="cursor: pointer; margin-left: 5px;" size="40" textSizeRatio="2" name="{{this.authenticatedUser.name}}" initialsSize="1" src=""></ngx-avatar>
+    <div style="cursor: pointer; margin-left: 5px;">
+      <ngx-avatar routerLink="/profile" size="40" textSizeRatio="2" name="{{this.authenticatedUser.name}}" initialsSize="1" src=""></ngx-avatar>
+    </div>
   </mat-toolbar>
   <mat-sidenav-container class="content-container">
     <mat-sidenav #sidenav class="sidenav-menu">

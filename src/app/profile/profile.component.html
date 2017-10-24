@@ -11,3 +11,9 @@
     </div>
   </mat-card>
 </div>
+
+<div class="imageUpload">
+  <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+  <img [src]="data.image">
+  <button mat-raised-button (click)="this.upload()" color="accent">Upload</button>
+</div>

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user/user.service';
 import {ActivatedRoute} from '@angular/router';
+import {Cloudinary} from '@cloudinary/angular-4.x';
+import {CropperSettings} from 'ng2-img-cropper';
+import {Http} from '@angular/http';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +14,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
+  data: any;
+  cropperSettings: CropperSettings;
   user: User = new User();
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  constructor(private http: Http, private userService: UserService, private route: ActivatedRoute) {
+    this.cropperSettings = new CropperSettings();
+    this.data = {};
   }
 
   ngOnInit() {
@@ -56,4 +64,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  upload() {
+    this.http.post('https://api.cloudinary.com/v1_1/ngn/image/upload', {'file': this.data.image, 'upload_preset': 'qcbitdy3'}).subscribe(done => {
+      console.log(done);
+    });
+  }
 }

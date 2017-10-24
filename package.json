@@ -12,6 +12,10 @@
   },
   "private": true,
   "dependencies": {
+    "ng2-img-cropper": "^0.9.0",
+    "@types/jquery": "^3.2.15",
+    "@cloudinary/angular-4.x": "^1.0.0",
+    "cloudinary-core": "^2.3.0",
     "ngx-cookie-service": "^1.0.9",
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",

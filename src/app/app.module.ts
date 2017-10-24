@@ -1,3 +1,6 @@
+import { CloudinaryModule } from '@cloudinary/angular-4.x';
+import * as Cloudinary from 'cloudinary-core';
+import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -24,6 +27,7 @@ import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { AppsComponent } from './apps/apps.component';
 import { ProfileComponent } from './profile/profile.component';
+import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -59,6 +63,8 @@ const appRoutes: Routes = [
     ProfileComponent
   ],
   imports: [
+    ImageCropperModule,
+    CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(
