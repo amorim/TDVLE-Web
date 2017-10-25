@@ -10,9 +10,9 @@ import {User} from '../../model/user.model';
 })
 export class FindPeopleComponent implements OnInit {
 
-  length = 14;
-  pageSize = 5;
-  pageSizeOptions = [5, 10, 25, 100];
+  length = 0;
+  pageSize = 10;
+  pageSizeOptions = [10, 25, 100];
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent();
 
@@ -24,11 +24,12 @@ export class FindPeopleComponent implements OnInit {
       this.userService.getUsersCount().subscribe(userCount => {
         this.length = userCount['userCount'];
         this.pageEvent.length = this.length;
-        console.log('There are:', userCount['userCount'], 'users');
       });
       this.pageEvent.pageSize = this.pageSize;
       this.pageEvent.pageIndex = this.pageIndex;
     });
+    this.pageEvent.pageSize = this.pageSize;
+    this.pageEvent.pageIndex = this.pageIndex;
   }
 
   ngOnInit() {

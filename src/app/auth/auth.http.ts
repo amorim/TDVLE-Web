@@ -32,7 +32,6 @@ export class AuthHttp {
   setAuthHeader(options: RequestOptionsArgs): RequestOptionsArgs {
     options = options || {};
     options.headers = options.headers || new Headers();
-
     options.headers.append('Authorization', 'Bearer ' + this.authService.getAccessToken());
 
     return options;

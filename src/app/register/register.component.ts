@@ -3,6 +3,7 @@ import {User} from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Http} from '@angular/http';
 import {MatSnackBar} from "@angular/material";
+import {Constants} from "../shared/constants";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   register() {
     console.log(this.userRegister);
     this.http
-      .post('http://localhost:8080/api/register', this.userRegister)
+      .post(Constants.url + '/register', this.userRegister)
       .subscribe(data => {
         console.log(data);
       });

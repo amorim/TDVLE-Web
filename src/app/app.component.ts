@@ -23,7 +23,8 @@ export class AppComponent {
     {path: 'apps', icon: 'apps', desc: 'Apps'}];
 
   constructor (private userService: UserService) {
-    setInterval(() => { this.getNotifications(); }, 30000);
+    this.getNotifications();
+    setInterval(() => { this.getNotifications(); }, 10000);
   }
 
   getNotifications() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {Http} from '@angular/http';
 import {User} from '../model/user.model';
+import {Constants} from "../shared/constants";
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
 
   login(user: User, callback) {
     this.http
-      .post('http://localhost:8080/api/login', user)
+      .post(Constants.url + '/login', user)
       .map(res => res.json())
       .subscribe(data => {
         this.cookieService.set('access-token', data['access_token']);

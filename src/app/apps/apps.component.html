@@ -1,1 +1,23 @@
+<div class="apps">
+  <mat-card *ngFor="let app of apps" class="appcard">
+    <div class="appimg">
+      <ngx-avatar name={{app.name}} initialsSize="1" src="" size="100">
+      </ngx-avatar>
+    </div>
+    <div class="appname">{{app.name}}</div>
+    <div class="action">
+      <button mat-raised-button (click)="accessApp(app)" color="accent">Access</button>
+    </div>
+  </mat-card>
+</div>
 
+<section class="FAB">
+  <div (click)="requestApp()" class="FAB__action-button">
+    <i class="action-button__icon material-icons">add</i>
+    <p class="action-button__text--hide">Request Integration</p>
+  </div>
+</section>
+
+<div class="mat-paginator">
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
+</div>
