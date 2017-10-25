@@ -36,4 +36,10 @@ export class EditUserComponent implements OnInit {
     });
   }
 
+  onKeyPress($event) {
+    if ($event.keyCode === 13) {
+      this.update();
+    }
+  }
+
 }

@@ -18,7 +18,6 @@ import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./shared/material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
-import {UserComponent} from "./user/user.component";
 import {AvatarModule} from "ngx-avatar";
 import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
@@ -26,7 +25,7 @@ import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { ProfileComponent } from './profile/profile.component';
-import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {ImageCropperModule} from 'ng2-img-cropper';
 import {DialogEditUserComponent} from "./edit-user/dialog-edit-user.component";
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SinglePostComponent } from './single-post/single-post.component';
@@ -40,7 +39,6 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: SinglePostComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'edit', component: EditUserComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
