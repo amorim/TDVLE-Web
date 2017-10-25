@@ -42,6 +42,10 @@ export class UserService {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
+  setUser(user: User): Observable<User> {
+    return this.http.put(Constants.url + '/user', user).map(res => res.json());
+  }
+
   getUser(id): Observable<User> {
     return this.http.get(Constants.url + '/profile/' + id).map(res => res.json());
   }

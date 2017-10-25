@@ -10,7 +10,7 @@
         <input matInput type="password" placeholder="Password" [(ngModel)]="this.userLogin.password" name="inputPassword">
       </mat-form-field>
       <button mat-raised-button (click)="login()" (onkeypress)="onKeyPress($event)" color="accent">Login</button>
-      <a routerLink="/register">Register</a>
+      <button mat-raised-button routerLink="/register" color="accent">Register</button>
     </form>
   </mat-card>
 </div>

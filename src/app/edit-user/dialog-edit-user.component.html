@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{this.toEdit}}</h1>
+
+<div class="imageSelector">
+  <input class="imageSelector" type="file" (change)="fileChangeListener($event)">
+</div>
+<img-cropper #cropper [image]="image" [settings]="cropperSettings"></img-cropper>
+<button class="uploadButton" [disabled]="this.image.image==null" mat-dialog-content mat-raised-button (click)="this.upload()" color="accent">Upload</button>
+

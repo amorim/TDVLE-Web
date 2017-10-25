@@ -28,6 +28,9 @@ import {PostModule} from "./post/post.module";
 import { AppsComponent } from './apps/apps.component';
 import { ProfileComponent } from './profile/profile.component';
 import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {DialogEditUserComponent} from "./edit-user/dialog-edit-user.component";
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { SinglePostComponent } from './single-post/single-post.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -35,7 +38,9 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: SinglePostComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'edit', component: EditUserComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'people', component: PeopleComponent, canActivate: [AuthGuard], children: [
@@ -60,8 +65,12 @@ const appRoutes: Routes = [
     FollowersComponent,
     FollowingComponent,
     AppsComponent,
-    ProfileComponent
+    ProfileComponent,
+    DialogEditUserComponent,
+    EditUserComponent,
+    SinglePostComponent
   ],
+  entryComponents: [DialogEditUserComponent],
   imports: [
     ImageCropperModule,
     CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),

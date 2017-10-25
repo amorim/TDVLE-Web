@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user/user.service';
 import {ActivatedRoute} from '@angular/router';
-import {Cloudinary} from '@cloudinary/angular-4.x';
-import {CropperSettings} from 'ng2-img-cropper';
-import {Http} from '@angular/http';
-import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -14,18 +10,16 @@ import {HttpParams} from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
 
-  data: any;
-  cropperSettings: CropperSettings;
+  isLoggedUser = false;
   user: User = new User();
 
-  constructor(private http: Http, private userService: UserService, private route: ActivatedRoute) {
-    this.cropperSettings = new CropperSettings();
-    this.data = {};
+  constructor(private userService: UserService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id == null) {
+    this.isLoggedUser = id == null;
+    if (this.isLoggedUser) {
       this.userService.getAuthenticatedUser().subscribe(user => {
         this.user = user;
         if (this.user.background == null) {
@@ -62,11 +56,5 @@ export class ProfileComponent implements OnInit {
       this.userService.setFollow(this.user.id);
       this.user.isFollowing = true;
     }
-  }
-
-  upload() {
-    this.http.post('https://api.cloudinary.com/v1_1/ngn/image/upload', {'file': this.data.image, 'upload_preset': 'qcbitdy3'}).subscribe(done => {
-      console.log(done);
-    });
   }
 }
