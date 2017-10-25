@@ -1,7 +1,7 @@
 <div class="apps">
   <mat-card *ngFor="let app of apps" class="appcard">
     <div class="appimg">
-      <ngx-avatar name={{app.name}} initialsSize="1" src="" size="100">
+      <ngx-avatar name={{app.name}} initialsSize="1" src="{{app.image}}" size="100">
       </ngx-avatar>
     </div>
     <div class="appname">{{app.name}}</div>

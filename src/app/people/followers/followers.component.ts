@@ -16,17 +16,18 @@ export class FollowersComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
 
+  authenticatedUser: User = new User();
   followers: User[] = [];
 
   constructor(private userService: UserService) {
-    this.userService.getFollowers(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
-      this.followers = users;
-      this.userService.getFollowerCount().subscribe(userCount => {
-        this.length = userCount['followerCount'];
-        this.pageEvent.length = this.length;
+    this.userService.getAuthenticatedUser().subscribe(au => {
+      this.authenticatedUser = au;
+      this.userService.getFollowers(this.authenticatedUser.id, this.pageSize, this.pageIndex * this.pageSize).subscribe(followers => {
+        this.followers = followers;
       });
-      this.pageEvent.pageSize = this.pageSize;
-      this.pageEvent.pageIndex = this.pageIndex;
+      this.userService.getFollowerCount(this.authenticatedUser.id).subscribe(userCount => {
+        this.length = userCount['followerCount'];
+      });
     });
   }
 
@@ -34,17 +35,13 @@ export class FollowersComponent implements OnInit {
   }
 
   alterPage() {
-    this.userService.getFollowers(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
-      this.followers = users;
+    this.userService.getFollowers(this.authenticatedUser.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(followers => {
+      this.followers = followers;
     });
   }
 
-  isFollowing(user: User) {
-    return user.isFollowing;
-  }
-
   getFollowingText(user: User) {
-    if (this.isFollowing(user)) {
+    if (user.isFollowing) {
       return ('Unfollow');
     } else {
       return('Follow');
@@ -52,7 +49,7 @@ export class FollowersComponent implements OnInit {
   }
 
   toggleFollow(user: User) {
-    if (this.isFollowing(user)) {
+    if (user.isFollowing) {
       this.userService.deleteFollow(user.id);
       user.isFollowing = false;
     } else {

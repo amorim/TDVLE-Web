@@ -1,15 +1,13 @@
 .users {
   height: auto;
   overflow: hidden;
-
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /*justify-content: center;*/
 }
 
 .usercard {
-  margin: 0.5%;
+  margin: 10px;
   width: 20%;
   max-width: 200px;
   min-width: 150px;
@@ -53,7 +51,10 @@
 }
 
 .mat-paginator {
+  background: #eeeeee;
   width: 100%;
   padding: 0 0;
-  float: left;
+  bottom: 0;
+  position: absolute;
 }
+

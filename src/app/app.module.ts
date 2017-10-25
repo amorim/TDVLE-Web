@@ -1,3 +1,6 @@
+import { CloudinaryModule } from '@cloudinary/angular-4.x';
+import * as Cloudinary from 'cloudinary-core';
+import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,6 +25,11 @@ import { FindPeopleComponent } from './people/find-people/find-people.component'
 import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
+import { ProfileComponent } from './profile/profile.component';
+import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {DialogEditUserComponent} from "./edit-user/dialog-edit-user.component";
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { SinglePostComponent } from './single-post/single-post.component';
 import {AppsModule} from "./apps/apps.module";
 import {AppsComponent} from "./apps/apps.component";
 
@@ -31,7 +39,11 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: SinglePostComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'edit', component: EditUserComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'people', component: PeopleComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'find', pathMatch: 'full'},
     {path: 'find', component: FindPeopleComponent},
@@ -52,9 +64,16 @@ const appRoutes: Routes = [
     PeopleComponent,
     FindPeopleComponent,
     FollowersComponent,
-    FollowingComponent
+    FollowingComponent,
+    ProfileComponent,
+    DialogEditUserComponent,
+    EditUserComponent,
+    SinglePostComponent
   ],
+  entryComponents: [DialogEditUserComponent],
   imports: [
+    ImageCropperModule,
+    CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(

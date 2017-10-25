@@ -20,10 +20,8 @@ export class AuthGuard implements CanActivate {
         observer.next(true);
         observer.complete();
       }, error => {
-        if (error.status === 401) {
-          this.authService.clearCookies();
-          this.router.navigate(['/login']);
-        }
+        this.authService.clearCookies();
+        this.router.navigate(['/login']);
         observer.error(false);
         observer.complete();
       });

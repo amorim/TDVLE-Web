@@ -39,7 +39,16 @@ export class AppsComponent implements OnInit {
   }
 
   requestApp() {
+    let app = new App();
+    app.name = "Teste";
+    app.description = "Testando";
+    app.image = "https://go.umaine.edu/wp-content/uploads/sites/10/2017/01/Mobile-Friendly-Application-300x300.png";
+    app.uri = "https://www.google.com";
+    this.appsService.requestIntegration(app).subscribe();
+  }
 
+  accessApp(app: App) {
+    window.location.href = app.uri;
   }
 
 }
