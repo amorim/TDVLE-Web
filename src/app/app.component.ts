@@ -33,7 +33,6 @@ export class AppComponent {
 
   getNotifications() {
     this.userService.getNotificationsCount().subscribe(notificationCount => {
-      console.log('There are:', notificationCount['notificationCount'], 'notifications');
       this.notificationCount = notificationCount['notificationCount'];
     });
 

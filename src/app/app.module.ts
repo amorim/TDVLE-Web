@@ -32,6 +32,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import {AppsModule} from "./apps/apps.module";
 import {AppsComponent} from "./apps/apps.component";
+import {ShowAppDialogComponent} from './apps/show-app-dialog/show-app-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
   ],
   entryComponents: [DialogEditUserComponent],
   imports: [
+    AppsModule,
     ImageCropperModule,
     CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
@@ -86,8 +88,7 @@ const appRoutes: Routes = [
     AuthModule,
     UserModule,
     PostModule,
-    AvatarModule,
-    AppsModule
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

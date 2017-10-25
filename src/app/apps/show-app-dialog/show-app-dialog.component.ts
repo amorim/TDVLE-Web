@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from '@angular/material';
+import {AppsService} from '../apps.service';
+import {App} from '../../model/app.model';
 
 @Component({
   selector: 'app-show-app-dialog',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowAppDialogComponent implements OnInit {
 
-  constructor() { }
+  appObj: App = new App();
+
+  constructor(private appsService: AppsService, public dialogRef: MatDialogRef<ShowAppDialogComponent>) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
   ngOnInit() {
+  }
+
+  request() {
+    console.log('FOI');
   }
 
 }
