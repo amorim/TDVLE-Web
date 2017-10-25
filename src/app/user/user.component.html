@@ -1,8 +1,8 @@
 <mat-card class="post-form">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{user.name}}</mat-card-title>
-    <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+    <mat-card-title>{{this.authenticatedUser.name}}</mat-card-title>
+    <mat-card-subtitle>{{this.autheticatedUser.email}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content></mat-card-content>
   <a routerLink="/welcome">Welcome</a>

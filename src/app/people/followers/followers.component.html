@@ -1,8 +1,7 @@
 <div class="users">
   <mat-card *ngFor="let user of this.followers" class="usercard">
     <div class="avatar">
-      <ngx-avatar name={{user.name}} initialsSize="1" src="" size="100">
-      </ngx-avatar>
+      <ngx-avatar style="cursor: pointer" routerLink="/profile/{{user.id}}" name={{user.name}} src="{{user.avatar}}" initialsSize="1" src="" size="100"></ngx-avatar>
     </div>
     <div class="username">{{user.name}}</div>
     <div class="action">
@@ -13,12 +12,6 @@
 
 <div class="mat-paginator">
   <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
-  <div *ngIf="pageEvent">
-    <h5>Page Change Event Properties</h5>
-    <div>List length: {{pageEvent.length}}</div>
-    <div>Page size: {{pageEvent.pageSize}}</div>
-    <div>Page index: {{pageEvent.pageIndex}}</div>
-  </div>
 </div>
 
-
+<router-outlet></router-outlet>

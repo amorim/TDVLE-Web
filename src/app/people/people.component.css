@@ -1,6 +1,13 @@
 nav {
   white-space: nowrap;
 }
+
 nav a {
   width: calc(100%/3);
+}
+
+.wrapper {
+  position: relative;
+  min-height: calc(100% - 56px);
+  padding-bottom: 56px;
 }

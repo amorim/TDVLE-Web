@@ -1,8 +1,7 @@
 <div class="users">
   <mat-card *ngFor="let user of this.users" class="usercard">
     <div class="avatar">
-      <ngx-avatar name={{user.name}} initialsSize="1" src="" size="100">
-      </ngx-avatar>
+      <ngx-avatar style="cursor: pointer" routerLink="/profile/{{user.id}}" name={{user.name}} src="{{user.avatar}}" initialsSize="1" src="" size="100"></ngx-avatar>
     </div>
     <div class="username">{{user.name}}</div>
     <div class="action">
@@ -10,9 +9,9 @@
     </div>
   </mat-card>
 </div>
-
 <div class="mat-paginator">
   <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
 </div>
 
+<router-outlet></router-outlet>
 

@@ -42,16 +42,28 @@ export class UserService {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
-  getFollowers(max, offset): Observable<User[]> {
-    return this.http.get(Constants.url + '/user/followers?max=' + max + '&offset=' + offset).map(res => res.json());
+  setUser(user: User): Observable<User> {
+    return this.http.put(Constants.url + '/user', user).map(res => res.json());
   }
 
-  getFollowerCount(): Observable<number> {
-    return this.http.get(Constants.url + '/users/follower/count').map(res => res.json());
+  getUser(id): Observable<User> {
+    return this.http.get(Constants.url + '/profile/' + id).map(res => res.json());
   }
 
-  getFollowing(id): Observable<User[]> {
-    return this.http.get(Constants.url + '/users/' + id + '/following').map(res => res.json());
+  getFollowers(id, max, offset): Observable<User[]> {
+    return this.http.get(Constants.url + '/users/' + id + '/followers?max=' + max + '&offset=' + offset).map(res => res.json());
+  }
+
+  getFollowerCount(id): Observable<number> {
+    return this.http.get(Constants.url + '/users/' + id + '/follower/count').map(res => res.json());
+  }
+
+  getFollowing(id, max, offset): Observable<User[]> {
+    return this.http.get(Constants.url + '/users/' + id + '/following?max=' + max + '&offset=' + offset).map(res => res.json());
+  }
+
+  getFollowingCount(id): Observable<number> {
+    return this.http.get(Constants.url + '/users/' + id + '/following/count').map(res => res.json());
   }
 
   setFollow(id) {

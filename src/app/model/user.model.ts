@@ -8,5 +8,7 @@ export class User {
   password: String;
   bornDate: Date;
   email: String;
+  avatar: String;
+  background: String;
   isFollowing: boolean;
 }
