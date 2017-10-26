@@ -34,6 +34,19 @@ export class ImageUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
+    console.log(dialog);
+    this.cropperSettings.width = dialog[0].clientWidth;
+    this.cropperSettings.canvasWidth = dialog[0].clientWidth;
+    this.cropperSettings.dynamicSizing = true;
+  }
+
+  resized() {
+    var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
+    console.log(dialog);
+    this.cropperSettings.width = dialog[0].clientWidth;
+    this.cropperSettings.canvasWidth = dialog[0].clientWidth;
+    console.log(this.cropper.cropcanvas);
   }
 
   onNoClick(): void {

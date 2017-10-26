@@ -31,9 +31,9 @@ export class AppComponent {
       this.authenticatedUser = au;
     });
     this.userService.getUserUpdated().subscribe((user: User) => {
-      this.authenticatedUser = user;
-      // this.avatar.src = user.avatar;
-      console.log(this.avatar.src);
+      this.authenticatedUser.avatar = user.avatar;
+      this.avatar.src = user.avatar.toString();
+      console.log(this.avatar.src, user.avatar);
     });
     this.getNotifications();
     setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);

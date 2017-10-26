@@ -19,6 +19,10 @@ export class AppsService {
     return this.http.get(Constants.url + '/apps/all?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
+  approveRequest(id): Observable<Object> {
+    return this.http.post(Constants.url + '/apps/' + id + '/approve', null).map(res => res.json());
+  }
+
   requestIntegration(app: App): Observable<App> {
     return this.http.post(Constants.url + '/apps', app).map(res => res.json());
   }

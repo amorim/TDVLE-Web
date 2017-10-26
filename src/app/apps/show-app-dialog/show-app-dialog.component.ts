@@ -16,7 +16,7 @@ export class ShowAppDialogComponent implements OnInit {
   constructor(private appsService: AppsService, public imageDialog: MatDialog, public dialogRef: MatDialogRef<ShowAppDialogComponent>) { }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class ShowAppDialogComponent implements OnInit {
   request() {
     this.appsService.requestIntegration(this.appObj).subscribe(app => {
       console.log('App requested:', app);
-      this.dialogRef.close();
+      this.dialogRef.close(true);
     });
   }
 

@@ -1,5 +1,6 @@
+<img class="background" src="{{this.user.background}}">
+<br>
 <div>
-  <img class="background" src="{{this.user.background}}">
   <mat-card class="usercard">
     <div class="avatar">
       <ngx-avatar name={{this.user.name}} src="{{this.user.avatar}}" initialsSize="1" src="" size="100">
@@ -8,12 +9,12 @@
     <div class="username">{{this.user.name}}</div>
     <div class="action">
       <button mat-raised-button (click)="this.toggleFollow()" color="accent">{{this.getFollowingText()}}</button>
+      <button mat-raised-button *ngIf="this.isLoggedUser" routerLink="/edit">Edit</button>
     </div>
   </mat-card>
 </div>
 
 <div *ngIf="this.isLoggedUser" class="imageUpload">
-  <button mat-raised-button routerLink="/edit">Edit</button>
 </div>
 
 <router-outlet></router-outlet>

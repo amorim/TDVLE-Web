@@ -1,8 +1,11 @@
-<h1 mat-dialog-title>{{this.toEdit}}</h1>
+<div class="myDialog" id="dialogContainer">
+  <h1 mat-dialog-title>{{this.toEdit}}</h1>
 
-<div class="imageSelector">
-  <input class="imageSelector" type="file" (change)="fileChangeListener($event)">
+  <div class="imageSelector">
+    <input class="imageSelector" type="file" (change)="fileChangeListener($event)">
+  </div>
+  <img-cropper class="cropper" #cropper [image]="this.image" [settings]="this.cropperSettings"></img-cropper>
+  <button class="uploadButton" [disabled]="this.image.image==null" mat-dialog-content mat-raised-button (click)="this.upload()" color="accent">Upload</button>
+  <button class="uploadButton" mat-dialog-content mat-raised-button (click)="this.resized()" color="accent">Resize</button>
 </div>
-<img-cropper #cropper [image]="image" [settings]="cropperSettings"></img-cropper>
-<button class="uploadButton" [disabled]="this.image.image==null" mat-dialog-content mat-raised-button (click)="this.upload()" color="accent">Upload</button>
 

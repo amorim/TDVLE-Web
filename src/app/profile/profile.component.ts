@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
     if (this.isLoggedUser) {
       this.userService.getAuthenticatedUser().subscribe(user => {
         this.user = user;
+        console.log(user);
         if (this.user.background == null) {
           this.user.background = 'http://2.bp.blogspot.com/-91pJBele_kY/U7e13L_b7KI/AAAAAAAAMNI/HgViWJhc6hY/s0/shiro-chibi-jibril-stephanie+dora-sora-q-chiang-1920x1080.jpg';
         }
