@@ -6,6 +6,13 @@
   margin-bottom: 20px;
 }
 
+.imageUpload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
 .wrapper {
   position: relative;
   min-height: calc(100% - 56px);

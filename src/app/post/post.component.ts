@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
-import {PageEvent} from "@angular/material";
+import {MatDialog, PageEvent} from '@angular/material';
 import {User} from "../model/user.model";
 import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
+import {ImageUploadComponent} from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-post',
@@ -23,7 +24,7 @@ export class PostComponent implements OnInit {
   postObj: Post = new Post();
   posts: Post[] = [];
 
-  constructor(private postService: PostService, private userService: UserService) {
+  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
     });
@@ -51,6 +52,14 @@ export class PostComponent implements OnInit {
     });
   }
 
+  openDialog(toEdit): void {
+    let dialogRef = this.dialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: toEdit}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.postObj.image = result;
+    });
+  }
+
   toggleLike(post: Post) {
     let like = new Like();
     like.post = post;
@@ -58,11 +67,6 @@ export class PostComponent implements OnInit {
       const idx = this.posts.indexOf(post, 0);
       this.posts[idx] = newPost;
     });
-  }
-
-
-  isLikedPost(post: Post) {
-    return post.hasLiked;
   }
 
   onKeyPress($event) {

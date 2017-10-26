@@ -7,6 +7,12 @@
         <textarea matInput required placeholder="Description" [(ngModel)]="this.postObj.description" name="inputDescription" #inputDescription="ngModel"></textarea>
       </mat-form-field>
     </form>
+    <div class="imageUpload">
+      <mat-form-field class="full-width">
+        <input matInput type="url" placeholder="Image link" [(ngModel)]="this.postObj.image" name="inputImage" #inputImage="ngModel">
+      </mat-form-field>
+      <button mat-raised-button (click)="openDialog('Image')" color="accent">Background</button>
+    </div>
     <button mat-raised-button [disabled]="inputDescription.invalid" (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
     <button mat-raised-button routerLink="/welcome" color="accent">Welcome</button>
   </mat-card>
@@ -19,15 +25,23 @@
       <mat-card-title>{{post.user.name}}</mat-card-title>
       <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content style="margin: 20px 0 20px 0" routerLink="/post/{{post.id}}">{{post.description}}</mat-card-content>
+    <div routerLink="/post/{{post.id}}">
+      <mat-card-content style="margin: 20px 0 20px 0">{{post.description}}</mat-card-content>
+      <div *ngIf="post.image != null">
+        <mat-card-content><img style="width: 100%;" src="{{post.image}}"></mat-card-content>
+      </div>
+    </div>
     <!--<div class="like">
       <h3>{{post.likeCount}}</h3>
       <button mat-raised-button >{{this.getLikeText(post)}}</button>
     </div>-->
     <mat-card-actions>
+      <div>
       <button (click)="this.toggleLike(post)" color="primary" mat-mini-fab>
-        <mat-icon color="{{isLikedPost(post) ? 'accent' : 'white'}}" class="md-24" aria-label="Like">favorite</mat-icon>
+        <mat-icon color="{{post.hasLiked ? 'accent' : 'white'}}" class="md-24" aria-label="Like">favorite</mat-icon>
       </button>
+        <span class="textGray"><small>{{post.likeCount}}</small></span>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>
