@@ -19,11 +19,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.userRegister);
     this.http
       .post(Constants.url + '/register', this.userRegister)
       .subscribe(data => {
-        console.log(data);
       });
   }
 

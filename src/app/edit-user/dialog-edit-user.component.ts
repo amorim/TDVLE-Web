@@ -65,9 +65,7 @@ export class DialogEditUserComponent implements OnInit {
 
   upload() {
     this.http.post('https://api.cloudinary.com/v1_1/ngn/image/upload', {'file': this.image.image, 'upload_preset': 'qcbitdy3'}).subscribe(done => {
-      console.log(done.json()['secure_url']);
       this.editUser(done.json()['secure_url']);
-      console.log(this.user);
       this.userService.setUser(this.user).subscribe();
     });
   }

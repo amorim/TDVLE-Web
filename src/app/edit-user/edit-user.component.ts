@@ -16,7 +16,6 @@ export class EditUserComponent implements OnInit {
   constructor(private userService: UserService, public dialog: MatDialog) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.user = user;
-      console.log(this.user);
     });
   }
 
@@ -25,14 +24,12 @@ export class EditUserComponent implements OnInit {
 
   update() {
     this.userService.setUser(this.user).subscribe(done => {
-      console.log(done);
     });
   }
 
   openDialog(toEdit): void {
     let dialogRef = this.dialog.open(DialogEditUserComponent, {width: 'auto', data: {user: this.user, toEdit: toEdit}});
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

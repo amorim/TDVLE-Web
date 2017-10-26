@@ -7,6 +7,7 @@ import {AuthHttp} from '../auth/auth.http';
 import {AuthService} from '../auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,10 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   userLogin: User = new User();
 
-  constructor (private authHttp: AuthHttp, private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private route: ActivatedRoute) {
-    if (this.authService.getAccessToken()) {
-      this.router.navigate(['/welcome']);
-    }
+  constructor (private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private route: ActivatedRoute, private userService: UserService) {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
+      this.router.navigate(['/post']);
+    });
   }
 
   login() {

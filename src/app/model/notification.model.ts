@@ -5,6 +5,7 @@ export class Notification {
   destUser: User;
   fromUser: User;
   message: String;
+  uri: string;
   read: boolean;
   date: Date;
 }

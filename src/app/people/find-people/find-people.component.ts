@@ -43,6 +43,7 @@ export class FindPeopleComponent implements OnInit {
     this.navigate(this.pageEvent.pageIndex);
     this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
       this.users = users;
+      window.scrollTo(0,0);
     });
   }
 

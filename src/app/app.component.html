@@ -18,7 +18,7 @@
           <div class="noNotifications" *ngIf="notificationsList.length === 0">
             <div class="noNotifText">No notifications here, senpai</div>
           </div>
-          <mat-card *ngFor="let notification of notificationsList; let i = index" class="notificationCard">
+          <mat-card *ngFor="let notification of notificationsList; let i = index" (click)="openUri(notification.uri)" class="notificationCard">
             <mat-card-title class="notificationCardTitle">{{notification.fromUser.name}}</mat-card-title>
             <div class="notificationCardTitle" style="float: right;">
               <button style="line-height: 28px; height: auto; width: 26px;" (click)="deleteNotif(i, $event)" mat-icon-button color="warn">
