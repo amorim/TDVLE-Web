@@ -20,7 +20,6 @@ export class AuthService {
         callback(true, 0);
       }, error => {
         callback(false, error.status);
-        console.log('login error');
       });
   }
 

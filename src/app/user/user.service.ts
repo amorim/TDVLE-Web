@@ -72,13 +72,13 @@ export class UserService {
 
   setFollow(id) {
     this.http.post(Constants.url + '/users/' + id + '/followers', null).subscribe(data => {
-      console.log(data);
+
     });
   }
 
   deleteFollow(id) {
     this.http.del(Constants.url + '/users/' + id + '/followers').subscribe(data => {
-      console.log(data);
+
     });
   }
 }

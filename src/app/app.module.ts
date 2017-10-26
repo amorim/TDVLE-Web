@@ -18,7 +18,6 @@ import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./shared/material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
-import {UserComponent} from "./user/user.component";
 import {AvatarModule} from "ngx-avatar";
 import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
@@ -42,7 +41,6 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: SinglePostComponent, canActivate: [AuthGuard] },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'edit', component: EditUserComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},

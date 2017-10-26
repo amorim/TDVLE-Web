@@ -5,6 +5,7 @@ import {User} from "./model/user.model";
 import {UserService} from "./user/user.service";
 import {Notification} from "./model/notification.model";
 import {Constants} from './shared/constants';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent {
     {path: 'post', icon: 'forum', desc: 'Posts'},
     {path: 'apps', icon: 'apps', desc: 'Apps'}];
 
-  constructor (private userService: UserService) {
+  constructor (private userService: UserService, private router: Router) {
     this.userService.getAuthenticatedUser().subscribe(au => {
       this.authenticatedUser = au;
     });
@@ -38,7 +39,6 @@ export class AppComponent {
     });
 
     this.userService.getNotifications().subscribe(notifications => {
-      console.log('Notifications:', notifications);
       this.notificationsList = notifications;
     });
   }
@@ -62,6 +62,10 @@ export class AppComponent {
     this.notificationsList.splice(i, 1);
     $event.stopPropagation();
     return false;
+  }
+
+  openUri(uri: string) {
+    this.router.navigateByUrl(uri);
   }
 
 }

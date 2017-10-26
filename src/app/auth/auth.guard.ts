@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
         observer.complete();
       }, error => {
         this.authService.clearCookies();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
         observer.error(false);
         observer.complete();
       });

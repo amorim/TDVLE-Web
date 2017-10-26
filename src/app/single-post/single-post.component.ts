@@ -29,7 +29,6 @@ export class SinglePostComponent implements OnInit {
     let like = new Like();
     like.post = post;
     this.postService.setLike(like).subscribe((newPost: Post) => {
-      console.log('Liked:', newPost);
     });
   }
 

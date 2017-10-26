@@ -16,7 +16,6 @@ export class EditUserComponent implements OnInit {
   constructor(private userService: UserService, public dialog: MatDialog) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.user = user;
-      console.log(this.user);
     });
   }
 
@@ -25,11 +24,6 @@ export class EditUserComponent implements OnInit {
 
   update() {
     this.userService.setUser(this.user).subscribe(done => {
-      if (done['status'] === 204) {
-        console.log(done, 'User edited successfully');
-      } else {
-        console.log(done);
-      }
     });
   }
 
