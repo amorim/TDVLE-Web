@@ -4,6 +4,7 @@ import {MatSidenav} from '@angular/material';
 import {User} from "./model/user.model";
 import {UserService} from "./user/user.service";
 import {Notification} from "./model/notification.model";
+import {Constants} from './shared/constants';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ export class AppComponent {
       this.authenticatedUser = au;
     });
     this.getNotifications();
-    setInterval(() => { this.getNotifications(); }, 10000);
+    setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);
   }
 
   getNotifications() {

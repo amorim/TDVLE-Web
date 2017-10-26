@@ -27,12 +27,13 @@ import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { ProfileComponent } from './profile/profile.component';
 import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
-import {DialogEditUserComponent} from "./edit-user/dialog-edit-user.component";
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import {AppsModule} from "./apps/apps.module";
 import {AppsComponent} from "./apps/apps.component";
 import {ShowAppDialogComponent} from './apps/show-app-dialog/show-app-dialog.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import {ImageUploadService} from './image-upload/image-upload.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -67,11 +68,12 @@ const appRoutes: Routes = [
     FollowersComponent,
     FollowingComponent,
     ProfileComponent,
-    DialogEditUserComponent,
     EditUserComponent,
-    SinglePostComponent
+    SinglePostComponent,
+    ShowAppDialogComponent,
+    ImageUploadComponent
   ],
-  entryComponents: [DialogEditUserComponent],
+  entryComponents: [ImageUploadComponent],
   imports: [
     AppsModule,
     ImageCropperModule,
@@ -90,7 +92,7 @@ const appRoutes: Routes = [
     PostModule,
     AvatarModule
   ],
-  providers: [],
+  providers: [ImageUploadService],
   bootstrap: [AppComponent]
 })
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user/user.service";
 import {User} from "../model/user.model";
 import {MatDialog} from "@angular/material";
-import {DialogEditUserComponent} from "./dialog-edit-user.component";
+import {ImageUploadComponent} from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,14 +25,27 @@ export class EditUserComponent implements OnInit {
 
   update() {
     this.userService.setUser(this.user).subscribe(done => {
-      console.log(done);
+      if (done['status'] === 204) {
+        console.log(done, 'User edited successfully');
+      } else {
+        console.log(done);
+      }
     });
   }
 
+  insertUserImage(toEdit: string, url: string) {
+    if (toEdit === 'Avatar') {
+      this.user.avatar = url;
+    } else {
+      this.user.background = url;
+    }
+  }
+
   openDialog(toEdit): void {
-    let dialogRef = this.dialog.open(DialogEditUserComponent, {width: 'auto', data: {user: this.user, toEdit: toEdit}});
+    let dialogRef = this.dialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: toEdit}});
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.insertUserImage(toEdit, result);
     });
   }
 

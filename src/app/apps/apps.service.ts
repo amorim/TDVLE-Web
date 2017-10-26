@@ -15,6 +15,10 @@ export class AppsService {
     return this.http.get(Constants.url + '/apps?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
+  getAllApps(max, offset): Observable<App[]> {
+    return this.http.get(Constants.url + '/apps/all?max=' + max + '&offset=' + offset).map(res => res.json());
+  }
+
   requestIntegration(app: App): Observable<App> {
     return this.http.post(Constants.url + '/apps', app).map(res => res.json());
   }

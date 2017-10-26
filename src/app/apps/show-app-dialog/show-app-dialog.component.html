@@ -1,24 +1,25 @@
-<div>
-  <mat-card class="register-form">
-    <h3>Request</h3>
-    <form>
+<mat-card class="register-form">
+  <h3>Request</h3>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Name" [(ngModel)]="this.appObj.name" name="inputName" #inputName="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Description" [(ngModel)]="this.appObj.description" name="inputDescription" #inputDescription="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Uri" [(ngModel)]="this.appObj.uri" name="inputUri" #inputUri="ngModel">
+    </mat-form-field>
+
+    <div class="imageUpload">
       <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Name" [(ngModel)]="this.appObj.name" name="inputName" #inputName="ngModel">
+        <input matInput required type="url" placeholder="Image Link" [(ngModel)]="this.appObj.image " name="inputImageLink" #inputImageLink="ngModel">
       </mat-form-field>
+      <button mat-raised-button (click)="this.uploadDialog()">Upload Image</button>
+    </div>
 
-      <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Description" [(ngModel)]="this.appObj.description" name="inputDescription" #inputDescription="ngModel">
-      </mat-form-field>
-
-      <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Uri" [(ngModel)]="this.appObj.uri" name="inputUri" #inputUri="ngModel">
-      </mat-form-field>
-
-      <!--<mat-form-field class="example-full-width">-->
-        <!--<input matInput required type="email" placeholder="Image" [(ngModel)]="this.userRegister.email" name="input" #inputEmail="ngModel">-->
-      <!--</mat-form-field>-->
-
-      <button mat-raised-button [disabled]="inputName.invalid || inputDescription.invalid || inputUri.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
-    </form>
-  </mat-card>
-</div>
+    <button mat-raised-button [disabled]="inputName.invalid || inputDescription.invalid || inputUri.invalid || inputImageLink.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
+  </form>
+</mat-card>

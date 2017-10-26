@@ -1,9 +1,16 @@
 .register-form {
   min-width: 150px;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0 0;
 }
 
 .example-full-width {
-  width: 100%;
+  width: auto;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
 }

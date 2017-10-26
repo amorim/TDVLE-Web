@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {AppsService} from '../apps.service';
 import {App} from '../../model/app.model';
+import {ImageUploadComponent} from '../../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-show-app-dialog',
@@ -12,7 +13,7 @@ export class ShowAppDialogComponent implements OnInit {
 
   appObj: App = new App();
 
-  constructor(private appsService: AppsService, public dialogRef: MatDialogRef<ShowAppDialogComponent>) { }
+  constructor(private appsService: AppsService, public imageDialog: MatDialog, public dialogRef: MatDialogRef<ShowAppDialogComponent>) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -22,7 +23,18 @@ export class ShowAppDialogComponent implements OnInit {
   }
 
   request() {
-    console.log('FOI');
+    this.appsService.requestIntegration(this.appObj).subscribe(app => {
+      console.log('App requested:', app);
+      this.dialogRef.close();
+    });
+  }
+
+  uploadDialog() {
+    let imageDialogRef = this.imageDialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: 'App Image'}});
+    imageDialogRef.afterClosed().subscribe(result => {
+      console.log('Image Upload dialog was closed');
+      this.appObj.image = result;
+    });
   }
 
 }

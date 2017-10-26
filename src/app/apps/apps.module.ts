@@ -8,7 +8,7 @@ import { IntegrateComponent } from './integrate/integrate.component';
 import { ShowAppDialogComponent } from './show-app-dialog/show-app-dialog.component';
 
 @NgModule({
-  declarations: [AppsComponent, IntegrateComponent, ShowAppDialogComponent],
+  declarations: [AppsComponent, IntegrateComponent],
   imports: [
     CommonModule,
     AvatarModule,
@@ -16,6 +16,6 @@ import { ShowAppDialogComponent } from './show-app-dialog/show-app-dialog.compon
   ],
   entryComponents: [ShowAppDialogComponent],
   providers: [AppsService],
-  exports: [AppsComponent, ShowAppDialogComponent]
+  exports: [AppsComponent]
 })
 export class AppsModule { }
