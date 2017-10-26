@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSidenav} from '@angular/material';
 import {User} from "./model/user.model";
@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('avatar') avatar: any;
 
   authenticatedUser: User = new User();
   notificationsList: Notification[] = [];
@@ -28,6 +29,11 @@ export class AppComponent {
   constructor (private userService: UserService, private router: Router) {
     this.userService.getAuthenticatedUser().subscribe(au => {
       this.authenticatedUser = au;
+    });
+    this.userService.getUserUpdated().subscribe((user: User) => {
+      this.authenticatedUser = user;
+      // this.avatar.src = user.avatar;
+      console.log(this.avatar.src);
     });
     this.getNotifications();
     setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);

@@ -4,11 +4,22 @@ import {User} from '../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
 import {Constants} from '../shared/constants';
 import {Notification} from "../model/notification.model";
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UserService {
 
+  userUpdatedSubject: Subject<User> = new Subject<User>();
+
   constructor(private http: AuthHttp) { }
+
+  updateUser(user: User): void {
+    this.userUpdatedSubject.next(user);
+  }
+
+  getUserUpdated(): Observable<User> {
+    return this.userUpdatedSubject.asObservable();
+  }
 
   getNotifications(): Observable<Notification[]> {
     return this.http.get(Constants.url + '/notifications').map(res => res.json());
@@ -72,13 +83,11 @@ export class UserService {
 
   setFollow(id) {
     this.http.post(Constants.url + '/users/' + id + '/followers', null).subscribe(data => {
-
     });
   }
 
   deleteFollow(id) {
     this.http.del(Constants.url + '/users/' + id + '/followers').subscribe(data => {
-
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user/user.service";
 import {User} from "../model/user.model";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class EditUserComponent implements OnInit {
 
   user: User = new User();
 
-  constructor(private userService: UserService, public dialog: MatDialog) {
+  constructor(private userService: UserService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.user = user;
     });
@@ -24,6 +24,8 @@ export class EditUserComponent implements OnInit {
 
   update() {
     this.userService.setUser(this.user).subscribe(done => {
+      this.userService.updateUser(this.user);
+      this.snackBar.open('Updated user successfully', 'Dismiss', {duration: 2000});
     });
   }
 
