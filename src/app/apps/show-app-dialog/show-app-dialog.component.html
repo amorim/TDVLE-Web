@@ -15,11 +15,13 @@
 
     <div class="imageUpload">
       <mat-form-field class="example-full-width">
-        <input matInput required type="url" placeholder="Image Link" [(ngModel)]="this.appObj.image " name="inputImageLink" #inputImageLink="ngModel">
+        <input matInput required type="url" placeholder="Image Link" [(ngModel)]="this.appObj.image" name="inputImageLink" #inputImageLink="ngModel">
       </mat-form-field>
-      <button mat-raised-button (click)="this.uploadDialog()">Upload Image</button>
+      <button style="margin-bottom: 12px;" (click)="this.uploadDialog()" mat-icon-button>
+        <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
+      </button>
     </div>
 
-    <button mat-raised-button [disabled]="inputName.invalid || inputDescription.invalid || inputUri.invalid || inputImageLink.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
+    <button mat-raised-button [disabled]="inputName.invalid || inputDescription.invalid || inputUri.invalid || inputImageLink.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Request Integration</button>
   </form>
 </mat-card>

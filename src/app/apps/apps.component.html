@@ -1,8 +1,7 @@
-<br>
 <div class="wrapper">
 <div class="apps">
   <mat-card *ngFor="let app of apps; let i = index" class="appcard">
-    <div routerLink="/app/{{app.id}}">
+    <div routerLink="/apps/{{app.id}}">
       <div class="appimg">
         <ngx-avatar name={{app.name}} initialsSize="1" src="{{app.image}}" size="100">
         </ngx-avatar>

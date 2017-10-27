@@ -1,4 +1,4 @@
 export class Constants {
-  public static url = 'http://localhost:8080/api';
-  public static notificationUpdateTime = 15000;
+  public static url = 'https://the-dank-network.herokuapp.com/api';
+  public static notificationUpdateTime = 20000;
 }

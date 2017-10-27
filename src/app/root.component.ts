@@ -32,9 +32,7 @@ export class RootComponent implements OnDestroy {
       this.authenticatedUser = au;
     });
     this.userService.getUserUpdated().subscribe((user: User) => {
-      this.authenticatedUser.avatar = user.avatar;
-      this.avatar.src = user.avatar.toString();
-      console.log(this.avatar.src, user.avatar);
+      this.authenticatedUser = user;
     });
     this.getNotifications();
     this.intervalId = setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);

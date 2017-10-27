@@ -51,7 +51,7 @@ const appRoutes: Routes = [
     {path: 'followers', component: FollowersComponent},
     {path: 'following', component: FollowingComponent}
   ]},
-  { path: 'apps', component: AppsComponent}, {path: 'app/:id', component: SingleAppComponent}]}
+  { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent}]}
   ];
 
 @NgModule({

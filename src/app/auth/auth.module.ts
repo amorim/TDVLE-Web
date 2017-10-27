@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CookieService} from 'ngx-cookie-service';
 import {AuthService} from './auth.service';
 import {UserService} from '../user/user.service';
 import {AuthGuard} from './auth.guard';
@@ -11,6 +10,6 @@ import {AuthHttp} from './auth.http';
     CommonModule
   ],
   declarations: [],
-  providers: [CookieService, AuthService, AuthGuard, AuthHttp]
+  providers: [AuthService, AuthGuard, AuthHttp]
 })
 export class AuthModule { }

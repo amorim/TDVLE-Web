@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
 import {Http} from '@angular/http';
 import {User} from '../model/user.model';
 import {Constants} from "../shared/constants";
@@ -7,7 +6,7 @@ import {Constants} from "../shared/constants";
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(private http: Http) {
   }
 
   login(user: User, callback) {
@@ -15,8 +14,8 @@ export class AuthService {
       .post(Constants.url + '/login', user)
       .map(res => res.json())
       .subscribe(data => {
-        this.cookieService.set('access-token', data['access_token']);
-        this.cookieService.set('refresh-token', data['refresh_token']);
+        localStorage.setItem('access-token', data['access_token']);
+        localStorage.setItem('refresh-token', data['refresh_token']);
         callback(true, 0);
       }, error => {
         callback(false, error.status);
@@ -28,11 +27,11 @@ export class AuthService {
   }
 
   clearCookies() {
-    this.cookieService.delete('access-token');
-    this.cookieService.delete('refresh-token');
+    localStorage.removeItem('access-token');
+    localStorage.removeItem('refresh-token');
   }
 
   getAccessToken() {
-    return this.cookieService.get('access-token');
+    return localStorage.getItem('access-token');
   }
 }

@@ -6,7 +6,7 @@
   </button>
   </div>
   <input id="upp" class="imageSelector" type="file" (change)="fileChangeListener($event)">
-  <img-cropper *ngIf="!this.wait" class="cropper" #cropper [image]="this.image" [settings]="this.cropperSettings"></img-cropper>
+  <img-cropper class="cropper" #cropper [image]="this.image" [settings]="this.cropperSettings"></img-cropper>
   <div *ngIf="!uploadingNow" style="margin-top: 10px;"><button class="uploadButton" [disabled]="this.image.image==null" mat-dialog-content mat-raised-button (click)="this.upload()" color="accent">Upload</button></div>
   <mat-progress-bar *ngIf="uploadingNow"
     color="primary"
