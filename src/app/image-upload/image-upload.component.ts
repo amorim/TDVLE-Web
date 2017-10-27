@@ -72,7 +72,7 @@ export class ImageUploadComponent implements OnInit {
         }
         else {
           this.snackBar.open('Image uploaded successfully.', 'Dismiss', {duration: 2000});
-          this.dialogRef.close(event.body.url);
+          this.dialogRef.close(event.body.secure_url);
         }
       }
     });

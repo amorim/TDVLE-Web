@@ -5,16 +5,21 @@ import {AuthHttp} from '../auth/auth.http';
 import {Constants} from '../shared/constants';
 import {Notification} from "../model/notification.model";
 import {Subject} from 'rxjs/Subject';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class UserService {
 
   userUpdatedSubject: Subject<User> = new Subject<User>();
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp, private httpStandard: Http) { }
 
   updateUser(user: User): void {
     this.userUpdatedSubject.next(user);
+  }
+
+  deleteUser(id): Observable<Object> {
+    return this.http.del(Constants.url + '/users/' + id);
   }
 
   getUserUpdated(): Observable<User> {
@@ -54,7 +59,7 @@ export class UserService {
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post(Constants.url + '/register', user).map(res => res.json());
+    return this.httpStandard.post(Constants.url + '/register', user).map(res => res.json());
   }
 
   setUser(user: User): Observable<User> {

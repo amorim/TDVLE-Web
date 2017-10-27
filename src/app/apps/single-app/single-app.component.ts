@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {App} from "../../model/app.model";
 import {AppsService} from "../apps.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from "../../model/user.model";
 import {UserService} from "../../user/user.service";
 
@@ -16,7 +16,7 @@ export class SingleAppComponent implements OnInit {
   app: App = new App();
   user: User = new User();
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private appsService: AppsService) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private appsService: AppsService) {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.user = user;
     });
@@ -34,6 +34,12 @@ export class SingleAppComponent implements OnInit {
     this.appsService.approveRequest(app.id).subscribe(done => {
       app.approved = true;
       console.log(done);
+    });
+  }
+
+  deleteApp(app: App, i: number) {
+    this.appsService.deleteApp(app.id).subscribe(done => {
+      this.router.navigate(['apps']);
     });
   }
 

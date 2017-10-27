@@ -9,5 +9,6 @@
   <div class="action">
     <button mat-raised-button (click)="accessApp(app)" color="accent">Access</button>
     <button mat-raised-button *ngIf="this.isAdmin()" [disabled]="app.approved" (click)="approveApp(app)" color="accent">Approve</button>
+    <button mat-raised-button *ngIf="this.isAdmin()" (click)="deleteApp(app, i)" color="accent">Delete</button>
   </div>
 </mat-card>

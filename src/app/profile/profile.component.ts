@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user/user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Post} from "../model/post.model";
 import {PostService} from "../post/post.service";
 import {Like} from "../model/like.model";
@@ -15,24 +15,34 @@ export class ProfileComponent implements OnInit {
 
   isLoggedUser = false;
   user: User = new User();
+  loggedUser: User = new User();
   posts: Post[];
-  constructor(private userService: UserService, private route: ActivatedRoute, private postService: PostService) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private postService: PostService) {
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.isLoggedUser = id == null;
-    if (this.isLoggedUser) {
-      this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.loggedUser = user;
+      if (id != null) {
+        this.userService.getUser(id).subscribe(subUser => {
+          this.user = subUser;
+          this.isLoggedUser = user.id === subUser.id;
+          console.log(this.isLoggedUser);
+          this.fetchPosts();
+        });
+      } else {
         this.user = user;
+        this.isLoggedUser = true;
         this.fetchPosts();
-      });
-    } else {
-      this.userService.getUser(id).subscribe(user => {
-        this.user = user;
-        this.fetchPosts();
-      });
-    }
+      }
+    });
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.user.id).subscribe(done => {
+      this.router.navigate(['people']);
+    });
   }
 
   fetchPosts() {
@@ -61,6 +71,17 @@ export class ProfileComponent implements OnInit {
       this.userService.setFollow(this.user.id);
       this.user.isFollowing = true;
     }
+  }
+
+  isAdmin() {
+    if (this.loggedUser != null && this.loggedUser.authority != null) {
+      for (let i = 0; i < this.loggedUser.authority.length; i ++) {
+        if (this.loggedUser.authority[i].authority === 'ROLE_ADMIN') {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   toggleLike(post: Post, idx:  number) {
