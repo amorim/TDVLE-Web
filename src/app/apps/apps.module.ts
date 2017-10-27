@@ -6,13 +6,16 @@ import {AvatarModule } from "ngx-avatar";
 import {MaterialModule} from "../shared/material.module";
 import { IntegrateComponent } from './integrate/integrate.component';
 import { ShowAppDialogComponent } from './show-app-dialog/show-app-dialog.component';
+import {SingleAppComponent} from "./single-app/single-app.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [AppsComponent, IntegrateComponent],
   imports: [
     CommonModule,
     AvatarModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   entryComponents: [ShowAppDialogComponent],
   providers: [AppsService],

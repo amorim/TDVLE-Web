@@ -1,11 +1,12 @@
 import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MatSidenav} from '@angular/material';
+import {MatSidenav, MatSnackBar} from '@angular/material';
 import {User} from "./model/user.model";
 import {UserService} from "./user/user.service";
 import {Notification} from "./model/notification.model";
 import {Constants} from './shared/constants';
 import {Router} from "@angular/router";
+import {AuthService} from "./auth/auth.service";
 
 @Component({
   selector: 'app-app',
@@ -26,7 +27,7 @@ export class RootComponent implements OnDestroy {
     {path: '/post', icon: 'forum', desc: 'Posts'},
     {path: '/apps', icon: 'apps', desc: 'Apps'}];
 
-  constructor (private userService: UserService, private router: Router) {
+  constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
     this.userService.getAuthenticatedUser().subscribe(au => {
       this.authenticatedUser = au;
     });
@@ -79,4 +80,9 @@ export class RootComponent implements OnDestroy {
     this.router.navigate([uri]);
   }
 
+  logout() {
+    this.authService.logout();
+    this.snackBar.open('Logged Out', 'Dismiss', {duration: 2000});
+    this.router.navigate(['/login']);
+  }
 }

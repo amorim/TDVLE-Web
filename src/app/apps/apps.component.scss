@@ -21,7 +21,6 @@
 }
 
 .appcard {
-  margin: 10px;
   width: 20%;
   max-width: 200px;
   min-width: 150px;
@@ -41,7 +40,7 @@
 .appimg {
   align-items: center;
   justify-content: center;
-  display: inline-flex;
+  display: flex;
   margin-bottom: 15px;
 }
 

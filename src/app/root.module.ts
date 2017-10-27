@@ -33,6 +33,7 @@ import {ShowAppDialogComponent} from './apps/show-app-dialog/show-app-dialog.com
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import {ImageUploadService} from './image-upload/image-upload.service';
 import {AppModule} from "./app.module";
+import {SingleAppComponent} from "./apps/single-app/single-app.component";
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 
 const appRoutes: Routes = [
@@ -50,7 +51,7 @@ const appRoutes: Routes = [
     {path: 'followers', component: FollowersComponent},
     {path: 'following', component: FollowingComponent}
   ]},
-  { path: 'apps', component: AppsComponent}]}
+  { path: 'apps', component: AppsComponent}, {path: 'app/:id', component: SingleAppComponent}]}
   ];
 
 @NgModule({
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     EditUserComponent,
     SinglePostComponent,
     ShowAppDialogComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    SingleAppComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
