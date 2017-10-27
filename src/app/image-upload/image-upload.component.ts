@@ -17,7 +17,6 @@ export class ImageUploadComponent implements OnInit {
   toEdit: String;
 
   constructor(private imageUploadService: ImageUploadService, public dialogRef: MatDialogRef<ImageUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.cropperSettings.preserveSize = true;
     this.cropperSettings.minWidth = 10;
     this.cropperSettings.minHeight = 10;
     this.cropperSettings.keepAspect = false;
@@ -35,18 +34,8 @@ export class ImageUploadComponent implements OnInit {
 
   ngOnInit(): void {
     var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
-    console.log(dialog);
-    this.cropperSettings.width = dialog[0].clientWidth;
-    this.cropperSettings.canvasWidth = dialog[0].clientWidth;
-    this.cropperSettings.dynamicSizing = true;
-  }
-
-  resized() {
-    var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
-    console.log(dialog);
-    this.cropperSettings.width = dialog[0].clientWidth;
-    this.cropperSettings.canvasWidth = dialog[0].clientWidth;
-    console.log(this.cropper.cropcanvas);
+    this.cropperSettings.canvasWidth = dialog[0].clientWidth * 0.8;
+    console.log(this.cropperSettings.canvasWidth);
   }
 
   onNoClick(): void {
@@ -71,5 +60,4 @@ export class ImageUploadComponent implements OnInit {
       this.dialogRef.close(done['secure_url']);
     });
   }
-
 }
