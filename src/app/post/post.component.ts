@@ -6,6 +6,7 @@ import {User} from "../model/user.model";
 import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -24,7 +25,8 @@ export class PostComponent implements OnInit {
   postObj: Post = new Post();
   posts: Post[] = [];
 
-  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog) {
+  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute) {
+    this.postObj.description = route.snapshot.queryParams['content'] || "";
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
     });

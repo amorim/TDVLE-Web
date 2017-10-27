@@ -22,7 +22,6 @@
 .posts {
   height: auto;
   overflow: hidden;
-
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

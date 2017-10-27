@@ -37,4 +37,10 @@ export class ShowAppDialogComponent implements OnInit {
     });
   }
 
+  onKeyPress($event) {
+    if ($event.keyCode === 13) {
+      this.request();
+    }
+  }
+
 }

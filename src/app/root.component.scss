@@ -1,0 +1,76 @@
+.everything {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.routerOutlet {
+  height: 100%;
+  flex: 1;
+}
+
+.notificationCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f00;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 200px;
+  color: white;
+}
+
+.notificationCard {
+  cursor: pointer;
+  margin: 20px;
+}
+
+::ng-deep .mat-menu-panel {
+  width: 80vw !important;
+  max-width: 400px !important;
+}
+
+::ng-deep .mat-menu-content {
+  padding-bottom: 0 !important;
+}
+
+.notificationCardTitle {
+  display: inline-block;
+}
+
+.noNotifications {
+  height: 50vh;
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  background: url("https://i.imgur.com/TrKchWC.png") center bottom;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+}
+
+.noNotifText {
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  height: 30%;
+  color: #757575;
+  text-align: center;
+  position: relative;
+  top: 30%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+.space-left {
+  margin-left: 15px;
+}
+.content-container {
+  height: 100%;
+}
+.sidenav-menu {
+}
