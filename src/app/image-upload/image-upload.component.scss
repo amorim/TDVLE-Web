@@ -1,6 +1,4 @@
-.imageSelector {
-  width: 100%;
-}
+
 
 .uploadButton {
   margin: 0 auto;
@@ -10,4 +8,8 @@
   width: 9999px !important;
   max-width: 100% !important;
   text-align: center !important;
+}
+
+input[type="file"] {
+  display: none;
 }

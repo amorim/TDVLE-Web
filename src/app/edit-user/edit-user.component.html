@@ -17,14 +17,18 @@
         <mat-form-field class="example-full-width">
           <input matInput type="url" placeholder="Avatar link" [(ngModel)]="this.user.avatar " name="inputAvatar" #inputAvatar="ngModel">
         </mat-form-field>
-        <button mat-raised-button (click)="openDialog('Avatar')" color="accent">Avatar</button>
+        <button style="margin-bottom: 12px;" (click)="openDialog('Avatar')" mat-icon-button>
+          <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
+        </button>
       </div>
 
       <div class="imageUpload">
         <mat-form-field class="example-full-width">
           <input matInput type="url" placeholder="Background link" [(ngModel)]="this.user.background " name="inputBackground" #inputBackground="ngModel">
         </mat-form-field>
-        <button mat-raised-button (click)="openDialog('Background')" color="accent">Background</button>
+        <button style="margin-bottom: 12px;" (click)="openDialog('Background')" mat-icon-button>
+          <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
+        </button>
       </div>
 
       <button mat-raised-button (click)="update()" (onkeypress)="onKeyPress($event)" color="accent">Update</button>

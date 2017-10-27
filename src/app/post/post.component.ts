@@ -6,7 +6,7 @@ import {User} from "../model/user.model";
 import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -25,8 +25,15 @@ export class PostComponent implements OnInit {
   postObj: Post = new Post();
   posts: Post[] = [];
 
-  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute) {
+  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
+    let param = route.snapshot.queryParams['page'];
+    if (!param) {
+      param = 0;
+      this.navigate(param);
+    }
+    this.pageIndex = param;
     this.postObj.description = route.snapshot.queryParams['content'] || "";
+    this.postObj.image = route.snapshot.queryParams['imageUrl'] || "";
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
     });
@@ -49,9 +56,14 @@ export class PostComponent implements OnInit {
   }
 
   alterPage() {
+    this.navigate(this.pageEvent.pageIndex);
     this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(posts => {
       this.posts = posts;
     });
+  }
+
+  navigate(pagen: number) {
+    this.router.navigate([], {queryParams: {page: pagen}, relativeTo: this.route},);
   }
 
   openDialog(toEdit): void {
@@ -62,11 +74,10 @@ export class PostComponent implements OnInit {
     });
   }
 
-  toggleLike(post: Post) {
+  toggleLike(post: Post, idx: number) {
     let like = new Like();
     like.post = post;
     this.postService.setLike(like).subscribe((newPost: Post) => {
-      const idx = this.posts.indexOf(post, 0);
       this.posts[idx] = newPost;
     });
   }

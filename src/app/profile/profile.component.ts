@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user/user.service';
 import {ActivatedRoute} from '@angular/router';
+import {Post} from "../model/post.model";
+import {PostService} from "../post/post.service";
+import {Like} from "../model/like.model";
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +15,8 @@ export class ProfileComponent implements OnInit {
 
   isLoggedUser = false;
   user: User = new User();
-
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  posts: Post[];
+  constructor(private userService: UserService, private route: ActivatedRoute, private postService: PostService) {
   }
 
   ngOnInit() {
@@ -22,19 +25,20 @@ export class ProfileComponent implements OnInit {
     if (this.isLoggedUser) {
       this.userService.getAuthenticatedUser().subscribe(user => {
         this.user = user;
-        console.log(user);
-        if (this.user.background == null) {
-          this.user.background = 'http://2.bp.blogspot.com/-91pJBele_kY/U7e13L_b7KI/AAAAAAAAMNI/HgViWJhc6hY/s0/shiro-chibi-jibril-stephanie+dora-sora-q-chiang-1920x1080.jpg';
-        }
+        this.fetchPosts();
       });
     } else {
       this.userService.getUser(id).subscribe(user => {
         this.user = user;
-        if (this.user.background == null) {
-          this.user.background = 'https://2.bp.blogspot.com/-91pJBele_kY/U7e13L_b7KI/AAAAAAAAMNI/HgViWJhc6hY/s0/shiro-chibi-jibril-stephanie+dora-sora-q-chiang-1920x1080.jpg';
-        }
+        this.fetchPosts();
       });
     }
+  }
+
+  fetchPosts() {
+    this.postService.getUserPosts(this.user, 10, 0).subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
   }
 
   isFollowing(user: User) {
@@ -57,5 +61,13 @@ export class ProfileComponent implements OnInit {
       this.userService.setFollow(this.user.id);
       this.user.isFollowing = true;
     }
+  }
+
+  toggleLike(post: Post, idx:  number) {
+    let like = new Like();
+    like.post = post;
+    this.postService.setLike(like).subscribe((newPost: Post) => {
+      this.posts[idx] = newPost;
+    });
   }
 }

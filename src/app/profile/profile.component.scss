@@ -1,26 +1,40 @@
-.background {
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.container {
+  position: fixed;
   z-index: -1;
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  -ms-filter: blur(8px);
+  filter: blur(8px);
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
 .usercard {
-  width: 20%;
-  max-width: 200px;
+  width: 80%;
+  max-width: 500px;
   min-width: 150px;
-  height: 220px;
+  height: 320px;
   flex-direction: column;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  position: relative;
   justify-content: flex-start;
   margin-left: auto;
   margin-right: auto;
   z-index: 8;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.user {
+  -moz-box-shadow: 0 0 50px #000 !important;
+  -webkit-box-shadow: 0 0 50px #000 !important;
+  box-shadow: 0 0 50px #000 !important;
 }
 
 .avatar {
@@ -34,7 +48,7 @@
   align-items: center;
   justify-content: center;
   display: flex;
-
+  font-size: xx-large;
 }
 
 .action {
@@ -48,4 +62,54 @@
 
 .imageUpload {
   text-align: center;
+}
+
+.posts {
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.postcard {
+  margin: 10px;
+  width: 80%;
+  max-width: 400px;
+  flex-direction: column;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  float: left;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.example-header-image {
+  background-image: url('http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png');
+  background-size: cover;
+}
+
+.like {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+}
+
+.textGray {
+  color: #757575;
+  margin-left: 10px;
+}
+
+.fill {
+  flex: 1;
+}
+
+.actionsholder {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  align-items: center;
 }

@@ -6,6 +6,7 @@ import {ShowAppDialogComponent} from './show-app-dialog/show-app-dialog.componen
 import {UserService} from '../user/user.service';
 import {User} from '../model/user.model';
 import {Authority} from '../model/authority.model';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-apps',
@@ -23,7 +24,13 @@ export class AppsComponent implements OnInit {
   user: User = new User();
   apps: App[] = [];
 
-  constructor(private userService: UserService, private appsService: AppsService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private userService: UserService, private appsService: AppsService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute) {
+    let param = route.snapshot.queryParams['page'];
+    if (!param) {
+      param = 0;
+      this.navigate(param);
+    }
+    this.pageIndex = param;
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.user = user;
     });
@@ -42,9 +49,14 @@ export class AppsComponent implements OnInit {
   }
 
   alterPage() {
+    this.navigate(this.pageEvent.pageIndex);
     this.appsService.getApps(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(apps => {
       this.apps = apps;
     });
+  }
+
+  navigate(pagen: number) {
+    this.router.navigate([], {queryParams: {page: pagen}, relativeTo: this.route},);
   }
 
   approveApp(app: App) {

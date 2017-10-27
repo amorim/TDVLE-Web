@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
-import {Http} from '@angular/http';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {ImageUploadService} from './image-upload.service';
+import {HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-image-upload',
@@ -15,8 +15,11 @@ export class ImageUploadComponent implements OnInit {
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   cropperSettings: CropperSettings = new CropperSettings();
   toEdit: String;
+  fileUploadProgress = undefined;
+  uploadingNow = false;
 
-  constructor(private imageUploadService: ImageUploadService, public dialogRef: MatDialogRef<ImageUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private http: HttpClient, private imageUploadService: ImageUploadService, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<ImageUploadComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.cropperSettings.preserveSize = true;
     this.cropperSettings.minWidth = 10;
     this.cropperSettings.minHeight = 10;
     this.cropperSettings.keepAspect = false;
@@ -34,7 +37,7 @@ export class ImageUploadComponent implements OnInit {
 
   ngOnInit(): void {
     var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
-    this.cropperSettings.canvasWidth = dialog[0].clientWidth * 0.8;
+    this.cropperSettings.canvasWidth = dialog[0].clientWidth;
     console.log(this.cropperSettings.canvasWidth);
   }
 
@@ -55,9 +58,27 @@ export class ImageUploadComponent implements OnInit {
   }
 
   upload() {
-    this.imageUploadService.uploadImage(this.image.image).subscribe(done => {
-      console.log(done['secure_url']);
-      this.dialogRef.close(done['secure_url']);
+    const req = new HttpRequest('POST', 'https://api.cloudinary.com/v1_1/ngn/image/upload', {'file': this.image.image, 'upload_preset': 'qcbitdy3'}, {
+      reportProgress: true,
     });
+    this.http.request(req).subscribe((event: HttpEvent<any>) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.uploadingNow = true;
+        this.fileUploadProgress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        this.uploadingNow = false;
+        if (event.status != 200) {
+          this.snackBar.open('Error uploading image. Try again.', 'Dismiss', {duration: 2000});
+        }
+        else {
+          this.snackBar.open('Image uploaded successfully.', 'Dismiss', {duration: 2000});
+          this.dialogRef.close(event.body.url);
+        }
+      }
+    });
+  }
+
+  openFileSelect() {
+    document.getElementById("upp").click();
   }
 }

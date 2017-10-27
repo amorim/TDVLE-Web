@@ -33,6 +33,7 @@ import {ShowAppDialogComponent} from './apps/show-app-dialog/show-app-dialog.com
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import {ImageUploadService} from './image-upload/image-upload.service';
 import {AppModule} from "./app.module";
+import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 
 const appRoutes: Routes = [
   { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
@@ -75,6 +76,7 @@ const appRoutes: Routes = [
     ImageCropperModule,
     CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forChild(
       appRoutes
@@ -87,7 +89,7 @@ const appRoutes: Routes = [
     PostModule,
     AvatarModule
   ],
-  providers: [ImageUploadService]
+  providers: [ImageUploadService, HttpClient]
 })
 
 export class RootModule { }

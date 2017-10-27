@@ -1,5 +1,21 @@
 .postcard {
   min-width: 150px;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
+
+.textGray {
+  color: #757575;
+  margin-left: 10px;
+}
+
+.fill {
+  flex: 1;
+}
+
+.actionsholder {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  align-items: center;
+} 

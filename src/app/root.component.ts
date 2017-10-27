@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSidenav} from '@angular/material';
 import {User} from "./model/user.model";
@@ -12,14 +12,14 @@ import {Router} from "@angular/router";
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss']
 })
-export class RootComponent {
+export class RootComponent implements OnDestroy {
   @ViewChild('sidenav') sidenav: MatSidenav;
   @ViewChild('avatar') avatar: any;
 
   authenticatedUser: User = new User();
   notificationsList: Notification[] = [];
   notificationCount = 0;
-
+  intervalId: any;
   urls = [{path: '/welcome', icon: 'home', desc: 'Home'},
     {path: '/profile', icon: 'person', desc: 'Profile'},
     {path: '/people', icon: 'people', desc: 'People'},
@@ -36,8 +36,13 @@ export class RootComponent {
       console.log(this.avatar.src, user.avatar);
     });
     this.getNotifications();
-    setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);
+    this.intervalId = setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);
   }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
+
 
   getNotifications() {
     this.userService.getNotificationsCount().subscribe(notificationCount => {
