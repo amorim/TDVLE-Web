@@ -1,11 +1,14 @@
+<br>
 <div class="wrapper">
 <div class="apps">
   <mat-card *ngFor="let app of apps" class="appcard">
-    <div class="appimg">
-      <ngx-avatar name={{app.name}} initialsSize="1" src="{{app.image}}" size="100">
-      </ngx-avatar>
+    <div routerLink="/app/{{app.id}}">
+      <div class="appimg">
+        <ngx-avatar name={{app.name}} initialsSize="1" src="{{app.image}}" size="100">
+        </ngx-avatar>
+      </div>
+      <div class="appname">{{app.name}}</div>
     </div>
-    <div class="appname">{{app.name}}</div>
     <div class="action">
       <button mat-raised-button (click)="accessApp(app)" color="accent">Access</button>
       <button mat-raised-button *ngIf="this.isAdmin()" [disabled]="app.approved" (click)="approveApp(app)" color="accent">Approve</button>

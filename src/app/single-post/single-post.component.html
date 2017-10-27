@@ -1,19 +1,8 @@
+<br>
 <mat-card class="postcard">
-  <!--<mat-card-header>-->
-    <!--<div mat-card-avatar class="example-header-image"></div>-->
-    <!--<mat-card-title>{{this.post.user.name}}</mat-card-title>-->
-    <!--<mat-card-subtitle>{{this.post.date | timeAgo }}</mat-card-subtitle>-->
-  <!--</mat-card-header>-->
-  <!--<mat-card-content>{{post.description}}</mat-card-content>-->
-  <!--<div class="like">-->
-    <!--<h3>{{this.post.likeCount}}</h3>-->
-    <!--<button mat-raised-button (click)="this.toggleLike(this.post)">{{this.getLikeText(this.post)}}</button>-->
-  <!--</div>-->
-  <mat-card-header>
-    <ngx-avatar mat-card-avatar size="40" src="{{post.user.avatar}}" initialsSize="1" routerLink="/profile/{{post.user.id}}" name={{post.user.name}}></ngx-avatar>
-    <mat-card-title>{{post.user.name}}</mat-card-title>
-    <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
-  </mat-card-header>
+  <ngx-avatar mat-card-avatar size="40" src="{{post.user.avatar}}" initialsSize="1" routerLink="/profile/{{post.user.id}}" name={{post.user.name}}></ngx-avatar>
+  <mat-card-title>{{post.user.name}}</mat-card-title>
+  <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
   <div routerLink="/post/{{post.id}}">
     <mat-card-content style="margin: 20px 0 20px 0">{{post.description}}</mat-card-content>
     <div *ngIf="post.image != null">

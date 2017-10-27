@@ -12,7 +12,7 @@
                 aria-label="Notifications">notifications
       </mat-icon>
       <div *ngIf="this.notificationCount > 0" class="notificationCircle">{{this.notificationCount}}</div>
-      <mat-menu style="width: 80vw; max-width: 400px;" #notifications="matMenu">
+      <mat-menu class="notificationsMatMenu" style="width: 80vw; max-width: 400px;" #notifications="matMenu">
         <div class="notificationHolder">
 
           <div class="noNotifications" *ngIf="notificationsList.length === 0">
@@ -31,9 +31,17 @@
         </div>
       </mat-menu>
     </button>
-    <div style="margin-left: 0.5vh; cursor: pointer;">
-      <ngx-avatar #avatar routerLink="/profile" [size]="40" [textSizeRatio]="2" [name]="this.authenticatedUser.name" [src]="this.authenticatedUser.avatar" [initialsSize]="1"></ngx-avatar>
+
+    <div style="margin-left: 0.5vh; cursor: pointer">
+      <button mat-icon-button [matMenuTriggerFor]="options">
+        <ngx-avatar #avatar [size]="40" [textSizeRatio]="2" [name]="this.authenticatedUser.name" [src]="this.authenticatedUser.avatar" [initialsSize]="1"></ngx-avatar>
+        <mat-menu class="optionsMatMenu" #options="matMenu">
+          <button mat-menu-item routerLink="/profile">Profile</button>
+          <button mat-menu-item (click)="this.logout()">Logout</button>
+        </mat-menu>
+      </button>
     </div>
+
   </mat-toolbar>
   <mat-sidenav-container class="content-container">
     <mat-sidenav #sidenav class="sidenav-menu">

@@ -11,7 +11,7 @@
       <mat-form-field class="full-width">
         <input matInput type="url" placeholder="Image link" [(ngModel)]="this.postObj.image" name="inputImage" #inputImage="ngModel">
       </mat-form-field>
-      <button mat-raised-button (click)="openDialog('Image')" color="accent">Background</button>
+      <button mat-raised-button (click)="openDialog('Image')" color="accent">Image</button>
     </div>
     <button mat-raised-button [disabled]="inputDescription.invalid" (click)="post()" (onkeypress)="onKeyPress($event)" color="accent">Post</button>
     <button mat-raised-button routerLink="/welcome" color="accent">Welcome</button>
