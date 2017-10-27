@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../user/user.service';
 import {PageEvent} from '@angular/material';
 import {User} from '../../model/user.model';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-find-people',
@@ -18,22 +19,36 @@ export class FindPeopleComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+    let param = route.snapshot.queryParams['page'];
+    if (!param) {
+      param = 0;
+      this.navigate(param);
+    }
+    this.pageIndex = param;
     this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
       this.users = users;
       this.userService.getUsersCount().subscribe(userCount => {
         this.length = userCount['userCount'];
       });
     });
+
   }
 
   ngOnInit() {
+
   }
 
   alterPage() {
+    this.navigate(this.pageEvent.pageIndex);
     this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
       this.users = users;
+      window.scrollTo(0,0);
     });
+  }
+
+  navigate(pagen: number) {
+    this.router.navigate([], {queryParams: {page: pagen}, relativeTo: this.route},);
   }
 
   getFollowingText(user: User) {

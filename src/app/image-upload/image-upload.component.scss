@@ -1,0 +1,15 @@
+
+
+.uploadButton {
+  margin: 0 auto;
+}
+
+::ng-deep .myDialog {
+  width: 9999px !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+input[type="file"] {
+  display: none;
+}

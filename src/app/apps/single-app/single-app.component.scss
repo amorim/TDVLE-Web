@@ -1,15 +1,14 @@
-.users {
-  height: auto;
+.background {
   overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  z-index: -1;
 }
 
-.usercard {
-  margin: 10px;
-  width: 20%;
-  max-width: 200px;
+.appcard {
+  width: 80%;
+  max-width: 300px;
   min-width: 150px;
   height: 220px;
   flex-direction: column;
@@ -19,18 +18,19 @@
   display: flex;
   position: relative;
   justify-content: flex-start;
-  float: left;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 8;
 }
 
-.avatar {
+.appimg {
   align-items: center;
   justify-content: center;
   display: inline-flex;
   margin-bottom: 15px;
-  cursor: pointer;
 }
 
-.username {
+.appname {
   align-items: center;
   justify-content: center;
   display: flex;
@@ -44,18 +44,8 @@
   bottom: 10px;
   left: 0;
   right: 0;
-
 }
 
-.uppercase {
-  text-transform: uppercase;
+.imageUpload {
+  text-align: center;
 }
-
-.mat-paginator {
-  background: #eeeeee;
-  width: 100%;
-  padding: 0 0;
-  bottom: 0;
-  position: absolute;
-}
-

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Http} from '@angular/http';
-import {MatSnackBar} from "@angular/material";
-import {Constants} from "../shared/constants";
+import {MatSnackBar} from '@angular/material';
+import {Constants} from '../shared/constants';
+import {UserService} from '../user/user.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -15,16 +17,18 @@ export class RegisterComponent implements OnInit {
 
   userRegister: User = new User();
 
-  constructor (private http: Http, private snackBar: MatSnackBar) {
+  constructor (private userService: UserService, private snackBar: MatSnackBar, private router: Router) {
   }
 
   register() {
-    console.log(this.userRegister);
-    this.http
-      .post(Constants.url + '/register', this.userRegister)
-      .subscribe(data => {
-        console.log(data);
-      });
+    this.userService.registerUser(this.userRegister).subscribe(user => {
+      this.snackBar.open('Registered user successfully', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/login']);
+      console.log('Registred user:', user);
+    }, (error: any) => {
+      this.snackBar.open('User already exists', 'Dismiss', {duration: 2000});
+      console.log('Already registered');
+    });
   }
 
   ngOnInit() {

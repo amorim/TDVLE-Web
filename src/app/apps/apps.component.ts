@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {App} from "../model/app.model";
-import {AppsService} from "./apps.service";
-import {PageEvent} from "@angular/material";
+import {App} from '../model/app.model';
+import {AppsService} from './apps.service';
+import {MatDialog, MatSnackBar, PageEvent} from '@angular/material';
+import {ShowAppDialogComponent} from './show-app-dialog/show-app-dialog.component';
+import {UserService} from '../user/user.service';
+import {User} from '../model/user.model';
+import {Authority} from '../model/authority.model';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-apps',
@@ -16,14 +21,25 @@ export class AppsComponent implements OnInit {
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent();
 
+  user: User = new User();
   apps: App[] = [];
 
-  constructor(private appsService: AppsService) {
+  constructor(private userService: UserService, private appsService: AppsService, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute) {
+    let param = route.snapshot.queryParams['page'];
+    if (!param) {
+      param = 0;
+      this.navigate(param);
+    }
+    this.pageIndex = param;
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.user = user;
+    });
     appsService.getApps(this.pageSize, this.pageIndex * this.pageSize).subscribe((apps: App[]) => {
       this.apps = apps;
       appsService.count().subscribe(count => {
         this.length = count['appsCount'];
         this.pageEvent.length = this.length;
+        console.log(this.apps);
       });
     });
   }
@@ -33,18 +49,47 @@ export class AppsComponent implements OnInit {
   }
 
   alterPage() {
+    this.navigate(this.pageEvent.pageIndex);
     this.appsService.getApps(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(apps => {
       this.apps = apps;
     });
   }
 
-  requestApp() {
-    let app = new App();
-    app.name = "Teste";
-    app.description = "Testando";
-    app.image = "https://go.umaine.edu/wp-content/uploads/sites/10/2017/01/Mobile-Friendly-Application-300x300.png";
-    app.uri = "https://www.google.com";
-    this.appsService.requestIntegration(app).subscribe();
+  navigate(pagen: number) {
+    this.router.navigate([], {queryParams: {page: pagen}, relativeTo: this.route},);
+  }
+
+  approveApp(app: App) {
+    this.appsService.approveRequest(app.id).subscribe(done => {
+      app.approved = true;
+      console.log(done);
+    });
+  }
+
+  requestApp(): void {
+    let dialogRef = this.dialog.open(ShowAppDialogComponent, {width: 'auto', data: {}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.snackBar.open('App requested successfully', 'Dismiss', {duration: 2000});
+      }
+    });
+  }
+
+  deleteApp(app: App, i: number) {
+    this.appsService.deleteApp(app.id).subscribe(done => {
+      this.apps.splice(i, 1);
+    });
+  }
+
+  isAdmin() {
+    if (this.user != null && this.user.authority != null) {
+      for (var i = 0; i < this.user.authority.length; i ++) {
+        if (this.user.authority[i].authority === 'ROLE_ADMIN') {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   accessApp(app: App) {

@@ -5,8 +5,9 @@ import 'rxjs/add/operator/map';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthHttp} from '../auth/auth.http';
 import {AuthService} from '../auth/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -14,14 +15,14 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title = 'login';
 
+  returnUrl: string;
   userLogin: User = new User();
 
-  constructor (private authHttp: AuthHttp, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
-    if (this.authService.getAccessToken()) {
-      this.router.navigate(['/welcome']);
-    }
+  constructor (private authService: AuthService, private router: Router, private snackBar: MatSnackBar, private route: ActivatedRoute, private userService: UserService) {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
+      this.router.navigate(['/post']);
+    });
   }
 
   login() {
@@ -29,17 +30,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   callback(logged, code) {
-    console.log(logged);
-    console.log(code);
     if (code === 0) {
       this.snackBar.open('Logged In', 'Dismiss', {duration: 2000});
+      this.router.navigateByUrl(this.returnUrl);
     } else if (code === 401) {
       this.snackBar.open('Wrong password or User not found', 'Dismiss', {duration: 2000});
     }
-    this.router.navigate(['/welcome']);
+
   }
 
   onKeyPress($event) {

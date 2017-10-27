@@ -1,0 +1,17 @@
+<div class="myDialog" id="dialogContainer">
+  <h1 mat-dialog-title>{{this.toEdit}}</h1>
+  <div style="margin-bottom: 10px;">
+  <button (click)="openFileSelect()" mat-fab color="primary">
+    <mat-icon class="md-24" aria-label="Example icon-button with a heart icon">file_upload</mat-icon>
+  </button>
+  </div>
+  <input id="upp" class="imageSelector" type="file" (change)="fileChangeListener($event)">
+  <img-cropper class="cropper" #cropper [image]="this.image" [settings]="this.cropperSettings"></img-cropper>
+  <div *ngIf="!uploadingNow" style="margin-top: 10px;"><button class="uploadButton" [disabled]="this.image.image==null" mat-dialog-content mat-raised-button (click)="this.upload()" color="accent">Upload</button></div>
+  <mat-progress-bar *ngIf="uploadingNow"
+    color="primary"
+    [mode]="fileUploadProgress ? 'determinate' : 'indeterminate'"
+    [value]="fileUploadProgress">
+  </mat-progress-bar>
+</div>
+

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
 import {UserService} from '../user/user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Post} from "../model/post.model";
+import {PostService} from "../post/post.service";
+import {Like} from "../model/like.model";
 
 @Component({
   selector: 'app-profile',
@@ -12,28 +15,40 @@ export class ProfileComponent implements OnInit {
 
   isLoggedUser = false;
   user: User = new User();
-
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  loggedUser: User = new User();
+  posts: Post[];
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private postService: PostService) {
   }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.isLoggedUser = id == null;
-    if (this.isLoggedUser) {
-      this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.loggedUser = user;
+      if (id != null) {
+        this.userService.getUser(id).subscribe(subUser => {
+          this.user = subUser;
+          this.isLoggedUser = user.id === subUser.id;
+          console.log(this.isLoggedUser);
+          this.fetchPosts();
+        });
+      } else {
         this.user = user;
-        if (this.user.background == null) {
-          this.user.background = 'http://2.bp.blogspot.com/-91pJBele_kY/U7e13L_b7KI/AAAAAAAAMNI/HgViWJhc6hY/s0/shiro-chibi-jibril-stephanie+dora-sora-q-chiang-1920x1080.jpg';
-        }
-      });
-    } else {
-      this.userService.getUser(id).subscribe(user => {
-        this.user = user;
-        if (this.user.background == null) {
-          this.user.background = 'https://2.bp.blogspot.com/-91pJBele_kY/U7e13L_b7KI/AAAAAAAAMNI/HgViWJhc6hY/s0/shiro-chibi-jibril-stephanie+dora-sora-q-chiang-1920x1080.jpg';
-        }
-      });
-    }
+        this.isLoggedUser = true;
+        this.fetchPosts();
+      }
+    });
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.user.id).subscribe(done => {
+      this.router.navigate(['people']);
+    });
+  }
+
+  fetchPosts() {
+    this.postService.getUserPosts(this.user, 10, 0).subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
   }
 
   isFollowing(user: User) {
@@ -56,5 +71,24 @@ export class ProfileComponent implements OnInit {
       this.userService.setFollow(this.user.id);
       this.user.isFollowing = true;
     }
+  }
+
+  isAdmin() {
+    if (this.loggedUser != null && this.loggedUser.authority != null) {
+      for (let i = 0; i < this.loggedUser.authority.length; i ++) {
+        if (this.loggedUser.authority[i].authority === 'ROLE_ADMIN') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  toggleLike(post: Post, idx:  number) {
+    let like = new Like();
+    like.post = post;
+    this.postService.setLike(like).subscribe((newPost: Post) => {
+      this.posts[idx] = newPost;
+    });
   }
 }

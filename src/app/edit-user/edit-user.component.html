@@ -1,19 +1,35 @@
+<br>
 <div>
   <mat-card class="edit-form">
     <h3>Edit</h3>
     <form>
       <mat-form-field class="example-full-width">
-        <input matInput required placeholder="Name" [(ngModel)]="this.user.name" name="inputName" #inputName="ngModel">
+        <input matInput placeholder="Name" [(ngModel)]="this.user.name" name="inputName" #inputName="ngModel">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input matInput required [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="this.user.bornDate" name="inputBornDate" #inputBornDate="ngModel">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="this.user.bornDate" name="inputBornDate" #inputBornDate="ngModel">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <button mat-raised-button (click)="openDialog('Avatar')" color="accent">Avatar</button>
-      <button mat-raised-button (click)="openDialog('Background')" color="accent">Background</button>
+      <div class="imageUpload">
+        <mat-form-field class="example-full-width">
+          <input matInput type="url" placeholder="Avatar link" [(ngModel)]="this.user.avatar " name="inputAvatar" #inputAvatar="ngModel">
+        </mat-form-field>
+        <button style="margin-bottom: 12px;" (click)="openDialog('Avatar')" mat-icon-button>
+          <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
+        </button>
+      </div>
+
+      <div class="imageUpload">
+        <mat-form-field class="example-full-width">
+          <input matInput type="url" placeholder="Background link" [(ngModel)]="this.user.background " name="inputBackground" #inputBackground="ngModel">
+        </mat-form-field>
+        <button style="margin-bottom: 12px;" (click)="openDialog('Background')" mat-icon-button>
+          <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
+        </button>
+      </div>
 
       <button mat-raised-button (click)="update()" (onkeypress)="onKeyPress($event)" color="accent">Update</button>
     </form>

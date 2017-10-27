@@ -1,5 +1,5 @@
 .users {
-  height: auto;
+  height: 100%;
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
@@ -27,13 +27,18 @@
   justify-content: center;
   display: inline-flex;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .username {
   align-items: center;
   justify-content: center;
-  display: flex;
-
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .action {

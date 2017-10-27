@@ -4,11 +4,27 @@ import {User} from '../model/user.model';
 import {AuthHttp} from '../auth/auth.http';
 import {Constants} from '../shared/constants';
 import {Notification} from "../model/notification.model";
+import {Subject} from 'rxjs/Subject';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: AuthHttp) { }
+  userUpdatedSubject: Subject<User> = new Subject<User>();
+
+  constructor(private http: AuthHttp, private httpStandard: Http) { }
+
+  updateUser(user: User): void {
+    this.userUpdatedSubject.next(user);
+  }
+
+  deleteUser(id): Observable<Object> {
+    return this.http.del(Constants.url + '/users/' + id);
+  }
+
+  getUserUpdated(): Observable<User> {
+    return this.userUpdatedSubject.asObservable();
+  }
 
   getNotifications(): Observable<Notification[]> {
     return this.http.get(Constants.url + '/notifications').map(res => res.json());
@@ -42,6 +58,10 @@ export class UserService {
     return this.http.get(Constants.url + '/user').map(res => res.json());
   }
 
+  registerUser(user: User): Observable<User> {
+    return this.httpStandard.post(Constants.url + '/register', user).map(res => res.json());
+  }
+
   setUser(user: User): Observable<User> {
     return this.http.put(Constants.url + '/user', user).map(res => res.json());
   }
@@ -68,13 +88,11 @@ export class UserService {
 
   setFollow(id) {
     this.http.post(Constants.url + '/users/' + id + '/followers', null).subscribe(data => {
-      console.log(data);
     });
   }
 
   deleteFollow(id) {
     this.http.del(Constants.url + '/users/' + id + '/followers').subscribe(data => {
-      console.log(data);
     });
   }
 }

@@ -2,7 +2,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 body {
   margin: 0;
+  padding: 0;
   height: 100%;
+  background: #fafafa;
 }
 html {
   height: 100%;

@@ -14,6 +14,10 @@ export class PostService {
     return this.http.get(Constants.url + '/posts?max=' + max + '&offset=' + offset).map(res => res.json());
   }
 
+  getUserPosts(user, max, offset): Observable<Post[]> {
+    return this.http.get(Constants.url + '/users/' + user.id + '/posts?max=' + max + '&offset=' + offset).map(res => res.json())
+  }
+
   getPost(id): Observable<Post> {
     return this.http.get(Constants.url + '/posts/' + id).map(res => res.json());
   }

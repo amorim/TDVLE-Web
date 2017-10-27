@@ -14,12 +14,18 @@
   justify-content: space-around;
 }
 
+.wrapper {
+  position: relative;
+  min-height: calc(100% - 56px);
+  padding-bottom: 56px;
+}
+
 .appcard {
-  margin: 10px;
+  margin: 20px 10px 10px 10px;
   width: 20%;
-  max-width: 200px;
+  max-width: 300px;
   min-width: 150px;
-  height: 220px;
+  height: 270px;
   flex-direction: column;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -35,7 +41,7 @@
 .appimg {
   align-items: center;
   justify-content: center;
-  display: inline-flex;
+  display: flex;
   margin-bottom: 15px;
 }
 
@@ -53,7 +59,10 @@
   bottom: 10px;
   left: 0;
   right: 0;
+}
 
+.approve {
+  bottom: 50px;
 }
 
 .uppercase {
