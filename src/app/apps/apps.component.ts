@@ -63,6 +63,12 @@ export class AppsComponent implements OnInit {
     });
   }
 
+  deleteApp(app: App, i: number) {
+    this.appsService.deleteApp(app.id).subscribe(done => {
+      this.apps.splice(i, 1);
+    });
+  }
+
   isAdmin() {
     if (this.user != null && this.user.authority != null) {
       for (var i = 0; i < this.user.authority.length; i ++) {

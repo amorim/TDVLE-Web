@@ -1,7 +1,7 @@
 <br>
 <div class="wrapper">
 <div class="apps">
-  <mat-card *ngFor="let app of apps" class="appcard">
+  <mat-card *ngFor="let app of apps; let i = index" class="appcard">
     <div routerLink="/app/{{app.id}}">
       <div class="appimg">
         <ngx-avatar name={{app.name}} initialsSize="1" src="{{app.image}}" size="100">
@@ -12,6 +12,7 @@
     <div class="action">
       <button mat-raised-button (click)="accessApp(app)" color="accent">Access</button>
       <button mat-raised-button *ngIf="this.isAdmin()" [disabled]="app.approved" (click)="approveApp(app)" color="accent">Approve</button>
+      <button mat-raised-button *ngIf="this.isAdmin()" (click)="deleteApp(app, i)" color="accent">Delete</button>
     </div>
   </mat-card>
 </div>

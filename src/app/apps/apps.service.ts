@@ -15,6 +15,10 @@ export class AppsService {
     return this.http.get(Constants.url + '/apps/' + id).map(res => res.json());
   }
 
+  deleteApp(id): Observable<Object> {
+    return this.http.del(Constants.url + '/apps/' + id + '/delete').map(res => res.json());
+  }
+
   getApps(max, offset): Observable<App[]> {
     return this.http.get(Constants.url + '/apps?max=' + max + '&offset=' + offset).map(res => res.json());
   }
