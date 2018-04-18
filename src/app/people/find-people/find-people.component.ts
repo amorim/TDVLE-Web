@@ -19,24 +19,22 @@ export class FindPeopleComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
-    let param = route.snapshot.queryParams['page'];
+  constructor(protected userService: UserService, protected router: Router, protected route: ActivatedRoute) {
+    let param = this.route.snapshot.queryParams['page'];
     if (!param) {
       param = 0;
       this.navigate(param);
     }
     this.pageIndex = param;
+  }
+
+  ngOnInit() {
     this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
       this.users = users;
       this.userService.getUsersCount().subscribe(userCount => {
         this.length = userCount['userCount'];
       });
     });
-
-  }
-
-  ngOnInit() {
-
   }
 
   alterPage() {
@@ -52,6 +50,7 @@ export class FindPeopleComponent implements OnInit {
   }
 
   getFollowingText(user: User) {
+
     if (user.isFollowing) {
       return ('Unfollow');
     } else {

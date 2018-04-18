@@ -1,5 +1,5 @@
 <div class="users">
-  <mat-card *ngFor="let user of this.following" class="usercard">
+  <mat-card *ngFor="let user of this.users" class="usercard">
     <div style="cursor: pointer;" class="avatar">
       <ngx-avatar routerLink="/profile/{{user.id}}" name={{user.name}} src="{{user.avatar}}" initialsSize="1" src="" size="100"></ngx-avatar>
     </div>

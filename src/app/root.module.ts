@@ -1,4 +1,4 @@
-import { CloudinaryModule } from '@cloudinary/angular-4.x';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as Cloudinary from 'cloudinary-core';
 import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
