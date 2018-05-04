@@ -28,7 +28,7 @@ export class RootComponent implements OnDestroy {
     {path: '/apps', icon: 'apps', desc: 'Apps'}];
 
   constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
-    this.userService.getAuthenticatedUser().subscribe(au => {
+    this.userService.getAuthenticatedUser().subscribe((au: User) => {
       this.authenticatedUser = au;
     });
     this.userService.getUserUpdated().subscribe((user: User) => {
@@ -48,7 +48,7 @@ export class RootComponent implements OnDestroy {
       this.notificationCount = notificationCount['notificationCount'];
     });
 
-    this.userService.getNotifications().subscribe(notifications => {
+    this.userService.getNotifications().subscribe((notifications: Notification[]) => {
       this.notificationsList = notifications;
     });
   }

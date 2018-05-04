@@ -14,7 +14,7 @@ export class EditUserComponent implements OnInit {
   user: User = new User();
 
   constructor(private userService: UserService, public dialog: MatDialog, private snackBar: MatSnackBar) {
-    this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.user = user;
     });
   }

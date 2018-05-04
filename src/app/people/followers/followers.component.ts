@@ -12,9 +12,9 @@ export class FollowersComponent extends FindPeopleComponent implements OnInit {
   au: User;
 
   ngOnInit() {
-    this.userService.getAuthenticatedUser().subscribe(au => {
+    this.userService.getAuthenticatedUser().subscribe((au: User) => {
       this.au = au;
-      this.userService.getFollowers(au.id, this.pageSize, this.pageIndex * this.pageSize).subscribe(followers => {
+      this.userService.getFollowers(au.id, this.pageSize, this.pageIndex * this.pageSize).subscribe((followers: User[]) => {
         this.users = followers;
       });
       this.userService.getFollowerCount(au.id).subscribe(userCount => {
@@ -25,7 +25,7 @@ export class FollowersComponent extends FindPeopleComponent implements OnInit {
 
   alterPage() {
     this.navigate(this.pageEvent.pageIndex);
-    this.userService.getFollowers(this.au.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(followers => {
+    this.userService.getFollowers(this.au.id, this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((followers: User[]) => {
       this.users = followers;
     });
   }

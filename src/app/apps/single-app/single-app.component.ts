@@ -17,7 +17,7 @@ export class SingleAppComponent implements OnInit {
   user: User = new User();
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private appsService: AppsService) {
-    this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.user = user;
     });
   }
@@ -25,7 +25,7 @@ export class SingleAppComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.appId = id;
-    this.appsService.getApp(this.appId).subscribe(app => {
+    this.appsService.getApp(this.appId).subscribe((app: App) => {
       this.app = app;
     });
   }

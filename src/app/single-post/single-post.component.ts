@@ -20,7 +20,7 @@ export class SinglePostComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.postId = id;
-    this.postService.getPost(this.postId).subscribe(post => {
+    this.postService.getPost(this.postId).subscribe((post: Post) => {
       this.post = post;
     });
   }

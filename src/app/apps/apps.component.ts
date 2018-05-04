@@ -5,7 +5,6 @@ import {MatDialog, MatSnackBar, PageEvent} from '@angular/material';
 import {ShowAppDialogComponent} from './show-app-dialog/show-app-dialog.component';
 import {UserService} from '../user/user.service';
 import {User} from '../model/user.model';
-import {Authority} from '../model/authority.model';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -31,7 +30,7 @@ export class AppsComponent implements OnInit {
       this.navigate(param);
     }
     this.pageIndex = param;
-    this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.user = user;
     });
     appsService.getApps(this.pageSize, this.pageIndex * this.pageSize).subscribe((apps: App[]) => {
@@ -50,7 +49,7 @@ export class AppsComponent implements OnInit {
 
   alterPage() {
     this.navigate(this.pageEvent.pageIndex);
-    this.appsService.getApps(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(apps => {
+    this.appsService.getApps(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((apps: App[]) => {
       this.apps = apps;
     });
   }

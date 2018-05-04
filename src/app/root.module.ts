@@ -1,6 +1,5 @@
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as Cloudinary from 'cloudinary-core';
-import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,7 +10,6 @@ import {FormsModule} from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthGuard} from './auth/auth.guard';
-import {Http, HttpModule} from '@angular/http';
 import {AuthModule} from './auth/auth.module';
 import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./shared/material.module";
@@ -32,9 +30,10 @@ import {AppsComponent} from "./apps/apps.component";
 import {ShowAppDialogComponent} from './apps/show-app-dialog/show-app-dialog.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import {ImageUploadService} from './image-upload/image-upload.service';
-import {AppModule} from "./app.module";
 import {SingleAppComponent} from "./apps/single-app/single-app.component";
-import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './auth/auth.interceptor';
+import {NgxPermissionsModule} from 'ngx-permissions';
 
 const appRoutes: Routes = [
   { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
@@ -83,15 +82,19 @@ const appRoutes: Routes = [
     RouterModule.forChild(
       appRoutes
     ),
-    HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
     AuthModule,
     UserModule,
     PostModule,
-    AvatarModule
+    AvatarModule,
+    NgxPermissionsModule.forRoot()
   ],
-  providers: [ImageUploadService, HttpClient]
+  providers: [ImageUploadService, HttpClient, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }]
 })
 
 export class RootModule { }

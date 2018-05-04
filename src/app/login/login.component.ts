@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
-import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {CookieService} from 'ngx-cookie-service';
-import {AuthHttp} from '../auth/auth.http';
 import {AuthService} from '../auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';

@@ -22,10 +22,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.loggedUser = user;
       if (id != null) {
-        this.userService.getUser(id).subscribe(subUser => {
+        this.userService.getUser(id).subscribe((subUser: User) => {
           this.user = subUser;
           this.isLoggedUser = user.id === subUser.id;
           console.log(this.isLoggedUser);

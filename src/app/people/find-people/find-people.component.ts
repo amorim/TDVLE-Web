@@ -29,7 +29,7 @@ export class FindPeopleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe(users => {
+    this.userService.getUsersPage(this.pageSize, this.pageIndex * this.pageSize).subscribe((users: User[]) => {
       this.users = users;
       this.userService.getUsersCount().subscribe(userCount => {
         this.length = userCount['userCount'];
@@ -39,7 +39,7 @@ export class FindPeopleComponent implements OnInit {
 
   alterPage() {
     this.navigate(this.pageEvent.pageIndex);
-    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(users => {
+    this.userService.getUsersPage(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((users: User[]) => {
       this.users = users;
       window.scrollTo(0,0);
     });

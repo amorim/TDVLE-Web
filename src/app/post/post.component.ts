@@ -34,13 +34,13 @@ export class PostComponent implements OnInit {
     this.pageIndex = param;
     this.postObj.description = route.snapshot.queryParams['content'] || "";
     this.postObj.image = route.snapshot.queryParams['imageUrl'] || "";
-    this.userService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.authenticatedUser = user;
     });
     this.postService.getPostCount().subscribe(postCount => {
       this.length = postCount['postCount'];
     });
-    this.postService.getPosts(this.pageSize, this.pageIndex * this.pageSize).subscribe(posts => {
+    this.postService.getPosts(this.pageSize, this.pageIndex * this.pageSize).subscribe((posts: Post[]) => {
       this.posts = posts;
     });
   }
@@ -57,7 +57,7 @@ export class PostComponent implements OnInit {
 
   alterPage() {
     this.navigate(this.pageEvent.pageIndex);
-    this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe(posts => {
+    this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((posts: Post[]) => {
       this.posts = posts;
     });
   }
