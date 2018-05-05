@@ -15,7 +15,7 @@ import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./shared/material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
-import {AvatarModule} from "ngx-avatar";
+import {AvatarModule} from "@lucasolivamorim/ngx-avatar";
 import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
 import { FollowersComponent } from './people/followers/followers.component';

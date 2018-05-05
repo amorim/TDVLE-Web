@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs/Observable";
 import {Post} from "../model/post.model";
 import {Constants} from "../shared/constants";
 import {Like} from "../model/like.model";

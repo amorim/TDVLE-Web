@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {AuthService} from './auth.service';
-import {Observer} from 'rxjs/Observer';
-import {Constants} from '../shared/constants';
-import {RequestOptionsArgs, Headers, Http} from '@angular/http';
+import {Observer} from 'rxjs';
 import {UserService} from "../user/user.service";
 
 @Injectable()

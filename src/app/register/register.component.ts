@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user.model';
-import {HttpClient} from '@angular/common/http';
-import {Http} from '@angular/http';
 import {MatSnackBar} from '@angular/material';
 import {Constants} from '../shared/constants';
 import {UserService} from '../user/user.service';
