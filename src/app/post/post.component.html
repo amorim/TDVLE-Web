@@ -19,8 +19,14 @@
   </mat-card>
 </div>
 
-<div class="posts">
-  <mat-card *ngFor="let post of posts; let i = index" class="postcard griditem">
+<ng-masonry-grid
+  (onNgMasonryInit)="onNgMasonryInit($event)"
+  (layoutComplete)="masonryLayoutComplete($event)"
+  [masonryOptions]="{ addStatus: 'prepend', transitionDuration: '0.8s', gutter: 5, horizontalOrder: true }"
+  [useAnimation]="true"
+  [scrollAnimationOptions]="{ animationEffect: 'effect-1', minDuration : 0.4, maxDuration : 0.7 }">
+  <ng-masonry-grid-item *ngFor="let post of posts; let i = index">
+  <mat-card class="postcard grid-item">
     <mat-card-header>
       <ngx-avatar mat-card-avatar size="40" src="{{post.user.avatar}}" initialsSize="1" routerLink="/profile/{{post.user.id}}" name={{post.user.name}}></ngx-avatar>
       <mat-card-title>{{post.user.name}}</mat-card-title>
@@ -41,7 +47,8 @@
       </div>
     </mat-card-actions>
   </mat-card>
-</div>
+  </ng-masonry-grid-item>
+</ng-masonry-grid>
 
 <div class="mat-paginator">
   <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>

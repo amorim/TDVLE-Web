@@ -34,6 +34,7 @@ import {SingleAppComponent} from "./apps/single-app/single-app.component";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {NgMasonryGridModule} from "@lucasolivamorim/ng-masonry-grid";
 
 const appRoutes: Routes = [
   { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     UserModule,
     PostModule,
     AvatarModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    NgMasonryGridModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,

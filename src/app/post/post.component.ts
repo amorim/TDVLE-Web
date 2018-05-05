@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {MatDialog, PageEvent} from '@angular/material';
@@ -7,16 +7,20 @@ import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
 import {ActivatedRoute, Router} from "@angular/router";
+import {Masonry} from "@lucasolivamorim/ng-masonry-grid";
+
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  styleUrls: ['./post.component.css', '../../../node_modules/@lucasolivamorim/ng-masonry-grid/ng-masonry-grid.css']
 })
-export class PostComponent implements OnInit {
 
+export class PostComponent implements AfterViewInit {
+
+  masonry: Masonry;
   length = 0;
-  pageSize = 5;
+  pageSize = 100;
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
@@ -50,9 +54,19 @@ export class PostComponent implements OnInit {
       this.posts.unshift(newPost);
       this.length ++;
     });
+
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+
+  }
+
+  onNgMasonryInit($event) {
+    this.masonry = $event;
+  }
+
+  masonryLayoutComplete($event) {
+    //this.masonry.reOrderItems();
   }
 
   alterPage() {

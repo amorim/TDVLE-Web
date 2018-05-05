@@ -33,9 +33,6 @@
   max-width: 400px;
   flex-direction: column;
   display: flex;
-  position: relative;
-  justify-content: flex-start;
-  float: left;
 }
 
 .full-width {
