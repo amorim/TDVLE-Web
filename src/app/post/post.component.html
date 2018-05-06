@@ -33,7 +33,7 @@
       <mat-card-subtitle>{{post.date | timeAgo }}</mat-card-subtitle>
     </mat-card-header>
     <div class="fill" routerLink="/post/{{post.id}}">
-      <mat-card-content style="margin: 20px 0 20px 0">{{post.description}}</mat-card-content>
+      <mat-card-content style="margin: 20px 0 20px 0" [innerHTML]="post.description | nl2br"></mat-card-content>
       <div *ngIf="post.image != null">
         <mat-card-content><img style="width: 100%;" src="{{post.image}}"></mat-card-content>
       </div>
