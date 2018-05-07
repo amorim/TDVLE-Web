@@ -25,7 +25,9 @@ export class RootComponent implements OnDestroy {
     {path: '/profile', icon: 'person', desc: 'Profile'},
     {path: '/people', icon: 'people', desc: 'People'},
     {path: '/post', icon: 'forum', desc: 'Posts'},
-    {path: '/apps', icon: 'apps', desc: 'Apps'}];
+    {path: '/apps', icon: 'apps', desc: 'Apps'},
+    {path: '/classes', icon: 'forum', desc: 'Classes'}
+  ];
 
   constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
     this.userService.getAuthenticatedUser().subscribe((au: User) => {

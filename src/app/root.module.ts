@@ -36,24 +36,33 @@ import {AuthInterceptor} from './auth/auth.interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {NgMasonryGridModule} from "@lucasolivamorim/ng-masonry-grid";
 import {Nl2BrPipeModule} from "@lucasolivamorim/nl2br-pipe";
+import {FileUploadComponent} from './file-upload/file-upload.component';
+import {ClassesComponent} from './classes/classes.component';
+import {SingleClassComponent} from './single-class/single-class.component';
+import {ShowCreateClassDialogComponent} from './classes/show-create-class-dialog/show-create-class-dialog.component';
+import {ClassesModule} from './classes/classes.module';
+import {ShowEnterClassDialogComponent} from './classes/show-enter-class-dialog/show-enter-class-dialog.component';
 
 const appRoutes: Routes = [
-  { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
+  {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'post', pathMatch: 'full'},
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'post', component: PostComponent },
-  { path: 'post/:id', component: SinglePostComponent },
-  { path: 'edit', component: EditUserComponent },
-  { path: 'profile', component: ProfileComponent},
-  { path: 'profile/:id', component: ProfileComponent},
-  { path: 'people', component: PeopleComponent, children: [
-    {path: '', redirectTo: 'find', pathMatch: 'full'},
-    {path: 'find', component: FindPeopleComponent},
-    {path: 'followers', component: FollowersComponent},
-    {path: 'following', component: FollowingComponent}
-  ]},
-  { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent}]}
-  ];
+    { path: 'welcome', component: WelcomeComponent },
+    { path: 'post', component: PostComponent },
+    { path: 'post/:id', component: SinglePostComponent },
+    { path: 'edit', component: EditUserComponent },
+    { path: 'profile', component: ProfileComponent},
+    { path: 'profile/:id', component: ProfileComponent},
+    { path: 'people', component: PeopleComponent, children: [
+      {path: '', redirectTo: 'find', pathMatch: 'full'},
+      {path: 'find', component: FindPeopleComponent},
+      {path: 'followers', component: FollowersComponent},
+      {path: 'following', component: FollowingComponent}
+    ]},
+    { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent},
+    { path: 'file-upload', component : FileUploadComponent},
+    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent}
+    ]
+  }];
 
 @NgModule({
   declarations: [
@@ -71,11 +80,16 @@ const appRoutes: Routes = [
     SinglePostComponent,
     ShowAppDialogComponent,
     ImageUploadComponent,
-    SingleAppComponent
+    SingleAppComponent,
+    FileUploadComponent,
+    SingleClassComponent,
+    ShowCreateClassDialogComponent,
+    ShowEnterClassDialogComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
     AppsModule,
+    ClassesModule,
     ImageCropperModule,
     CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
