@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="classes">
+    <mat-card *ngFor="let clazz of classes; let i = index" class="classcard">
+      <div routerLink="/apps/{{clazz.id}}">
+        <div class="appimg">
+          <ngx-avatar name={{clazz.name}} initialsSize="1" size="100">
+          </ngx-avatar>
+        </div>
+        <div class="appname">{{clazz.name}}</div>
+      </div>
+      <div class="action">
+        <button mat-raised-button (click)="accessClass(app)" color="accent">Access</button>
+        <!--<button mat-raised-button *ngIf="this.isAdmin()" [disabled]="app.approved" (click)="approveApp(app)" color="accent">Approve</button>-->
+        <!--<button mat-raised-button *ngIf="this.isAdmin()" (click)="deleteApp(app, i)" color="accent">Delete</button>-->
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-toolbar class="toobar">
+    <mat-toolbar-row>
+      <button mat-fab (click)="createClass()" color="accent"><mat-icon>add</mat-icon></button>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-fab (click)="enterClass()" color="accent"><mat-icon>class</mat-icon></button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="mat-paginator">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<mat-card class="register-form">
+  <h3>Request</h3>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Class access code" [(ngModel)]="this.classAccessCode" name="inputName" #inputName="ngModel">
+    </mat-form-field>
+
+    <button mat-raised-button [disabled]="inputName.invalid" (click)="this.enter()" (onkeypress)="onKeyPress($event)" color="accent">Enter</button>
+  </form>
+</mat-card>
