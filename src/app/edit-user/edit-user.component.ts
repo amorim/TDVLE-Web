@@ -3,6 +3,7 @@ import {UserService} from "../user/user.service";
 import {User} from "../model/user.model";
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
+import {Authority} from '../model/authority.model';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,10 +13,15 @@ import {ImageUploadComponent} from '../image-upload/image-upload.component';
 export class EditUserComponent implements OnInit {
 
   user: User = new User();
+  authorities: Authority[] = [];
 
   constructor(private userService: UserService, public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.userService.getAuthenticatedUser().subscribe((user: User) => {
       this.user = user;
+    });
+    this.userService.getAuthorities().subscribe((authorities: Authority[]) => {
+      console.log(authorities);
+      this.authorities = authorities;
     });
   }
 
@@ -23,6 +29,7 @@ export class EditUserComponent implements OnInit {
   }
 
   update() {
+    console.log(this.authorities);
     this.userService.setUser(this.user).subscribe(done => {
       this.userService.updateUser(this.user);
       this.snackBar.open('Updated user successfully', 'Dismiss', {duration: 2000});
