@@ -28,6 +28,7 @@ export class PostComponent implements AfterViewInit {
   authenticatedUser: User = new User();
   postObj: Post = new Post();
   posts: Post[] = [];
+  postsReady = false;
 
   constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
     let param = route.snapshot.queryParams['page'];
@@ -45,13 +46,16 @@ export class PostComponent implements AfterViewInit {
       this.length = postCount['postCount'];
     });
     this.postService.getPosts(this.pageSize, this.pageIndex * this.pageSize).subscribe((posts: Post[]) => {
-      this.posts = posts;
+      this.posts.push(...posts);
+      this.postsReady = true;
     });
+
   }
 
   post() {
     this.postService.setPost(this.postObj).subscribe((newPost: Post) => {
-      this.posts.unshift(newPost);
+      this.masonry.setAddStatus('prepend');
+      this.posts.splice(0, 0, newPost);
       this.length ++;
     });
 
@@ -63,10 +67,17 @@ export class PostComponent implements AfterViewInit {
 
   onNgMasonryInit($event) {
     this.masonry = $event;
-  }
+    if (this.masonry) {
+      this.masonry.setAddStatus('append');
 
+      setTimeout(() => {
+        console.log("call");
+        this.masonry.reOrderItems();
+      }, 5000);
+    }
+  }
   masonryLayoutComplete($event) {
-    //this.masonry.reOrderItems();
+    console.log("complete");
   }
 
   alterPage() {
@@ -92,7 +103,9 @@ export class PostComponent implements AfterViewInit {
     let like = new Like();
     like.post = post;
     this.postService.setLike(like).subscribe((newPost: Post) => {
-      this.posts[idx] = newPost;
+      this.posts[idx].hasLiked = newPost.hasLiked;
+      this.posts[idx].likeCount = newPost.likeCount;
+      this.posts[idx].likes = newPost.likes;
     });
   }
 

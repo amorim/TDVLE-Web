@@ -36,6 +36,7 @@ import {AuthInterceptor} from './auth/auth.interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {NgMasonryGridModule} from "@lucasolivamorim/ng-masonry-grid";
 import {Nl2BrPipeModule} from "@lucasolivamorim/nl2br-pipe";
+import {LinkyModule} from "angular-linky";
 
 const appRoutes: Routes = [
   { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     AvatarModule,
     NgxPermissionsModule.forRoot(),
     NgMasonryGridModule,
-    Nl2BrPipeModule
+    Nl2BrPipeModule,
+    LinkyModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,
