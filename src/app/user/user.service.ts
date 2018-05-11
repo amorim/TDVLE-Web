@@ -59,7 +59,15 @@ export class UserService {
   }
 
   getAuthorities() {
-    return this.http.get(Constants.url + '/authority/');
+    return this.http.get(Constants.url + '/authority');
+  }
+
+  setAuthorities(authorities: Authority[], id) {
+    return this.http.post(Constants.url + '/authority/' + id, authorities);
+  }
+
+  getAuthoritiesFromUser(id) {
+    return this.http.get(Constants.url + '/authority/' + id);
   }
 
   requestAuthorities(authorities: Authority[]) {

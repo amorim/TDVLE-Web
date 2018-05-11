@@ -31,7 +31,7 @@ export class EditUserComponent implements OnInit {
   update() {
     this.userService.setUser(this.user).subscribe(done => {
       this.userService.updateUser(this.user);
-      this.snackBar.open('Updated user successfully', 'Dismiss', {duration: 2000});
+      this.snackBar.open('Updated User', 'Dismiss', {duration: 2000});
     });
     this.userService.requestAuthorities(this.authorities).subscribe(done => {
     });

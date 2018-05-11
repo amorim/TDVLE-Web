@@ -42,6 +42,7 @@ import {SingleClassComponent} from './single-class/single-class.component';
 import {ShowCreateClassDialogComponent} from './classes/show-create-class-dialog/show-create-class-dialog.component';
 import {ClassesModule} from './classes/classes.module';
 import {ShowEnterClassDialogComponent} from './classes/show-enter-class-dialog/show-enter-class-dialog.component';
+import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     ]},
     { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent},
     { path: 'file-upload', component : FileUploadComponent},
-    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent}
+    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent},
+    { path: 'authority/:id', component: EditAuthorityComponent }
     ]
   }];
 
@@ -84,7 +86,8 @@ const appRoutes: Routes = [
     FileUploadComponent,
     SingleClassComponent,
     ShowCreateClassDialogComponent,
-    ShowEnterClassDialogComponent
+    ShowEnterClassDialogComponent,
+    EditAuthorityComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
