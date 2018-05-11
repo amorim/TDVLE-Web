@@ -5,6 +5,7 @@ import {Constants} from '../shared/constants';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Container} from '@angular/compiler/src/i18n/i18n_ast';
+import {Authority} from '../model/authority.model';
 
 @Injectable()
 export class UserService {
@@ -59,6 +60,10 @@ export class UserService {
 
   getAuthorities() {
     return this.http.get(Constants.url + '/authority/');
+  }
+
+  requestAuthorities(authorities: Authority[]) {
+    return this.http.post(Constants.url + '/authority/request', authorities);
   }
 
   registerUser(user: User) {
