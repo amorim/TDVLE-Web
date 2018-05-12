@@ -42,8 +42,7 @@ import {SingleClassComponent} from './single-class/single-class.component';
 import {ShowCreateClassDialogComponent} from './classes/show-create-class-dialog/show-create-class-dialog.component';
 import {ClassesModule} from './classes/classes.module';
 import {ShowEnterClassDialogComponent} from './classes/show-enter-class-dialog/show-enter-class-dialog.component';
-import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
-
+import {LinkyModule} from "angular-linky";
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -61,8 +60,7 @@ const appRoutes: Routes = [
     ]},
     { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent},
     { path: 'file-upload', component : FileUploadComponent},
-    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent},
-    { path: 'authority/:id', component: EditAuthorityComponent }
+    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent}
     ]
   }];
 
@@ -86,8 +84,7 @@ const appRoutes: Routes = [
     FileUploadComponent,
     SingleClassComponent,
     ShowCreateClassDialogComponent,
-    ShowEnterClassDialogComponent,
-    EditAuthorityComponent
+    ShowEnterClassDialogComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
@@ -109,7 +106,8 @@ const appRoutes: Routes = [
     AvatarModule,
     NgxPermissionsModule.forRoot(),
     NgMasonryGridModule,
-    Nl2BrPipeModule
+    Nl2BrPipeModule,
+    LinkyModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,
