@@ -75,7 +75,7 @@ export class ClassesComponent implements OnInit {
   }
 
   accessClass(clazz) {
-
+    this.router.navigate(['/class/{{clazz.id}}']);
   }
 
 }

@@ -25,4 +25,8 @@ export class ClassService {
   getClassesCount() {
     return this.http.get(Constants.url + '/class/count');
   }
+
+  getClass(id) {
+    return this.http.get(Constants.url + '/class/' + id);
+  }
 }

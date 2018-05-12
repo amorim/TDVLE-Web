@@ -7,9 +7,11 @@ import {ClassesComponent} from './classes.component';
 import {ShowCreateClassDialogComponent} from './show-create-class-dialog/show-create-class-dialog.component';
 import {ClassService} from './class.service';
 import {ShowEnterClassDialogComponent} from './show-enter-class-dialog/show-enter-class-dialog.component';
+import {ClassStreamComponent} from './class-stream/class-stream.component';
+import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-stream-item-dialog/show-create-stream-item-dialog.component';
 
 @NgModule({
-  declarations: [ClassesComponent],
+  declarations: [ClassesComponent, ClassStreamComponent, ShowCreateStreamItemDialogComponent],
   imports: [
     CommonModule,
     AvatarModule,
@@ -18,6 +20,6 @@ import {ShowEnterClassDialogComponent} from './show-enter-class-dialog/show-ente
   ],
   entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent],
   providers: [ClassService],
-  exports: [ClassesComponent]
+  exports: [ClassesComponent, ClassStreamComponent]
 })
 export class ClassesModule { }
