@@ -42,15 +42,24 @@ export class CreateQuizComponent implements OnInit {
 
   validProblems() {
     for (const p of this.quiz.problems) {
-      if (p.description == null || (p.kind === 2 && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
+      if (p.description == null || (p.kind === 1 && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
         return(0);
       }
     }
     return(1);
   }
 
+  addAlternative(problem) {
+    problem.alternativeDescription.push('asdf');
+  }
+
+  removeAlternative(problem, j) {
+    problem.alternativeDescription.splice(j, 1);
+  }
+
   createProblem() {
-    this.quiz.problems.unshift(new Problem());
+    this.quiz.problems.push(new Problem());
+    console.log(this.quiz.problems);
   }
 
   onKeyPress($event) {

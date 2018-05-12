@@ -1,7 +1,7 @@
 export class Problem {
   id: number;
-  kind = 1;
+  kind = 0;
   description: string;
-  alternativeDescription: String[] = [];
-  answer;
+  alternativeDescription: string[] = [];
+  answer = 0;
 }

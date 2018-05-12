@@ -18,20 +18,29 @@
         </mat-form-field>
       </div>
 
-      <div *ngFor="let problem of this.quiz.problems; let i = index">
+      <div *ngFor="let problem of this.quiz.problems; index as i">
         <mat-card>
-          <h3>Problem {{i + 1}}</h3>
+          <h4>Problem {{i + 1}}</h4>
+          <mat-slide-toggle [(ngModel)]="problem.kind" name="Problem {{i + 1}} kind">Enable multiple choices</mat-slide-toggle>
           <mat-form-field class="example-full-width">
-            <input matInput required placeholder="Description" [(ngModel)]="problem.description" name="description" #inputDescription="ngModel">
+            <textarea matInput required placeholder="Description" [(ngModel)]="problem.description" name="Problem {{i + 1}} description"></textarea>
           </mat-form-field>
+
+          <div *ngIf="problem.kind">
+            <div *ngFor="let alternativeDescription of problem.alternativeDescription; index as j">
+              <mat-form-field class="example-full-width">
+                <input matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternativeDescription[j]" name="Alternative {{j + 1}}">
+              </mat-form-field>
+              <button mat-mini-fab (click)="removeAlternative(problem, j)" name="rem {{j + 1}}"><mat-icon>remove</mat-icon></button>
+            </div>
+            <mat-chip-list><mat-chip (click)="addAlternative(problem)" color="accent" selected="true">Alternative<mat-icon>add</mat-icon></mat-chip></mat-chip-list>
+          </div>
+
         </mat-card>
       </div>
 
-      <div>
-        <h3>Problems:</h3>
-        <button mat-fab (click)="createProblem()" color="accent"><mat-icon>add</mat-icon></button>
-      </div>
-
+      <br>
+        <mat-chip-list><mat-chip (click)="createProblem()" color="accent" selected="true">Problem<mat-icon>add</mat-icon></mat-chip></mat-chip-list>
       <br>
 
       <button mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || inputDueDate.invalid || !validProblems()" (click)="this.create()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>

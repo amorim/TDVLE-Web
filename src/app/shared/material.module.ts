@@ -7,7 +7,7 @@ import {
   MatMenuModule,
   MatNativeDateModule, MatPaginator, MatPaginatorModule, MatSidenavModule,
   MatSnackBarModule, MatToolbarModule, MatTooltipModule,
-  MatTabsModule, MatDialogModule, MatProgressBar, MatProgressBarModule, MatSelectModule
+  MatTabsModule, MatDialogModule, MatProgressBar, MatProgressBarModule, MatSelectModule, MatChipsModule, MatSlideToggleModule
 } from '@angular/material';
 
 @NgModule({
@@ -31,7 +31,9 @@ import {
     MatTabsModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule,
+    MatSlideToggleModule
   ],
   declarations: [],
   exports: [
@@ -54,7 +56,9 @@ import {
     MatTabsModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule { }
