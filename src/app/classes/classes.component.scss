@@ -21,6 +21,7 @@
 }
 
 .classcard {
+  padding: 0;
   margin: 20px 10px 10px 10px;
   width: 20%;
   max-width: 300px;
@@ -36,20 +37,36 @@
   float: left;
 }
 
+.classinfo {
+  position: relative;
+  cursor: pointer;
+  background-image: url('https://i.imgur.com/jYwqN0X.jpg');
+  height: 40%;
+}
+
 
 
 .classimg {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  margin-bottom: 15px;
+  float: right;
+  margin-top: calc(40% - 35px);
+  margin-right: 10px;
 }
 
 .classname {
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  margin-left: 20px;
+  margin-top: 10px;
+  color: white;
+  font-size: 20px;
+  text-shadow: 3px 3px 6px #000;
+}
 
+.teachername {
+  margin-left: 20px;
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  bottom: 10px;
+  text-shadow: 3px 3px 6px #000;
 }
 
 .action {

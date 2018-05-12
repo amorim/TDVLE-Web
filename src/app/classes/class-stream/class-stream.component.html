@@ -1,28 +1,23 @@
-<div class="wrapper">
-  <div class="classes">
-    <mat-card *ngFor="let s of this.stream; let i = index" class="classcard">
-      <div routerLink="/class/{{s.id}}">
-        <div class="appimg">
-          <ngx-avatar name={{s.title}} initialsSize="1" size="100">
-          </ngx-avatar>
-        </div>
-        <div class="appname">{{s.title}}</div>
-      </div>
-      <div class="action">
-        <button mat-raised-button (click)="accessStream(s)" color="accent">Access</button>
-        <!--<button mat-raised-button *ngIf="this.isAdmin()" [disabled]="app.approved" (click)="approveApp(app)" color="accent">Approve</button>-->
-        <!--<button mat-raised-button *ngIf="this.isAdmin()" (click)="deleteApp(app, i)" color="accent">Delete</button>-->
+<ng-masonry-grid
+  [masonryOptions]="{ addStatus: 'prepend',horizontalOrder: true, isFitWidth: true, percentPosition: true }"
+  style="margin: 0 auto;">
+  <ng-masonry-grid-item style="max-width: 400px" *ngFor="let activity of posts; let i = index">
+    <mat-card [routerLink]="[activity.uri]" class="postcard grid-item">
+      <mat-card-header>
+        <ngx-avatar mat-card-avatar size="40" src="{{activity.clazz.teacher.avatar}}" initialsSize="1" routerLink="/profile/{{activity.clazz.teacher.id}}" name={{activity.clazz.teacher.name}}></ngx-avatar>
+        <mat-card-title>{{activity.title}}</mat-card-title>
+        <mat-card-subtitle>Prazo: {{activity.dueDate | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="fill">
+        <mat-card-content style="margin: 20px 0 20px 0" [innerHTML]="activity.detail | nl2br | linky"></mat-card-content>
       </div>
     </mat-card>
+  </ng-masonry-grid-item>
+</ng-masonry-grid>
+<section class="FAB">
+  <div routerLink="../create" class="FAB__action-button">
+    <i class="action-button__icon material-icons">add</i>
+    <p class="action-button__text--hide">Add Activity</p>
   </div>
-
-  <mat-toolbar class="toobar">
-    <mat-toolbar-row>
-      <button mat-fab (click)="createStreamItem()" color="accent"><mat-icon>add</mat-icon></button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <!--<div class="mat-paginator">-->
-    <!--<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" (page)="pageEvent = $event; this.alterPage()"></mat-paginator>-->
-  <!--</div>-->
-</div>
+</section>
+<router-outlet></router-outlet>

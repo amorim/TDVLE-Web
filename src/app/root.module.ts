@@ -43,8 +43,12 @@ import {ShowCreateClassDialogComponent} from './classes/show-create-class-dialog
 import {ClassesModule} from './classes/classes.module';
 import {ShowEnterClassDialogComponent} from './classes/show-enter-class-dialog/show-enter-class-dialog.component';
 import {LinkyModule} from "angular-linky";
+import {ClassStreamComponent} from "./classes/class-stream/class-stream.component";
+import {ClassActivityComponent} from "./classes/class-activity/class-activity.component";
+import {componentFactoryName} from "@angular/compiler";
+import {CreateActivityComponent} from "./classes/create-activity/create-activity.component";
 import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
-import {ClassStreamComponent} from './classes/class-stream/class-stream.component';
+
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -62,9 +66,12 @@ const appRoutes: Routes = [
     ]},
     { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent},
     { path: 'file-upload', component : FileUploadComponent},
-    { path: 'classes', component: ClassesComponent }, {path: 'apps/:id', component: SingleClassComponent},
+    { path: 'classes', component: ClassesComponent },
     { path: 'authority/:id', component: EditAuthorityComponent },
-    { path: 'class/:id', component: ClassStreamComponent }
+    { path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
+    { path: 'classes/:id/stream', component: ClassStreamComponent},
+    { path: 'classes/:id/create', component: CreateActivityComponent},
+    { path: 'classes/:id/activity/:id', component: ClassActivityComponent}
     ]
   }];
 

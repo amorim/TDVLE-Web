@@ -1,12 +1,14 @@
 <div class="wrapper">
   <div class="classes">
     <mat-card *ngFor="let clazz of classes; let i = index" class="classcard">
-      <div routerLink="/class/{{clazz.id}}">
-        <div class="appimg">
-          <ngx-avatar name={{clazz.name}} initialsSize="1" size="100">
+      <div class="classinfo" routerLink="/classes/{{clazz.id}}">
+        <div class="classimg">
+          <ngx-avatar name={{clazz.teacher.name}} [src]="clazz.teacher.avatar" initialsSize="1" size="70">
           </ngx-avatar>
         </div>
-        <div class="appname">{{clazz.name}}</div>
+        <div class="classname">{{clazz.name}}</div>
+        <div class="teachername">{{clazz.teacher.name}}</div>
+
       </div>
       <div class="action">
         <button mat-raised-button (click)="accessClass(clazz)" color="accent">Access</button>

@@ -1,5 +1,5 @@
-<mat-card class="register-form">
-  <h3>Request</h3>
+
+<mat-card-title><div style="font-family: Roboto, sans-serif;">Create class</div></mat-card-title>
   <form>
     <mat-form-field class="example-full-width">
       <input matInput required placeholder="Name" [(ngModel)]="this.clazz.name" name="inputName" #inputName="ngModel">
@@ -7,4 +7,3 @@
 
     <button mat-raised-button [disabled]="inputName.invalid" (click)="this.create()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>
   </form>
-</mat-card>
