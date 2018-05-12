@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Activity} from "../../model/activity.model";
+import {ClassService} from "../class.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-class-stream',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassStreamComponent implements OnInit {
 
-  constructor() { }
+  posts: Activity[] = [];
+
+  constructor(private classService: ClassService, private route: ActivatedRoute) {
+    const id = route.snapshot.paramMap.get('id');
+    classService.getClass(id).subscribe((acts: Activity[]) => {
+      this.posts = acts;
+    });
+  }
 
   ngOnInit() {
+
   }
 
 }

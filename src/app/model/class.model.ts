@@ -4,5 +4,5 @@ export class Class {
   id: number;
   name: String;
   classAccessCode: String;
-  owner: User;
+  teacher: User;
 }

@@ -1,0 +1,25 @@
+<div style="padding-top: 20px;">
+<mat-card class="register-form">
+  <h3>Create Activity</h3>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Title" [(ngModel)]="activity.title" name="inputTitle" #inputTitle="ngModel">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput required placeholder="Detail" [(ngModel)]="activity.detail" name="inputDetail" #inputDetail="ngModel"></textarea>
+    </mat-form-field>
+
+    <div style="display: flex; flex-direction: column">
+    <mat-form-field class="example-full-width">
+      <input matInput required [matDatepicker]="picker" placeholder="Choose a due date" [(ngModel)]="activity.dueDate" name="inputDueDate" #inputDueDate="ngModel">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    </div>
+
+
+    <button mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || inputDueDate.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Request Integration</button>
+  </form>
+</mat-card>
+</div>
