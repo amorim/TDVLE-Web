@@ -3,7 +3,7 @@
     <mat-card *ngFor="let clazz of classes; let i = index" class="classcard">
       <div class="classinfo" routerLink="/classes/{{clazz.id}}">
         <div class="classimg">
-          <ngx-avatar name={{clazz.name}} [src]="clazz.teacher.avatar" initialsSize="1" size="70">
+          <ngx-avatar name={{clazz.teacher.name}} [src]="clazz.teacher.avatar" initialsSize="1" size="70">
           </ngx-avatar>
         </div>
         <div class="classname">{{clazz.name}}</div>

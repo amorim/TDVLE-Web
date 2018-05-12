@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatSnackBar, PageEvent} from '@angular/material';
 import {User} from '../model/user.model';
-import {App} from '../model/app.model';
 import {UserService} from '../user/user.service';
 import {Class} from '../model/class.model';
 import {ClassService} from './class.service';
-import {ShowAppDialogComponent} from '../apps/show-app-dialog/show-app-dialog.component';
 import {ShowCreateClassDialogComponent} from './show-create-class-dialog/show-create-class-dialog.component';
 import {ShowEnterClassDialogComponent} from './show-enter-class-dialog/show-enter-class-dialog.component';
 
@@ -39,10 +37,8 @@ export class ClassesComponent implements OnInit {
     classService.getClasses(this.pageSize, this.pageIndex * this.pageSize).subscribe((classes: Class[]) => {
       this.classes = classes;
       classService.getClassesCount().subscribe(count => {
-        console.log(count);
         this.length = count['classCount'];
         this.pageEvent.length = this.length;
-        console.log(this.classes);
       });
     });
   }

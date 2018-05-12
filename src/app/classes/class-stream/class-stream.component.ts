@@ -15,6 +15,13 @@ export class ClassStreamComponent implements OnInit {
   constructor(private classService: ClassService, private route: ActivatedRoute) {
     const id = route.snapshot.paramMap.get('id');
     classService.getClass(id).subscribe((acts: Activity[]) => {
+      acts.sort((a, b) => {
+        if (a.dueDate < b.dueDate)
+          return -1;
+        if (a.dueDate > b.dueDate)
+          return 1;
+        return 0;
+      });
       this.posts = acts;
     });
   }
