@@ -3,12 +3,20 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
+
+const ignoreUrls = ['cloudinary'];
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
 
   constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    if (ignoreUrls.some(u => req.url.includes(u)))
+      return next.handle(req);
+
     const token: string = this.authService.getAccessToken();
 
     if (token) {

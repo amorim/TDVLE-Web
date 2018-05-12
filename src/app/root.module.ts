@@ -22,7 +22,7 @@ import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { ProfileComponent } from './profile/profile.component';
-import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {ImageCropperModule} from 'ngx-img-cropper';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import {AppsModule} from "./apps/apps.module";
