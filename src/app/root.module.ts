@@ -47,6 +47,9 @@ import {ClassStreamComponent} from "./classes/class-stream/class-stream.componen
 import {ClassActivityComponent} from "./classes/class-activity/class-activity.component";
 import {componentFactoryName} from "@angular/compiler";
 import {CreateActivityComponent} from "./classes/create-activity/create-activity.component";
+import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
+
+
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'post', pathMatch: 'full'},
@@ -63,13 +66,14 @@ const appRoutes: Routes = [
       {path: 'following', component: FollowingComponent}
     ]},
     { path: 'apps', component: AppsComponent},
-      {path: 'apps/:id', component: SingleAppComponent},
+    {path: 'apps/:id', component: SingleAppComponent},
     { path: 'file-upload', component : FileUploadComponent},
     { path: 'classes', component: ClassesComponent },
-      {path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
-      {path: 'classes/:id/stream', component: ClassStreamComponent},
-      {path: 'classes/:id/create', component: CreateActivityComponent},
-      {path: 'classes/:id/activity/:id', component: ClassActivityComponent}
+    { path: 'authority/:id', component: EditAuthorityComponent },
+    { path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
+    { path: 'classes/:id/stream', component: ClassStreamComponent},
+    { path: 'classes/:id/create', component: CreateActivityComponent},
+    { path: 'classes/:id/activity/:id', component: ClassActivityComponent}
     ]
   }];
 
@@ -93,7 +97,8 @@ const appRoutes: Routes = [
     FileUploadComponent,
     SingleClassComponent,
     ShowCreateClassDialogComponent,
-    ShowEnterClassDialogComponent
+    ShowEnterClassDialogComponent,
+    EditAuthorityComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
