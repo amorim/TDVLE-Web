@@ -1,7 +1,6 @@
-export class Quiz {
-  id: number;
-  title: string;
-  detail: string;
-  dueDate: Date;
-  uri: string;
+import {StreamItem} from './streamItem.model';
+import {Problem} from './problem.model';
+
+export class Quiz extends StreamItem {
+  problems: Problem[] = [];
 }

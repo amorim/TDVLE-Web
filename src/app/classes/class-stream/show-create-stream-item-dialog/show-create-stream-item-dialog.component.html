@@ -1,10 +1,19 @@
 <mat-card class="register-form">
-  <h3>Request</h3>
+  <h3>Item</h3>
   <form>
     <mat-form-field class="example-full-width">
-      <input matInput required placeholder="Name" [(ngModel)]="this.stream.title" name="inputName" #inputName="ngModel">
+      <input matInput required placeholder="Title" [(ngModel)]="this.streamItem.title" name="inputTitle" #inputTitle="ngModel">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput required placeholder="Detail" [(ngModel)]="this.streamItem.detail" name="inputDetail" #inputDetail="ngModel">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-select [(value)]="this.selected" placeholder="Select kind">
+        <mat-option value='0'>Quiz</mat-option>
+        <mat-option value='1'>Activity</mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button [disabled]="inputName.invalid" (click)="this.create()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>
+    <button mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || this.selected === '-1'" (click)="this.create()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>
   </form>
 </mat-card>

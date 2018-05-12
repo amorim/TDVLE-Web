@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Class} from '../model/class.model';
 import {Constants} from '../shared/constants';
+import {Quiz} from '../model/quiz.model';
 
 @Injectable()
 export class ClassService {
@@ -28,5 +29,9 @@ export class ClassService {
 
   getClass(id) {
     return this.http.get(Constants.url + '/class/' + id);
+  }
+
+  createQuiz(quiz: Quiz, classId) {
+    return this.http.post(Constants.url + '/class/' + classId + '/quiz/create', quiz);
   }
 }

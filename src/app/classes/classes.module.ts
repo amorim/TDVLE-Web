@@ -15,12 +15,14 @@ import {LinkyModule} from "angular-linky";
 import {CreateActivityComponent} from "./create-activity/create-activity.component";
 import {FormsModule} from "@angular/forms";
 import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-stream-item-dialog/show-create-stream-item-dialog.component';
+import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { ShowCreateProblemDialogComponent } from './create-quiz/show-create-problem-dialog/show-create-problem-dialog.component';
 
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
   ClassStreamComponent,
-  CreateActivityComponent, ShowCreateStreamItemDialogComponent],
+  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,11 +33,12 @@ import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-
     Nl2BrPipeModule,
     LinkyModule
   ],
-  entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent],
+  entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent, ShowCreateStreamItemDialogComponent],
   providers: [ClassService],
   exports: [ClassesComponent,
     ClassActivityComponent,
     ClassStreamComponent,
-    CreateActivityComponent]
+    CreateActivityComponent,
+    CreateQuizComponent]
 })
 export class ClassesModule { }

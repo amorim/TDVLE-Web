@@ -48,6 +48,7 @@ import {ClassActivityComponent} from "./classes/class-activity/class-activity.co
 import {componentFactoryName} from "@angular/compiler";
 import {CreateActivityComponent} from "./classes/create-activity/create-activity.component";
 import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
+import {CreateQuizComponent} from './classes/create-quiz/create-quiz.component';
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -70,8 +71,9 @@ const appRoutes: Routes = [
     { path: 'authority/:id', component: EditAuthorityComponent },
     { path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
     { path: 'classes/:id/stream', component: ClassStreamComponent},
-    { path: 'classes/:id/create', component: CreateActivityComponent},
-    { path: 'classes/:id/activity/:id', component: ClassActivityComponent}
+    { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
+    { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
+    { path: 'classes/:classId/quiz/:quizId', component: ClassActivityComponent}
     ]
   }];
 
