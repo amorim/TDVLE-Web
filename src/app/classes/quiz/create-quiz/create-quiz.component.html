@@ -31,18 +31,18 @@
           </mat-form-field>
 
           <div *ngIf="problem.kind">
-            <div *ngFor="let alternativeDescription of problem.alternativeDescription; let j = index; trackBy:trackByFn">
+            <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
               <div class="sideBySide">
                 <mat-form-field style="flex: 1;">
-                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternativeDescription[j]" name="Alternative {{j + 1}}"></textarea>
+                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternatives[j].description" name="Alternative {{j + 1}}"></textarea>
                 </mat-form-field>
-                <button mat-mini-fab (click)="removeAlternative(problem, j)" name="rem {{j + 1}}"><mat-icon>remove</mat-icon></button>
+                <button mat-mini-fab (click)="removeAlternative(problem, j)" name="rem {{j + 1}}"><mat-icon>remove</mat-icon>{{i}},{{j}}</button>
               </div>
             </div>
 
             <mat-radio-group [(ngModel)]="problem.answer" [ngModelOptions]="{standalone: true}">
               Answer:
-              <div *ngFor="let alternativeDescription of problem.alternativeDescription; let j = index; trackBy:trackByFn" style="display: inline;">
+              <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn" style="display: inline;">
                 <mat-radio-button value='{{j+1}}'>{{j + 1}}</mat-radio-button>&nbsp;
               </div>
             </mat-radio-group>

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Quiz} from '../../model/quiz.model';
 import {ClassService} from '../class.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Alternative} from '../../model/alternative.model';
+import {QuizAnswer} from '../../model/quiz-answer.model';
+import {ProblemAnswer} from '../../model/problem-answer.model';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-quiz',
@@ -11,17 +15,22 @@ import {ActivatedRoute} from '@angular/router';
 export class QuizComponent implements OnInit {
 
   quiz: Quiz = new Quiz();
+  quizAnswer: QuizAnswer = new QuizAnswer();
   classId = 0; quizId = 0;
 
-  constructor(private classService: ClassService, private route: ActivatedRoute) {
+  constructor(private classService: ClassService, private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
     this.quizId = Number(this.route.snapshot.paramMap.get('quizId'));
-    this.classService.getQuiz(this.classId, this.quizId).subscribe((quiz: Quiz) => {
-      console.log('done: ' + quiz);
+    this.classService.getQuiz(this.classId, this.quizId).subscribe((quiz: any) => {
+      if (quiz['switch']) {
+        this.router.navigate(['/classes/' + this.classId + '/quiz/' + this.quizId + '/answers'], );
+      }
       this.quiz = quiz;
+      this.quiz.problems.sort((a, b) => {if (a.problemId < b.problemId) {return(-1);} if (a.problemId > b.problemId) {return(1);} return(0);});
+      this.prepareAnswer();
     });
   }
 
@@ -29,25 +38,33 @@ export class QuizComponent implements OnInit {
     return index;
   }
 
-  validAlternatives(alternatives: string[]) {
-    for (const a of alternatives) {
-      if (a == null) {
+  validProblems() {
+    for (const p of this.quizAnswer.answers) {
+      if ((p.openAnswer === '' || p.openAnswer == null) && (!(Number(p.choiceId) > 0 && Number(p.choiceId) <= this.quizAnswer.answers.length))) {
         return(0);
       }
     }
     return(1);
   }
 
-  validProblems() {
+  prepareAnswer() {
+    console.log(this.quiz);
     for (const p of this.quiz.problems) {
-      if (p.description == null || (p.kind === true && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
-        return(0);
-      }
+      this.quizAnswer.answers.push(new ProblemAnswer());
+      this.quizAnswer.answers[this.quizAnswer.answers.length - 1].problemId = this.quizAnswer.answers.length;
     }
-    return(1);
+  }
+
+  changeChoiceId(answer, alternatives) {
+    answer.choiceId = alternatives[answer.choice - 1].alternativeId;
+    console.log('choosen:' + answer.choiceId);
   }
 
   submit() {
+    this.classService.submit(this.classId, this.quizId, this.quizAnswer).subscribe((data) => {
+      this.snackBar.open('Answer submitted', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/classes/' + this.classId], );
+    });
   }
 
   onKeyPress($event) {

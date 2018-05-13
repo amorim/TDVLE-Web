@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Quiz} from '../../model/quiz.model';
-import {ClassService} from '../class.service';
+import {Quiz} from '../../../model/quiz.model';
+import {ClassService} from '../../class.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {ShowCreateClassDialogComponent} from '../show-create-class-dialog/show-create-class-dialog.component';
-import {Problem} from '../../model/problem.model';
+import {ShowCreateClassDialogComponent} from '../../show-create-class-dialog/show-create-class-dialog.component';
+import {Problem} from '../../../model/problem.model';
+import {Alternative} from '../../../model/alternative.model';
 
 @Component({
   selector: 'app-create-quiz',
@@ -23,17 +24,9 @@ export class CreateQuizComponent implements OnInit {
     this.classId = Number(id);
   }
 
-  create() {
-    console.log(this.quiz);
-    this.classService.createQuiz(this.quiz, this.classId).subscribe((quiz) => {
-      this.snackBar.open('Created quiz', 'Dismiss', {duration: 2000});
-      this.router.navigate(['/classes/' + this.classId], );
-    });
-  }
-
-  validAlternatives(alternatives: string[]) {
+  validAlternatives(alternatives: Alternative[]) {
     for (const a of alternatives) {
-      if (a == null) {
+      if (a == null || a.description === '') {
         return(0);
       }
     }
@@ -41,8 +34,9 @@ export class CreateQuizComponent implements OnInit {
   }
 
   validProblems() {
+    if (this.quiz.problems.length === 0) { return(0); }
     for (const p of this.quiz.problems) {
-      if (p.description == null || (p.kind === true && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
+      if (p.description === '' || (p.kind === true && (!(Number(p.answer) > 0 && Number(p.answer) <= p.alternatives.length) || !this.validAlternatives(p.alternatives)))) {
         return(0);
       }
     }
@@ -50,7 +44,8 @@ export class CreateQuizComponent implements OnInit {
   }
 
   addAlternative(problem) {
-    problem.alternativeDescription.push('');
+    problem.alternatives.push(new Alternative());
+    problem.alternatives[problem.alternatives.length - 1].alternativeId = problem.alternatives.length;
   }
 
   trackByFn(index: any, item: any) {
@@ -63,15 +58,24 @@ export class CreateQuizComponent implements OnInit {
     } else if (Number(problem.answer) === j + 1) {
       problem.answer = '0';
     }
-    problem.alternativeDescription.splice(j, 1);
+    problem.alternatives.splice(j, 1);
   }
 
   createProblem() {
     this.quiz.problems.push(new Problem());
+    this.quiz.problems[this.quiz.problems.length - 1].problemId = this.quiz.problems.length;
   }
 
   removeProblem(i) {
     this.quiz.problems.splice(i, 1);
+  }
+
+  create() {
+    console.log(this.quiz);
+    this.classService.createQuiz(this.quiz, this.classId).subscribe((quiz) => {
+      this.snackBar.open('Created quiz', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/classes/' + this.classId], );
+    });
   }
 
   onKeyPress($event) {

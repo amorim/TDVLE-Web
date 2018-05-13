@@ -38,4 +38,12 @@ export class ClassService {
   getQuiz(classId, quizId) {
     return this.http.get(Constants.url + '/class/' + classId + '/quiz/' + quizId);
   }
+
+  getAnswers(classId, quizId) {
+    return this.http.get(Constants.url + '/class/' + classId + '/quiz/' + quizId + '/answers');
+  }
+
+  submit(classId, quizId, quizAnswer) {
+    return this.http.post(Constants.url + '/class/' + classId + '/quiz/' + quizId + '/submit', quizAnswer);
+  }
 }

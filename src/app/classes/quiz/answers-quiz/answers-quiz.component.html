@@ -1,0 +1,40 @@
+<div style="padding-top: 20px;">
+  <mat-card class="register-form">
+    <h3>Quiz: {{this.quiz.title}}</h3>
+    <h4>{{this.quiz.detail}}</h4>
+    <form>
+      <div *ngFor="let answer of this.quizAnswers; let a = index; trackBy:trackByFn">
+        <mat-card>
+          <mat-card-title>{{answer.student.name}}</mat-card-title>
+          <div *ngFor="let problem of this.quiz.problems; let i = index; trackBy:trackByFn">
+            <h4 style="flex: 1">Problem {{i + 1}}</h4>
+
+            <mat-form-field class="example-full-width">
+              <textarea matInput disabled required placeholder="Description" [(ngModel)]="problem.description" name="{{a + 1}} Problem {{i + 1}} description"></textarea>
+            </mat-form-field>
+
+            <div *ngIf="!problem.kind">
+              <mat-form-field class="example-full-width">
+                <textarea matInput disabled required placeholder="Answer" [(ngModel)]="this.quizAnswers[a].answers[i].openAnswer" name="{{a + 1}} Answer {{i + 1}}"></textarea>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="problem.kind">
+              <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
+                <mat-form-field class="example-full-width">
+                  <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternatives[j].description" name="{{a + 1}} Alternative {{j + 1}}"></textarea>
+                </mat-form-field>
+              </div>
+
+              <mat-chip-list>
+                <mat-chip *ngIf="problem.answer.toString() === this.quizAnswers[a].answers[i].choiceId.toString()" style="background-color: lime;" selected="true">Right</mat-chip>
+                <mat-chip *ngIf="problem.answer.toString() !== this.quizAnswers[a].answers[i].choiceId.toString()" style="background-color: red;" selected="true">Wrong</mat-chip>
+              </mat-chip-list>
+              <br><br>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </form>
+  </mat-card>
+</div>
