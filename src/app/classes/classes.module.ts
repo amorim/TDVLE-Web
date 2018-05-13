@@ -17,12 +17,13 @@ import {FormsModule} from "@angular/forms";
 import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-stream-item-dialog/show-create-stream-item-dialog.component';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { ShowCreateProblemDialogComponent } from './create-quiz/show-create-problem-dialog/show-create-problem-dialog.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
   ClassStreamComponent,
-  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent],
+  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent],
   imports: [
     CommonModule,
     FormsModule,

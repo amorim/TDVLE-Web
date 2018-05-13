@@ -31,7 +31,7 @@ export class CreateQuizComponent implements OnInit {
     });
   }
 
-  validAlternatives(alternatives: String[]) {
+  validAlternatives(alternatives: string[]) {
     for (const a of alternatives) {
       if (a == null) {
         return(0);
@@ -42,7 +42,7 @@ export class CreateQuizComponent implements OnInit {
 
   validProblems() {
     for (const p of this.quiz.problems) {
-      if (p.description == null || (p.kind === 1 && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
+      if (p.description == null || (p.kind === true && (p.answer == null || !this.validAlternatives(p.alternativeDescription)))) {
         return(0);
       }
     }
@@ -50,16 +50,28 @@ export class CreateQuizComponent implements OnInit {
   }
 
   addAlternative(problem) {
-    problem.alternativeDescription.push('asdf');
+    problem.alternativeDescription.push('');
+  }
+
+  trackByFn(index: any, item: any) {
+    return index;
   }
 
   removeAlternative(problem, j) {
+    if (Number(problem.answer) > j + 1) {
+      problem.answer = (Number(problem.answer) - 1).toString();
+    } else if (Number(problem.answer) === j + 1) {
+      problem.answer = '0';
+    }
     problem.alternativeDescription.splice(j, 1);
   }
 
   createProblem() {
     this.quiz.problems.push(new Problem());
-    console.log(this.quiz.problems);
+  }
+
+  removeProblem(i) {
+    this.quiz.problems.splice(i, 1);
   }
 
   onKeyPress($event) {

@@ -34,4 +34,8 @@ export class ClassService {
   createQuiz(quiz: Quiz, classId) {
     return this.http.post(Constants.url + '/class/' + classId + '/quiz/create', quiz);
   }
+
+  getQuiz(classId, quizId) {
+    return this.http.get(Constants.url + '/class/' + classId + '/quiz/' + quizId);
+  }
 }

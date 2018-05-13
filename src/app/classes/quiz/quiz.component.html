@@ -1,0 +1,43 @@
+<div style="padding-top: 20px;">
+  <mat-card class="register-form">
+    <h3>Create Quiz</h3>
+    <form>
+      <div *ngFor="let problem of this.quiz.problems; let i = index; trackBy:trackByFn">
+        <mat-card>
+          <div class="sideBySide">
+            <h4 style="flex: 1">Problem {{i + 1}}</h4>
+          </div>
+
+          <mat-form-field class="example-full-width">
+            <textarea matInput required placeholder="Description" [(ngModel)]="problem.description" name="Problem {{i + 1}} description"></textarea>
+          </mat-form-field>
+
+          <div *ngIf="problem.kind">
+            <div *ngFor="let alternativeDescription of problem.alternativeDescription; let j = index; trackBy:trackByFn">
+              <div class="sideBySide">
+                <mat-form-field style="flex: 1;">
+                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternativeDescription[j]" name="Alternative {{j + 1}}"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-radio-group [(ngModel)]="problem.answer" [ngModelOptions]="{standalone: true}">
+              Answer:
+              <div *ngFor="let alternativeDescription of problem.alternativeDescription; let j = index; trackBy:trackByFn" style="display: inline;">
+                <mat-radio-button value='{{j+1}}'>{{j + 1}}</mat-radio-button>&nbsp;
+              </div>
+            </mat-radio-group>
+            <br><br>
+          </div>
+
+        </mat-card>
+      </div>
+
+      <br>
+      <br>
+
+      <button mat-raised-button [disabled]="!validProblems()" (click)="this.submit()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>
+
+    </form>
+  </mat-card>
+</div>
