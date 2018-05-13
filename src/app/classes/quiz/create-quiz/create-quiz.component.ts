@@ -45,7 +45,6 @@ export class CreateQuizComponent implements OnInit {
 
   addAlternative(problem) {
     problem.alternatives.push(new Alternative());
-    problem.alternatives[problem.alternatives.length - 1].alternativeId = problem.alternatives.length;
   }
 
   trackByFn(index: any, item: any) {
@@ -63,15 +62,30 @@ export class CreateQuizComponent implements OnInit {
 
   createProblem() {
     this.quiz.problems.push(new Problem());
-    this.quiz.problems[this.quiz.problems.length - 1].problemId = this.quiz.problems.length;
   }
 
   removeProblem(i) {
     this.quiz.problems.splice(i, 1);
   }
 
+  putIndexes(quiz: Quiz) {
+    let i = 1;
+    for (let p of quiz.problems) {
+      p.problemId = i;
+      if (p.kind) {
+        let j = 1;
+        for (let a of p.alternatives) {
+          a.alternativeId = j;
+          j += 1;
+        }
+      }
+      i += 1;
+    }
+  }
+
   create() {
     console.log(this.quiz);
+    this.putIndexes(this.quiz);
     this.classService.createQuiz(this.quiz, this.classId).subscribe((quiz) => {
       this.snackBar.open('Created quiz', 'Dismiss', {duration: 2000});
       this.router.navigate(['/classes/' + this.classId], );

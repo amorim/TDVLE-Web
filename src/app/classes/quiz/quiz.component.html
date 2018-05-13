@@ -3,7 +3,7 @@
     <h3>Quiz: {{this.quiz.title}}</h3>
     <h4>{{this.quiz.detail}}</h4>
     <form>
-      <div *ngFor="let problem of this.quiz.problems; let i = index; trackBy:trackByFn">
+      <div *ngFor="let problem of this.quiz.problems; let i = index;">
         <mat-card>
           <h4 style="flex: 1">Problem {{i + 1}}</h4>
 
@@ -18,15 +18,15 @@
           </div>
 
           <div *ngIf="problem.kind">
-            <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
+            <div *ngFor="let alternative of problem.alternatives; let j = index;">
               <mat-form-field class="example-full-width">
-                <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternatives[j].description" name="Alternative {{j + 1}}"></textarea>
+                <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{i + 1}} Alternative {{j + 1}}"></textarea>
               </mat-form-field>
             </div>
 
             <mat-radio-group (change)="changeChoiceId(this.quizAnswer.answers[i], problem.alternatives)" [(ngModel)]="this.quizAnswer.answers[i].choice" [ngModelOptions]="{standalone: true}">
               Answer:
-              <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn" style="display: inline;">
+              <div *ngFor="let alternative of problem.alternatives; let j = index;" style="display: inline;">
                 <mat-radio-button value='{{j+1}}'>{{j + 1}}</mat-radio-button>&nbsp;
               </div>
             </mat-radio-group>

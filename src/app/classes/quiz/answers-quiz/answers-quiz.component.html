@@ -3,10 +3,10 @@
     <h3>Quiz: {{this.quiz.title}}</h3>
     <h4>{{this.quiz.detail}}</h4>
     <form>
-      <div *ngFor="let answer of this.quizAnswers; let a = index; trackBy:trackByFn">
+      <div *ngFor="let answer of this.quizAnswers; let a = index;">
         <mat-card>
           <mat-card-title>{{answer.student.name}}</mat-card-title>
-          <div *ngFor="let problem of this.quiz.problems; let i = index; trackBy:trackByFn">
+          <div *ngFor="let problem of this.quiz.problems; let i = index;">
             <h4 style="flex: 1">Problem {{i + 1}}</h4>
 
             <mat-form-field class="example-full-width">
@@ -22,7 +22,7 @@
             <div *ngIf="problem.kind">
               <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
                 <mat-form-field class="example-full-width">
-                  <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternatives[j].description" name="{{a + 1}} Alternative {{j + 1}}"></textarea>
+                  <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{a + 1}} {{i + 1}} Alternative {{j + 1}}"></textarea>
                 </mat-form-field>
               </div>
 

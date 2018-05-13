@@ -28,6 +28,11 @@ export class AnswersQuizComponent implements OnInit {
     this.classService.getQuiz(this.classId, this.quizId).subscribe((quiz: Quiz) => {
       this.quiz = quiz['quiz'];
       this.quiz.problems.sort((a, b) => {if (a.problemId < b.problemId) {return(-1);} if (a.problemId > b.problemId) {return(1);} return(0);});
+      for (let p of this.quiz.problems) {
+        if (p.kind) {
+          p.alternatives.sort((a, b) => {if (a.alternativeId < b.alternativeId) {return(-1);} if (a.alternativeId > b.alternativeId) {return(1);} return(0);});
+        }
+      }
       console.log(this.quiz);
     });
   }

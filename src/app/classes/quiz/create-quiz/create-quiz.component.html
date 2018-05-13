@@ -18,7 +18,7 @@
         </mat-form-field>
       </div>
 
-      <div *ngFor="let problem of this.quiz.problems; let i = index; trackBy:trackByFn">
+      <div *ngFor="let problem of this.quiz.problems; let i = index;">
         <mat-card>
           <div class="sideBySide">
             <h4 style="flex: 1">Problem {{i + 1}}</h4>
@@ -30,19 +30,19 @@
             <textarea matInput required placeholder="Description" [(ngModel)]="problem.description" name="Problem {{i + 1}} description"></textarea>
           </mat-form-field>
 
-          <div *ngIf="problem.kind">
+          <div *ngIf="this.quiz.problems[i].kind">
             <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
               <div class="sideBySide">
                 <mat-form-field style="flex: 1;">
-                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="problem.alternatives[j].description" name="Alternative {{j + 1}}"></textarea>
+                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{i + 1}} Alternative {{j + 1}}"></textarea>
                 </mat-form-field>
-                <button mat-mini-fab (click)="removeAlternative(problem, j)" name="rem {{j + 1}}"><mat-icon>remove</mat-icon>{{i}},{{j}}</button>
+                <button mat-mini-fab (click)="removeAlternative(problem, j)"><mat-icon>remove</mat-icon></button>
               </div>
             </div>
 
             <mat-radio-group [(ngModel)]="problem.answer" [ngModelOptions]="{standalone: true}">
               Answer:
-              <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn" style="display: inline;">
+              <div *ngFor="let alternative of problem.alternatives; let j = index;" style="display: inline;">
                 <mat-radio-button value='{{j+1}}'>{{j + 1}}</mat-radio-button>&nbsp;
               </div>
             </mat-radio-group>
