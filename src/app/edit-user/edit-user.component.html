@@ -30,7 +30,7 @@
           <mat-icon class="md-24" aria-label="Add image">add_a_photo</mat-icon>
         </button>
       </div>
-
+      <h4>Select desired roles</h4>
       <div class="authorities">
         <div *ngFor="let authority of this.authorities; let i = index">
           <mat-checkbox (change)="authority.enabled = !authority.enabled" [checked]="authority.enabled">{{authority.description}}</mat-checkbox>

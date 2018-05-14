@@ -26,13 +26,14 @@ export class QuizComponent implements OnInit {
     this.quizId = Number(this.route.snapshot.paramMap.get('quizId'));
     this.classService.getQuiz(this.classId, this.quizId).subscribe((quiz: any) => {
       if (quiz['switchTeacher']) {
-        this.router.navigate(['/classes/' + this.classId + '/quiz/' + this.quizId + '/answers'], );
+        this.router.navigate(['/classes/' + this.classId + '/quiz/' + this.quizId + '/answers'], { replaceUrl: true });
       }
       if (quiz['switchStudent']) {
-        this.router.navigate(['/classes/' + this.classId], );
+        this.router.navigate(['/classes/' + this.classId], { replaceUrl: true });
       }
       this.quiz = quiz;
-      this.quiz.problems.sort((a, b) => {if (a.problemId < b.problemId) {return(-1);} if (a.problemId > b.problemId) {return(1);} return(0);});
+      if (this.quiz.problems)
+        this.quiz.problems.sort((a, b) => {if (a.problemId < b.problemId) {return(-1);} if (a.problemId > b.problemId) {return(1);} return(0);});
       this.prepareAnswer();
     });
   }

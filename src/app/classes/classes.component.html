@@ -9,7 +9,7 @@
         <div class="classname">{{clazz.name}}</div>
         <div class="teachername">{{clazz.teacher.name}}</div>
       </div>
-      <mat-card-content><mat-chip-list><mat-chip style="text-align: center;">{{clazz.classAccessCode}}</mat-chip></mat-chip-list></mat-card-content>
+      <mat-card-content style="display: flex; flex-direction: column; height: 100%; justify-content: center;"><mat-chip-list style="margin-right: 10px; margin-left: 10px; "><mat-chip style="text-align: center;">{{clazz.classAccessCode}}</mat-chip></mat-chip-list></mat-card-content>
       <div class="action">
         <button mat-raised-button (click)="accessClass(clazz)" color="accent">Access</button>
       </div>

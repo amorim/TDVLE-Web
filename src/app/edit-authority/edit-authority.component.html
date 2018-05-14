@@ -1,12 +1,8 @@
 <br>
 <div>
   <mat-card class="edit-form">
-    <h3>Edit Authorities</h3>
+    <h3>Edit Roles for {{this.user.name}}</h3>
     <form>
-      <div>
-        <mat-card-title>{{this.user.name}}</mat-card-title>
-      </div>
-
       <div class="authorities">
         <div *ngFor="let authority of this.authorities; let i = index">
           <mat-checkbox (change)="authority.enabled = !authority.enabled" [checked]="authority.enabled">{{authority.description}}</mat-checkbox>
