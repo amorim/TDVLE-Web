@@ -15,16 +15,17 @@ import {LinkyModule} from "angular-linky";
 import {CreateActivityComponent} from "./create-activity/create-activity.component";
 import {FormsModule} from "@angular/forms";
 import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-stream-item-dialog/show-create-stream-item-dialog.component';
-import { CreateQuizComponent } from './create-quiz/create-quiz.component';
-import { ShowCreateProblemDialogComponent } from './create-quiz/show-create-problem-dialog/show-create-problem-dialog.component';
+import { CreateQuizComponent } from './quiz/create-quiz/create-quiz.component';
+import { ShowCreateProblemDialogComponent } from './quiz/create-quiz/show-create-problem-dialog/show-create-problem-dialog.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { AnswersQuizComponent } from './quiz/answers-quiz/answers-quiz.component';
 import { AmazingTimePickerModule } from '@lucasolivamorim/amazing-time-picker';
 import {NgxPermissionsModule} from "ngx-permissions";
-
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
   ClassStreamComponent,
-  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent],
+  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent, AnswersQuizComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -1,0 +1,64 @@
+<div style="padding-top: 20px;">
+  <mat-card class="register-form">
+    <h3>Create Quiz</h3>
+    <form>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="Title" [(ngModel)]="quiz.title" name="inputTitle" #inputTitle="ngModel">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput required placeholder="Detail" [(ngModel)]="quiz.detail" name="inputDetail" #inputDetail="ngModel"></textarea>
+      </mat-form-field>
+
+      <div style="display: flex; flex-direction: column">
+        <mat-form-field style="width: 80%;">
+          <input matInput required [matDatepicker]="picker" placeholder="Choose a due date" [(ngModel)]="quiz.dueDate" name="inputDueDate" #inputDueDate="ngModel">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div *ngFor="let problem of this.quiz.problems; let i = index;">
+        <mat-card>
+          <div class="sideBySide">
+            <h4 style="flex: 1">Problem {{i + 1}}</h4>
+            <button mat-mini-fab (click)="removeProblem(i)" name="remPro {{i + 1}}"><mat-icon>remove</mat-icon></button>
+          </div>
+          <mat-slide-toggle [(ngModel)]="problem.kind" name="Problem {{i + 1}} kind">Enable multiple choices</mat-slide-toggle>
+
+          <mat-form-field class="example-full-width">
+            <textarea matInput required placeholder="Description" [(ngModel)]="problem.description" name="Problem {{i + 1}} description"></textarea>
+          </mat-form-field>
+
+          <div *ngIf="this.quiz.problems[i].kind">
+            <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
+              <div class="sideBySide">
+                <mat-form-field style="flex: 1;">
+                  <textarea matInput required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{i + 1}} Alternative {{j + 1}}"></textarea>
+                </mat-form-field>
+                <button mat-mini-fab (click)="removeAlternative(problem, j)"><mat-icon>remove</mat-icon></button>
+              </div>
+            </div>
+
+            <mat-radio-group [(ngModel)]="problem.answer" [ngModelOptions]="{standalone: true}">
+              Answer:
+              <div *ngFor="let alternative of problem.alternatives; let j = index;" style="display: inline;">
+                <mat-radio-button value='{{j+1}}'>{{j + 1}}</mat-radio-button>&nbsp;
+              </div>
+            </mat-radio-group>
+            <br><br>
+            <mat-chip-list><mat-chip (click)="addAlternative(problem)" color="accent" selected="true">Alternative<mat-icon>add</mat-icon></mat-chip></mat-chip-list>
+          </div>
+
+        </mat-card>
+      </div>
+
+      <br>
+        <mat-chip-list><mat-chip (click)="createProblem()" color="accent" selected="true">Problem<mat-icon>add</mat-icon></mat-chip></mat-chip-list>
+      <br>
+
+      <button mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || inputDueDate.invalid || !validProblems()" (click)="this.create()" (onkeypress)="onKeyPress($event)" color="accent">Create</button>
+
+    </form>
+  </mat-card>
+</div>
