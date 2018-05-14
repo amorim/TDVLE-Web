@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ClassService} from '../../class.service';
 import {QuizAnswer} from '../../../model/quiz-answer.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Quiz} from '../../../model/quiz.model';
 import {Evaluation} from '../../../model/evaluation.model';
 
@@ -17,7 +17,7 @@ export class AnswersQuizComponent implements OnInit {
   quiz: Quiz = new Quiz();
   classId = 0; quizId = 0;
 
-  constructor(private classService: ClassService, private route: ActivatedRoute) {
+  constructor(private classService: ClassService, private route: ActivatedRoute, private router: Router) {
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
     this.quizId = Number(this.route.snapshot.paramMap.get('quizId'));
     this.classService.getAnswers(this.classId, this.quizId).subscribe((quizAnswers: QuizAnswer[]) => {
@@ -74,7 +74,7 @@ export class AnswersQuizComponent implements OnInit {
 
   evaluate(a) {
     this.classService.evaluate(this.classId, this.quizId, this.evaluations[a]).subscribe((data) => {
-      console.log(a);
+      this.router.navigate(['/classes/' + this.classId], );
     });
   }
 
