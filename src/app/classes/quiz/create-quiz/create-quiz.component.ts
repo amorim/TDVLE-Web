@@ -16,6 +16,7 @@ export class CreateQuizComponent implements OnInit {
 
   quiz: Quiz = new Quiz();
   classId = 0;
+  hour: string = "23:59";
 
   constructor(private classService: ClassService, private route: ActivatedRoute, private snackBar: MatSnackBar, private router: Router, public dialog: MatDialog) { }
 
@@ -84,8 +85,12 @@ export class CreateQuizComponent implements OnInit {
   }
 
   create() {
-    console.log(this.quiz);
-    this.putIndexes(this.quiz);
+    this.quiz.dueDate.setHours(parseInt(this.hour.split(':')[0]));
+    this.quiz.dueDate.setMinutes(parseInt(this.hour.split(':')[1]));
+    if (this.quiz.dueDate <= new Date()) {
+      this.snackBar.open('Please choose a valid due date', 'Dismiss', {duration: 2000});
+      return;
+    }
     this.classService.createQuiz(this.quiz, this.classId).subscribe((quiz) => {
       this.snackBar.open('Created quiz', 'Dismiss', {duration: 2000});
       this.router.navigate(['/classes/' + this.classId], );

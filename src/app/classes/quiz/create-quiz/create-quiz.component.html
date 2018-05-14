@@ -9,12 +9,14 @@
       <mat-form-field class="example-full-width">
         <textarea matInput required placeholder="Detail" [(ngModel)]="quiz.detail" name="inputDetail" #inputDetail="ngModel"></textarea>
       </mat-form-field>
-
-      <div style="display: flex; flex-direction: column">
+      <div style="display: flex; flex-direction: row">
         <mat-form-field style="width: 80%;">
           <input matInput required [matDatepicker]="picker" placeholder="Choose a due date" [(ngModel)]="quiz.dueDate" name="inputDueDate" #inputDueDate="ngModel">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width: 20%; padding-left: 5px;">
+          <input atp-time-picker locale="pt-BR" value="23:59" matInput [(ngModel)]="hour" required placeholder="Hour" name="inputTime">
         </mat-form-field>
       </div>
 

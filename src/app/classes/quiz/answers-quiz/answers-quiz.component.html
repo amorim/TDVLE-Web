@@ -3,6 +3,7 @@
     <h3>Quiz: {{this.quiz.title}}</h3>
     <h4 [innerHTML]="this.quiz.detail | nl2br | linky"></h4>
       <form>
+        <p *ngIf="!this.quizAnswers.length" style="text-align: center; color: #e54304; font-family: Roboto, sans-serif">None of your students submitted answers for this quiz</p>
         <div *ngFor="let answer of this.quizAnswers; let a = index;">
           <mat-accordion>
             <mat-expansion-panel>

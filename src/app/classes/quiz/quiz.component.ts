@@ -53,10 +53,18 @@ export class QuizComponent implements OnInit {
 
   prepareAnswer() {
     console.log(this.quiz);
+    if (!this.quiz.problems)
+      return;
     for (const p of this.quiz.problems) {
       this.quizAnswer.answers.push(new ProblemAnswer());
       this.quizAnswer.answers[this.quizAnswer.answers.length - 1].problemId = this.quizAnswer.answers.length;
     }
+  }
+
+  validDate() {
+    if (!this.quiz)
+      return false;
+    return new Date(this.quiz.dueDate) > new Date();
   }
 
   changeChoiceId(answer, alternatives) {
