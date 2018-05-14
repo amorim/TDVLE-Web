@@ -1,40 +1,56 @@
 <div style="padding-top: 20px;">
   <mat-card class="register-form">
     <h3>Quiz: {{this.quiz.title}}</h3>
-    <h4>{{this.quiz.detail}}</h4>
-    <form>
-      <div *ngFor="let answer of this.quizAnswers; let a = index;">
-        <mat-card>
-          <mat-card-title>{{answer.student.name}}</mat-card-title>
-          <div *ngFor="let problem of this.quiz.problems; let i = index;">
-            <h4 style="flex: 1">Problem {{i + 1}}</h4>
+    <h4 [innerHTML]="this.quiz.detail | nl2br | linky"></h4>
+      <form>
+        <div *ngFor="let answer of this.quizAnswers; let a = index;">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title><h4>{{answer.student.name}}</h4></mat-panel-title>
+                <mat-panel-description><h4>Grade: {{calculateScore(a)}}%</h4></mat-panel-description>
+              </mat-expansion-panel-header>
 
-            <mat-form-field class="example-full-width">
-              <textarea matInput disabled required placeholder="Description" [(ngModel)]="problem.description" name="{{a + 1}} Problem {{i + 1}} description"></textarea>
-            </mat-form-field>
+              <div *ngFor="let problem of this.quiz.problems; let i = index;">
+                <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title><h5>Problem {{i + 1}}</h5></mat-panel-title>
+                      <mat-panel-description>
+                        <h5 *ngIf="openEvaluation?.checked || (problem.kind && problem.answer.toString() === this.quizAnswers[a].answers[i].choiceId.toString())" style="color: lime;">Correct</h5>
+                        <h5 *ngIf="(problem.kind && problem.answer.toString() !== this.quizAnswers[a].answers[i].choiceId.toString())" style="color: #F44336;">Wrong</h5>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
 
-            <div *ngIf="!problem.kind">
-              <mat-form-field class="example-full-width">
-                <textarea matInput disabled required placeholder="Answer" [(ngModel)]="this.quizAnswers[a].answers[i].openAnswer" name="{{a + 1}} Answer {{i + 1}}"></textarea>
-              </mat-form-field>
-            </div>
+                    <h5 style="margin-bottom: 4px; margin-top: 0px;">Description</h5>
+                    <p style="margin-top: 0px" [innerHTML]="problem.description | nl2br | linky"></p>
 
-            <div *ngIf="problem.kind">
-              <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
-                <mat-form-field class="example-full-width">
-                  <textarea matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{a + 1}} {{i + 1}} Alternative {{j + 1}}"></textarea>
-                </mat-form-field>
+                    <div *ngIf="!problem.kind">
+                      <h5 style="margin-bottom: 4px;">Answer</h5>
+                      <p style="margin-top: 0px; margin-bottom: 0px" [innerHTML]="this.quizAnswers[a].answers[i].openAnswer | nl2br | linky"></p>
+                      <mat-checkbox (change)="addScore($event, a)" name="testing {{a + 1}} {{i + 1}}" #openEvaluation style="margin-bottom: 0px">
+                        <h5 *ngIf="openEvaluation.checked" style="color: lime;">Correct</h5>
+                        <h5 *ngIf="!openEvaluation.checked" style="color: #F44336;">Wrong</h5>
+                      </mat-checkbox>
+                    </div>
+
+                    <div *ngIf="problem.kind">
+                      <div *ngFor="let alternative of problem.alternatives; let j = index; trackBy:trackByFn">
+                        <mat-form-field class="example-full-width">
+                          <textarea style="color: lime;" *ngIf="problem.answer.toString() === (j + 1).toString()" matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{a + 1}} {{i + 1}} Alternative {{j + 1}}"></textarea>
+                          <textarea style="color: #F44336;" *ngIf="problem.answer.toString() !== (j + 1).toString() && (j + 1).toString() === this.quizAnswers[a].answers[i].choiceId.toString()" matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{a + 1}} {{i + 1}} Alternative {{j + 1}}"></textarea>
+                          <textarea *ngIf="problem.answer.toString() !== (j + 1).toString() && (j + 1).toString() !== this.quizAnswers[a].answers[i].choiceId.toString()" matInput disabled required placeholder="Alternative {{j + 1}}" [(ngModel)]="alternative.description" name="{{a + 1}} {{i + 1}} Alternative {{j + 1}}"></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
               </div>
-
-              <mat-chip-list>
-                <mat-chip *ngIf="problem.answer.toString() === this.quizAnswers[a].answers[i].choiceId.toString()" style="background-color: lime;" selected="true">Right</mat-chip>
-                <mat-chip *ngIf="problem.answer.toString() !== this.quizAnswers[a].answers[i].choiceId.toString()" style="background-color: red;" selected="true">Wrong</mat-chip>
-              </mat-chip-list>
-              <br><br>
-            </div>
-          </div>
-        </mat-card>
-      </div>
-    </form>
+              <br>
+              <button mat-raised-button (click)="this.evaluate(a)" (onkeypress)="onKeyPress($event, a)" color="accent">Evaluate</button>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </form>
   </mat-card>
 </div>

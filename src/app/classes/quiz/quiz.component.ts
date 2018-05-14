@@ -40,7 +40,7 @@ export class QuizComponent implements OnInit {
 
   validProblems() {
     for (const p of this.quizAnswer.answers) {
-      if ((p.openAnswer === '' || p.openAnswer == null) && (!(Number(p.choiceId) > 0 && Number(p.choiceId) <= this.quizAnswer.answers.length))) {
+      if ((p.openAnswer === '' || p.openAnswer == null) && Number(p.choiceId) === 0) {
         return(0);
       }
     }

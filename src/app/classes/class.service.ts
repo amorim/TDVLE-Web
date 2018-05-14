@@ -46,4 +46,8 @@ export class ClassService {
   submit(classId, quizId, quizAnswer) {
     return this.http.post(Constants.url + '/class/' + classId + '/quiz/' + quizId + '/submit', quizAnswer);
   }
+
+  evaluate(classId, quizId, evaluation) {
+    return this.http.post(Constants.url + '/class/' + classId + '/quiz/' + quizId + '/answers/evaluate', evaluation);
+  }
 }
