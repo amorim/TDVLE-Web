@@ -21,11 +21,12 @@ import { QuizComponent } from './quiz/quiz.component';
 import { AnswersQuizComponent } from './quiz/answers-quiz/answers-quiz.component';
 import { AmazingTimePickerModule } from '@lucasolivamorim/amazing-time-picker';
 import {NgxPermissionsModule} from "ngx-permissions";
+import {ClassActivityTeacherComponent} from "./class-activity-teacher/class-activity-teacher.component";
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
   ClassStreamComponent,
-  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent, AnswersQuizComponent],
+  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent, AnswersQuizComponent, ClassActivityTeacherComponent],
   imports: [
     CommonModule,
     FormsModule,

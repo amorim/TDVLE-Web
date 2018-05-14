@@ -1,9 +1,10 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Activity} from "../../model/activity.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ClassService} from "../class.service";
 import {Submission} from "../../model/submission.model";
 import {BehaviorSubject} from "rxjs/index";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-class-activity',
@@ -16,7 +17,7 @@ export class ClassActivityComponent implements OnInit {
   uploadedSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   submissionCopy: Submission[] = [];
 
-  constructor(private ref: ChangeDetectorRef, route: ActivatedRoute, private classService: ClassService) {
+  constructor(private ref: ChangeDetectorRef, private route: ActivatedRoute, private classService: ClassService, private snackBar: MatSnackBar, private router: Router) {
     window['callbackFileUploaded'] = this.uploadedSubject;
     let id = route.snapshot.params['activityId'];
     classService.getActivity(id).subscribe((act: Activity) => {
@@ -57,19 +58,11 @@ export class ClassActivityComponent implements OnInit {
     this.ref.detectChanges();
   }
 
-  checkSubmissionsArrayEqualToOriginal() {
-    let count = 0;
-    for (let sub of this.submissionCopy) {
-      for (let sub2 of this.submissions) {
-        if (sub.url == sub2.url)
-          count += 1;
-      }
-    }
-    return true;
-  }
-
   submit() {
-    this.classService.sendSubmission(this.activity.id, this.submissions).subscribe();
+    this.classService.sendSubmission(this.activity.id, this.submissions).subscribe((submissions) => {
+      this.snackBar.open('Activity submitted', 'Dismiss', {duration: 2000});
+      this.router.navigate(['../../'], {relativeTo: this.route});
+    });
   }
 
 }

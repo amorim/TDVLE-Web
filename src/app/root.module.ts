@@ -53,6 +53,7 @@ import {QuizComponent} from './classes/quiz/quiz.component';
 import {AnswersQuizComponent} from './classes/quiz/answers-quiz/answers-quiz.component';
 import {AmazingTimePickerModule} from '@lucasolivamorim/amazing-time-picker';
 import {CallbackComponent} from "./shared/callbackupload.component";
+import {ClassActivityTeacherComponent} from "./classes/class-activity-teacher/class-activity-teacher.component";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     { path: 'classes/:id/stream', component: ClassStreamComponent},
     { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
     { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
+    { path: 'classes/:classId/activity/:activityId/teacher', component: ClassActivityTeacherComponent},
     { path: 'callbackFileUpload', component: CallbackComponent},
     { path: 'classes/:classId/quiz/:quizId', component: QuizComponent},
     { path: 'classes/:classId/quiz/:quizId/answers', component: AnswersQuizComponent}

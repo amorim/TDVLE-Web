@@ -48,6 +48,10 @@ export class ClassService {
     return this.http.get(Constants.url + '/activity/' + id + '/submissions');
   }
 
+  getAllSubmissions(id) {
+    return this.http.get(Constants.url + '/activity/' + id + '/allSubmissions');
+  }
+
   sendSubmission(id, submissions) {
     return this.http.post(Constants.url + '/activity/' + id + '/submissions', submissions);
   }

@@ -11,11 +11,29 @@
       <h4 style="margin-top: 20px;">Activity Details</h4>
       <p [innerHTML]="activity?.detail | nl2br | linky"></p>
       <h4>Submissions from your students</h4>
-      <mat-accordion *ngFor="let allsubs of allsubmissions">
+      <p *ngIf="!allsubmissions.length" style="text-align: center; color: #e54304; font-family: Roboto, sans-serif">None of your students submitted files for this activity</p>
+      <mat-accordion class="example-headers-align" *ngFor="let allsubs of allsubmissions">
         <mat-expansion-panel>
         <mat-expansion-panel-header>
-
+          <mat-panel-title>{{allsubs.submissions[0].userActivity.user.name}}</mat-panel-title>
+          <mat-panel-description>
+            {{allsubs.submissions.length}} file(s)
+          </mat-panel-description>
         </mat-expansion-panel-header>
+          <mat-card style="cursor: pointer; margin-top: 20px; display: flex; flex-direction: row" *ngFor="let submission of allsubs.submissions; let i = index">
+            <a style="text-decoration: none; display: flex; color: dimgray; overflow: hidden; flex: 1;" target="_blank"  [href]="submission.url">
+              <div><img src="https://i.imgur.com/vFTOQHS.png"></div>
+              <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1; overflow: hidden">
+                <div style="font-size: 16px; text-overflow: ellipsis; width: 100%; overflow: hidden; white-space: nowrap">
+                  {{submission.fileName}}
+                </div>
+                <div style="flex: 1"></div>
+                <div style="font-size: 12px">
+                  {{submission.fileType}}
+                </div>
+              </div>
+            </a>
+          </mat-card>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>

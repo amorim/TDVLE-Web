@@ -52,13 +52,13 @@
           </div>
           </a>
           <div style="display: flex">
-            <button style="line-height: 28px; height: auto; width: 26px;" (click)="deleteSubmission(i, $event)" mat-icon-button color="warn">
+            <button *ngIf="checkDate()" style="line-height: 28px; height: auto; width: 26px;" (click)="deleteSubmission(i, $event)" mat-icon-button color="warn">
               <mat-icon aria-label="Delete submisson">clear</mat-icon>
             </button>
           </div>
         </mat-card>
 
-      <button *ngIf="checkDate()" style="margin-top: 20px;" mat-raised-button [disabled]="!checkSubmissionsArrayEqualToOriginal()"
+      <button *ngIf="checkDate()" style="margin-top: 20px;" mat-raised-button
               (click)="submit()" color="accent">Submit
       </button>
 
