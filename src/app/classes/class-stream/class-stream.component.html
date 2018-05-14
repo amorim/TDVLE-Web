@@ -11,6 +11,11 @@
         <mat-card-subtitle>Due: {{item.dueDate | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
       </mat-card-header>
       <div class="fill">
+        <mat-card-content *ngIf="item.evaluated" style="margin: 20px 0 20px 0">
+          <mat-chip-list>
+            <mat-chip>Grade: {{item.evaluation.grade}}%</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
         <mat-card-content style="margin: 20px 0 20px 0" [innerHTML]="item.detail | nl2br | linky"></mat-card-content>
       </div>
     </mat-card>
