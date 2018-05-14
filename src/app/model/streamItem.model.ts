@@ -1,4 +1,5 @@
 import {Class} from './class.model';
+import {Evaluation} from './evaluation.model';
 
 export class StreamItem {
   id: number;
@@ -7,4 +8,6 @@ export class StreamItem {
   dueDate: Date;
   uri: string;
   clazz: Class;
+  evaluated = false;
+  evaluation: Evaluation;
 }
