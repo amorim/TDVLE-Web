@@ -65,9 +65,7 @@ export class ClassActivityComponent implements OnInit {
           count += 1;
       }
     }
-    console.log(count);
     return true;
-
   }
 
   submit() {
