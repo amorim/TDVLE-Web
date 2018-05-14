@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Activity} from "../../model/activity.model";
-import {ClassService} from "../class.service";
-import {ActivatedRoute} from "@angular/router";
+import {StreamItem} from '../../model/streamItem.model';
+import {ClassService} from '../class.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ShowCreateClassDialogComponent} from '../show-create-class-dialog/show-create-class-dialog.component';
+import {ShowCreateStreamItemDialogComponent} from './show-create-stream-item-dialog/show-create-stream-item-dialog.component';
 
 @Component({
   selector: 'app-class-stream',
@@ -10,23 +13,30 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ClassStreamComponent implements OnInit {
 
-  posts: Activity[] = [];
+  streamItems: StreamItem[];
+  classId = 0;
 
-  constructor(private classService: ClassService, private route: ActivatedRoute) {
-    const id = route.snapshot.paramMap.get('id');
-    classService.getClass(id).subscribe((acts: Activity[]) => {
-      acts.sort((a, b) => {
-        if (a.dueDate < b.dueDate)
-          return -1;
-        if (a.dueDate > b.dueDate)
-          return 1;
-        return 0;
-      });
-      this.posts = acts;
-    });
+  constructor(private classService: ClassService, private route: ActivatedRoute, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.classId = Number(id);
+    this.classService.getClass(id).subscribe((streamItems: any) => {
+      console.log(streamItems);
+      this.streamItems = streamItems;
+    });
+  }
+
+  createQuiz() {
+    this.router.navigate(['/classes/' + this.classId + '/createQuiz'], {},);
+  }
+
+  createActivity() {
+    this.router.navigate(['/classes/' + this.classId + '/createActivity'], {},);
+  }
+
+  accessStream(s) {
 
   }
 

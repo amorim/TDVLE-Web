@@ -220,3 +220,11 @@
     bottom: 20px + 60px * $i;
   }
 }
+
+.toobar {
+  position: absolute;
+  bottom: 72px;
+  right: 32px;
+  width: 56px;
+  background-color: rgba(0, 0, 0, 0);
+}
