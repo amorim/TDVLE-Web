@@ -1,0 +1,20 @@
+.register-form {
+  min-width: 150px;
+  max-width: 600px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}

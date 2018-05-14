@@ -26,7 +26,7 @@
               </button>
             </div>
             <mat-card-subtitle>{{notification.message}}</mat-card-subtitle>
-            <mat-card-subtitle>{{notification.date | timeAgo}}</mat-card-subtitle>
+            <mat-card-subtitle>{{notification.date | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
           </mat-card>
         </div>
       </mat-menu>

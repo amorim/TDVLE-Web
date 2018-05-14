@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {CropperSettings, ImageCropperComponent} from 'ng2-img-cropper';
+import {CropperSettings, ImageCropperComponent} from 'ngx-img-cropper';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {ImageUploadService} from './image-upload.service';
 import {HttpClient, HttpEvent, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";

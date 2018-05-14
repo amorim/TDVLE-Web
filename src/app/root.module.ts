@@ -22,7 +22,7 @@ import { FollowersComponent } from './people/followers/followers.component';
 import { FollowingComponent } from './people/following/following.component';
 import {PostModule} from "./post/post.module";
 import { ProfileComponent } from './profile/profile.component';
-import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {ImageCropperModule} from 'ngx-img-cropper';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import {AppsModule} from "./apps/apps.module";
@@ -35,24 +35,55 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/h
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {NgMasonryGridModule} from "@lucasolivamorim/ng-masonry-grid";
+import {Nl2BrPipeModule} from "@lucasolivamorim/nl2br-pipe";
+import {FileUploadComponent} from './file-upload/file-upload.component';
+import {ClassesComponent} from './classes/classes.component';
+import {SingleClassComponent} from './single-class/single-class.component';
+import {ShowCreateClassDialogComponent} from './classes/show-create-class-dialog/show-create-class-dialog.component';
+import {ClassesModule} from './classes/classes.module';
+import {ShowEnterClassDialogComponent} from './classes/show-enter-class-dialog/show-enter-class-dialog.component';
+import {LinkyModule} from "angular-linky";
+import {ClassStreamComponent} from "./classes/class-stream/class-stream.component";
+import {ClassActivityComponent} from "./classes/class-activity/class-activity.component";
+import {componentFactoryName} from "@angular/compiler";
+import {CreateActivityComponent} from "./classes/create-activity/create-activity.component";
+import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
+import {CreateQuizComponent} from './classes/quiz/create-quiz/create-quiz.component';
+import {QuizComponent} from './classes/quiz/quiz.component';
+import {AnswersQuizComponent} from './classes/quiz/answers-quiz/answers-quiz.component';
+import {AmazingTimePickerModule} from '@lucasolivamorim/amazing-time-picker';
+import {CallbackComponent} from "./shared/callbackupload.component";
+import {ClassActivityTeacherComponent} from "./classes/class-activity-teacher/class-activity-teacher.component";
 
 const appRoutes: Routes = [
-  { path: '', component: RootComponent, canActivate: [AuthGuard] ,children: [
+  {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'post', pathMatch: 'full'},
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'post', component: PostComponent },
-  { path: 'post/:id', component: SinglePostComponent },
-  { path: 'edit', component: EditUserComponent },
-  { path: 'profile', component: ProfileComponent},
-  { path: 'profile/:id', component: ProfileComponent},
-  { path: 'people', component: PeopleComponent, children: [
-    {path: '', redirectTo: 'find', pathMatch: 'full'},
-    {path: 'find', component: FindPeopleComponent},
-    {path: 'followers', component: FollowersComponent},
-    {path: 'following', component: FollowingComponent}
-  ]},
-  { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent}]}
-  ];
+    { path: 'welcome', component: WelcomeComponent },
+    { path: 'post', component: PostComponent },
+    { path: 'post/:id', component: SinglePostComponent },
+    { path: 'edit', component: EditUserComponent },
+    { path: 'profile', component: ProfileComponent},
+    { path: 'profile/:id', component: ProfileComponent},
+    { path: 'people', component: PeopleComponent, children: [
+      {path: '', redirectTo: 'find', pathMatch: 'full'},
+      {path: 'find', component: FindPeopleComponent},
+      {path: 'followers', component: FollowersComponent},
+      {path: 'following', component: FollowingComponent}
+    ]},
+    { path: 'apps', component: AppsComponent}, {path: 'apps/:id', component: SingleAppComponent},
+    { path: 'file-upload', component : FileUploadComponent},
+    { path: 'classes', component: ClassesComponent },
+    { path: 'authority/:id', component: EditAuthorityComponent },
+    { path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
+    { path: 'classes/:id/stream', component: ClassStreamComponent},
+    { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
+    { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
+    { path: 'classes/:classId/activity/:activityId/teacher', component: ClassActivityTeacherComponent},
+    { path: 'callbackFileUpload', component: CallbackComponent},
+    { path: 'classes/:classId/quiz/:quizId', component: QuizComponent},
+    { path: 'classes/:classId/quiz/:quizId/answers', component: AnswersQuizComponent}
+    ]
+  }];
 
 @NgModule({
   declarations: [
@@ -70,11 +101,18 @@ const appRoutes: Routes = [
     SinglePostComponent,
     ShowAppDialogComponent,
     ImageUploadComponent,
-    SingleAppComponent
+    SingleAppComponent,
+    FileUploadComponent,
+    SingleClassComponent,
+    ShowCreateClassDialogComponent,
+    ShowEnterClassDialogComponent,
+    EditAuthorityComponent,
+    CallbackComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
     AppsModule,
+    ClassesModule,
     ImageCropperModule,
     CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'ngn', api_key: '295533173244583', api_secret: 'xiGfbeV5PXiYqKzB9VyOBfEYP6w'}),
     BrowserModule,
@@ -90,7 +128,10 @@ const appRoutes: Routes = [
     PostModule,
     AvatarModule,
     NgxPermissionsModule.forRoot(),
-    NgMasonryGridModule
+    NgMasonryGridModule,
+    Nl2BrPipeModule,
+    LinkyModule,
+    AmazingTimePickerModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,

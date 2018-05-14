@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:200,300,400);
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+@mixin circleShadow($vertical) {
+  box-shadow:0 0 $vertical rgba(0,0,0,.14),0 $vertical $vertical*2 rgba(0,0,0,.28)
+}
+
+.post-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.wrapper {
+  position: relative;
+  min-height: calc(100% - 56px);
+  padding-bottom: 56px;
+}
+
+.posts {
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.postcard {
+  cursor: pointer;
+  margin: 15px;
+  max-width: 400px;
+  flex-direction: column;
+  display: flex;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.example-header-image {
+  background-image: url('http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png');
+  background-size: cover;
+}
+
+.like {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+}
+
+.textGray {
+  color: #757575;
+  margin-left: 10px;
+}
+
+.fill {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  flex: 1;
+}
+
+.actionsholder {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  align-items: center;
+}
+
+.bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.mat-paginator {
+  background: #eeeeee;
+  width: 100%;
+  padding: 0 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.FAB {
+  position: absolute;
+  bottom: 72px;
+  right: 16px;
+  width: 56px;
+
+  &__action-button,
+  &__mini-action-button{
+    cursor: pointer;
+    position: absolute;
+  }
+
+  &__action-button {
+    bottom: 0;
+    right: 0;
+
+    &:hover {
+      .action-button__icon {
+        @include circleShadow(8px);
+      }
+    }
+  }
+
+  &__mini-action-button {
+    bottom: 0;
+    right: 49px;
+
+
+  }
+
+
+}
+
+.action-button {
+  &__icon{
+    @include circleShadow(4px);
+    background-color: #ff4081;
+    border-radius: 50%;
+    color: #fff;
+    padding: 16px;
+  }
+
+  &__text {
+
+    &--hide {
+      display: none;
+    }
+
+    &--show {
+      background-color: #212121;
+      border-radius: 3px;
+      color: #fff;
+      right: 75px;
+      font-size: 14px;
+      font-family: "Helvetica Neue";
+      opacity: .8;
+      padding: 5px 9px;
+      position: absolute;
+      top: 2px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.mini-action-button {
+
+  &__icon {
+    @include circleShadow(4px);
+    background-color: #536DFE;
+    border-radius: 50%;
+    color: #fff;
+    padding: 8px;
+
+    &:hover {
+      @include circleShadow(8px);
+    }
+
+  }
+
+  &__text {
+
+    &--hide {
+      display: none;
+    }
+
+    &--show {
+      background-color: #212121;
+      border-radius: 3px;
+      color: #fff;
+      display: block;
+      right: 60px;
+      font-size: 14px;
+      font-family: "Helvetica Neue";
+      opacity: .8;
+      padding: 5px 9px;
+      position: absolute;
+      top: -6px;
+      white-space: nowrap;
+    }
+  }
+
+  &--show {
+    position: absolute;
+    text-align: center;
+  }
+
+  &--hide {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@for $i from 1 through 10 {
+  .mini-action-button--show:nth-child(#{$i}) {
+    bottom: 20px + 60px * $i;
+  }
+}
+
+.toobar {
+  position: fixed;
+  bottom: 32px;
+  right: 5vh;
+  width: 56px;
+  background-color: rgba(0, 0, 0, 0);
+}

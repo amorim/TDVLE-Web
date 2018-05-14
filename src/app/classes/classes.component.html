@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="classes">
+    <mat-card *ngFor="let clazz of classes; let i = index" class="classcard">
+      <div class="classinfo" routerLink="/classes/{{clazz.id}}">
+        <div class="classimg">
+          <ngx-avatar name={{clazz.teacher.name}} [src]="clazz.teacher.avatar" initialsSize="1" size="70">
+          </ngx-avatar>
+        </div>
+        <div class="classname">{{clazz.name}}</div>
+        <div class="teachername">{{clazz.teacher.name}}</div>
+      </div>
+      <mat-card-content style="display: flex; flex-direction: column; height: 100%; justify-content: center;"><mat-chip-list style="margin-right: 10px; margin-left: 10px; "><mat-chip style="text-align: center;">{{clazz.classAccessCode}}</mat-chip></mat-chip-list></mat-card-content>
+      <div class="action">
+        <button mat-raised-button (click)="accessClass(clazz)" color="accent">Access</button>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-toolbar class="toobar">
+    <mat-toolbar-row>
+      <button mat-fab (click)="createClass()" *ngxPermissionsOnly="['ROLE_TEACHER']" color="accent"><mat-icon>add</mat-icon></button>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-fab (click)="enterClass()" color="accent"><mat-icon>class</mat-icon></button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

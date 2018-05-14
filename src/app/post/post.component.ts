@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {MatDialog, PageEvent} from '@angular/material';
@@ -7,7 +7,7 @@ import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Masonry} from "@lucasolivamorim/ng-masonry-grid";
+import {Masonry, MasonryGridItem} from "@lucasolivamorim/ng-masonry-grid";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class PostComponent implements AfterViewInit {
 
   masonry: Masonry;
   length = 0;
-  pageSize = 100;
+  pageSize = 25;
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
@@ -28,8 +28,9 @@ export class PostComponent implements AfterViewInit {
   authenticatedUser: User = new User();
   postObj: Post = new Post();
   posts: Post[] = [];
+  postsReady = false;
 
-  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
+  constructor(private postService: PostService, private ref: ChangeDetectorRef, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
     let param = route.snapshot.queryParams['page'];
     if (!param) {
       param = 0;
@@ -45,13 +46,16 @@ export class PostComponent implements AfterViewInit {
       this.length = postCount['postCount'];
     });
     this.postService.getPosts(this.pageSize, this.pageIndex * this.pageSize).subscribe((posts: Post[]) => {
-      this.posts = posts;
+      this.posts.push(...posts);
+      this.postsReady = true;
     });
+
   }
 
   post() {
     this.postService.setPost(this.postObj).subscribe((newPost: Post) => {
-      this.posts.unshift(newPost);
+      this.masonry.setAddStatus('prepend');
+      this.posts.splice(0, 0, newPost);
       this.length ++;
     });
 
@@ -63,16 +67,26 @@ export class PostComponent implements AfterViewInit {
 
   onNgMasonryInit($event) {
     this.masonry = $event;
-  }
+    if (this.masonry) {
+      this.masonry.setAddStatus('add');
 
+      setTimeout(() => {
+
+      }, 5000);
+    }
+  }
   masonryLayoutComplete($event) {
-    //this.masonry.reOrderItems();
+    console.log("complete");
   }
 
   alterPage() {
+    this.masonry.removeAllItems();
+    this.postsReady = false;
+    this.ref.detectChanges();
     this.navigate(this.pageEvent.pageIndex);
     this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((posts: Post[]) => {
       this.posts = posts;
+      this.postsReady = true;
     });
   }
 
@@ -92,7 +106,9 @@ export class PostComponent implements AfterViewInit {
     let like = new Like();
     like.post = post;
     this.postService.setLike(like).subscribe((newPost: Post) => {
-      this.posts[idx] = newPost;
+      this.posts[idx].hasLiked = newPost.hasLiked;
+      this.posts[idx].likeCount = newPost.likeCount;
+      this.posts[idx].likes = newPost.likes;
     });
   }
 

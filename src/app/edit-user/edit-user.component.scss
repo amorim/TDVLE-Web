@@ -16,3 +16,12 @@
   margin: 0 auto;
   align-items: center;
 }
+
+.authorities {
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}

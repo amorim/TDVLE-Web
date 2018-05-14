@@ -7,6 +7,7 @@ import {Notification} from "./model/notification.model";
 import {Constants} from './shared/constants';
 import {Router} from "@angular/router";
 import {AuthService} from "./auth/auth.service";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
   selector: 'app-app',
@@ -25,11 +26,18 @@ export class RootComponent implements OnDestroy {
     {path: '/profile', icon: 'person', desc: 'Profile'},
     {path: '/people', icon: 'people', desc: 'People'},
     {path: '/post', icon: 'forum', desc: 'Posts'},
-    {path: '/apps', icon: 'apps', desc: 'Apps'}];
+    {path: '/apps', icon: 'apps', desc: 'Apps'},
+    {path: '/classes', icon: 'forum', desc: 'Classes'}
+  ];
 
-  constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar, private permissionService: NgxPermissionsService) {
     this.userService.getAuthenticatedUser().subscribe((au: User) => {
       this.authenticatedUser = au;
+      let perm = [];
+      for (let a of au.authority) {
+        perm.push(a.authority);
+      }
+      this.permissionService.loadPermissions(perm);
     });
     this.userService.getUserUpdated().subscribe((user: User) => {
       this.authenticatedUser = user;

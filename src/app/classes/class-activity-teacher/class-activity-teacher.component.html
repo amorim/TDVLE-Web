@@ -1,0 +1,41 @@
+<div style="padding-top: 20px; padding-bottom: 20px;">
+  <mat-card class="register-form">
+    <mat-card-header>
+      <ngx-avatar mat-card-avatar size="40" src="{{activity?.clazz.teacher.avatar}}" initialsSize="1"
+                  [routerLink]="['/profile', activity?.clazz.teacher.id]"
+                  name="{{activity?.clazz.teacher.name}}"></ngx-avatar>
+      <mat-card-title>{{activity?.title}}</mat-card-title>
+      <mat-card-subtitle>Due {{activity?.dueDate | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h4 style="margin-top: 20px;">Activity Details</h4>
+      <p [innerHTML]="activity?.detail | nl2br | linky"></p>
+      <h4>Submissions from your students</h4>
+      <p *ngIf="!allsubmissions.length" style="text-align: center; color: #e54304; font-family: Roboto, sans-serif">None of your students submitted files for this activity</p>
+      <mat-accordion class="example-headers-align" *ngFor="let allsubs of allsubmissions">
+        <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{allsubs.submissions[0].userActivity.user.name}}</mat-panel-title>
+          <mat-panel-description>
+            {{allsubs.submissions.length}} file(s)
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+          <mat-card style="cursor: pointer; margin-top: 20px; display: flex; flex-direction: row" *ngFor="let submission of allsubs.submissions; let i = index">
+            <a style="text-decoration: none; display: flex; color: dimgray; overflow: hidden; flex: 1;" target="_blank"  [href]="submission.url">
+              <div><img src="https://i.imgur.com/vFTOQHS.png"></div>
+              <div style="display: flex; flex-direction: column; padding-left: 20px; flex: 1; overflow: hidden">
+                <div style="font-size: 16px; text-overflow: ellipsis; width: 100%; overflow: hidden; white-space: nowrap">
+                  {{submission.fileName}}
+                </div>
+                <div style="flex: 1"></div>
+                <div style="font-size: 12px">
+                  {{submission.fileType}}
+                </div>
+              </div>
+            </a>
+          </mat-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>
