@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 
 
-const ignoreUrls = ['cloudinary'];
+const ignoreUrls = ['cloudinary', 'authority/all'];
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

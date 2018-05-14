@@ -20,8 +20,8 @@
       <mat-form-field class="example-full-width">
         <input matInput required type="email" placeholder="Email" [(ngModel)]="this.userRegister.email" name="inputEmail" #inputEmail="ngModel">
       </mat-form-field>
-      <button mat-raised-button [disabled]="inputName.invalid || inputUserName.invalid || inputPassword.invalid || inputBornDate.invalid || inputEmail.invalid" (click)="register()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
-      <button mat-raised-button routerLink="/login" color="accent">Login</button>
+      <button mat-raised-button style="margin-right: 10px" [disabled]="inputName.invalid || inputUserName.invalid || inputPassword.invalid || inputBornDate.invalid || inputEmail.invalid" (click)="register()" (onkeypress)="onKeyPress($event)" color="accent">Register</button>
+      <button mat-raised-button routerLink="/login" color="primary">Login</button>
     </form>
   </mat-card>
 </div>

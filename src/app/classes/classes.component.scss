@@ -95,12 +95,13 @@
 }
 
 .toobar {
-  position: absolute;
-  bottom: 72px;
-  right: 32px;
+  position: fixed;
+  bottom: 32px;
+  right: 5vh;
   width: 56px;
   background-color: rgba(0, 0, 0, 0);
 }
+
 
 .FAB {
   position: absolute;

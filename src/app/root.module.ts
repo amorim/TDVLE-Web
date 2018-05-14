@@ -49,6 +49,8 @@ import {componentFactoryName} from "@angular/compiler";
 import {CreateActivityComponent} from "./classes/create-activity/create-activity.component";
 import {EditAuthorityComponent} from './edit-authority/edit-authority.component';
 import {CreateQuizComponent} from './classes/create-quiz/create-quiz.component';
+import {AmazingTimePickerModule} from '@lucasolivamorim/amazing-time-picker';
+import {CallbackComponent} from "./shared/callbackupload.component";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -73,7 +75,8 @@ const appRoutes: Routes = [
     { path: 'classes/:id/stream', component: ClassStreamComponent},
     { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
     { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
-    { path: 'classes/:classId/quiz/:quizId', component: ClassActivityComponent}
+    { path: 'classes/:classId/quiz/:quizId', component: ClassActivityComponent},
+    { path: 'callbackFileUpload', component: CallbackComponent}
     ]
   }];
 
@@ -98,7 +101,8 @@ const appRoutes: Routes = [
     SingleClassComponent,
     ShowCreateClassDialogComponent,
     ShowEnterClassDialogComponent,
-    EditAuthorityComponent
+    EditAuthorityComponent,
+    CallbackComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
@@ -121,7 +125,8 @@ const appRoutes: Routes = [
     NgxPermissionsModule.forRoot(),
     NgMasonryGridModule,
     Nl2BrPipeModule,
-    LinkyModule
+    LinkyModule,
+    AmazingTimePickerModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,

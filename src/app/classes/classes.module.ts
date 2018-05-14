@@ -17,6 +17,8 @@ import {FormsModule} from "@angular/forms";
 import { ShowCreateStreamItemDialogComponent } from './class-stream/show-create-stream-item-dialog/show-create-stream-item-dialog.component';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
 import { ShowCreateProblemDialogComponent } from './create-quiz/show-create-problem-dialog/show-create-problem-dialog.component';
+import { AmazingTimePickerModule } from '@lucasolivamorim/amazing-time-picker';
+import {NgxPermissionsModule} from "ngx-permissions";
 
 @NgModule({
   declarations: [ClassesComponent,
@@ -31,7 +33,9 @@ import { ShowCreateProblemDialogComponent } from './create-quiz/show-create-prob
     RouterModule,
     NgMasonryGridModule,
     Nl2BrPipeModule,
-    LinkyModule
+    LinkyModule,
+    AmazingTimePickerModule,
+    NgxPermissionsModule
   ],
   entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent, ShowCreateStreamItemDialogComponent],
   providers: [ClassService],

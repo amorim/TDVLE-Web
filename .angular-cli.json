@@ -55,7 +55,9 @@
     "component": {
     },
     "serve": {
-      "port": 4200
+      "port": 4200,
+      "sslKey": "./server.key",
+      "sslCert": "./cert.crt"
     }
   }
 }

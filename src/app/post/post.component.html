@@ -22,18 +22,17 @@
 <ng-masonry-grid
   *ngIf="postsReady"
   (onNgMasonryInit)="onNgMasonryInit($event)"
-  (layoutComplete)="masonryLayoutComplete($event)"
   [useImagesLoaded]="true"
-  [masonryOptions]="{ addStatus: 'prepend',horizontalOrder: true, isFitWidth: true, percentPosition: true }"
+  [masonryOptions]="{ addStatus: 'add',horizontalOrder: true, isFitWidth: true }"
   style="margin: 0 auto;">
-  <ng-masonry-grid-item style="max-width: 400px" *ngFor="let post of posts; let i = index">
+  <ng-masonry-grid-item style="width: 300px" *ngFor="let post of posts; let i = index">
   <mat-card class="postcard grid-item">
     <mat-card-header>
-      <ngx-avatar mat-card-avatar size="40" src="{{post.user.avatar}}" initialsSize="1" routerLink="/profile/{{post.user.id}}" name={{post.user.name}}></ngx-avatar>
+      <ngx-avatar mat-card-avatar size="40" src="{{post.user.avatar}}" initialsSize="1" style="cursor: pointer;" routerLink="/profile/{{post.user.id}}" name={{post.user.name}}></ngx-avatar>
       <mat-card-title>{{post.user.name}}</mat-card-title>
       <mat-card-subtitle>{{post.date | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
     </mat-card-header>
-    <div class="fill" routerLink="/post/{{post.id}}">
+    <div class="fill">
       <mat-card-content style="margin: 20px 0 20px 0" [innerHTML]="post.description | nl2br | linky"></mat-card-content>
       <div *ngIf="post.image != null">
         <mat-card-content><img style="width: 100%;" src="{{post.image}}"></mat-card-content>
@@ -45,6 +44,11 @@
           <mat-icon color="{{post.hasLiked ? 'accent' : 'white'}}" class="md-24" aria-label="Like">favorite</mat-icon>
         </button>
         <span class="textGray"><small>{{post.likeCount}}</small></span>
+        <div style="flex: 1;"></div>
+
+        <button style="margin-right: 20px" [routerLink]="['/post', post.id]" color="red" mat-icon-button>
+          <mat-icon color="white" class="md-24" aria-label="Like">more_horiz</mat-icon>
+        </button>
       </div>
     </mat-card-actions>
   </mat-card>

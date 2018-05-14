@@ -1,28 +1,49 @@
 <div style="padding-top: 20px;">
-<mat-card class="register-form">
-  <h3>Create Activity</h3>
-  <form>
-    <mat-form-field class="example-full-width">
-      <input matInput required placeholder="Title" [(ngModel)]="activity.title" name="inputTitle" #inputTitle="ngModel">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <textarea matInput required placeholder="Detail" [(ngModel)]="activity.detail" name="inputDetail" #inputDetail="ngModel"></textarea>
-    </mat-form-field>
-
-    <div style="display: flex; flex-direction: row">
-    <mat-form-field style="width: 80%;">
-      <input matInput required [matDatepicker]="picker" placeholder="Choose a due date" [(ngModel)]="activity.dueDate" name="inputDueDate" #inputDueDate="ngModel">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-      <mat-form-field style="width: 20%;">
-        <input matInput required placeholder="Hour" [(ngModel)]="activity.dueDate" name="inputTime" #inputTime="ngModel">
+  <mat-card class="register-form">
+    <h3>Create Activity</h3>
+      <mat-form-field class="example-full-width">
+        <input matInput required placeholder="Title" [(ngModel)]="activity.title" name="inputTitle"
+               #inputTitle="ngModel">
       </mat-form-field>
-    </div>
 
+      <mat-form-field class="example-full-width">
+        <textarea matInput required placeholder="Detail" [(ngModel)]="activity.detail" name="inputDetail"
+                  #inputDetail="ngModel"></textarea>
+      </mat-form-field>
 
-    <button mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || inputDueDate.invalid" (click)="this.request()" (onkeypress)="onKeyPress($event)" color="accent">Request Integration</button>
-  </form>
-</mat-card>
+      <div style="display: flex; flex-direction: row">
+        <mat-form-field style="width: 80%;">
+          <input matInput required [matDatepicker]="picker" placeholder="Choose a due date"
+                 [(ngModel)]="activity.dueDate" name="inputDueDate" #inputDueDate="ngModel">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width: 20%; padding-left: 5px;">
+          <input atp-time-picker locale="pt-BR" value="23:59" matInput [(ngModel)]="hour" required placeholder="Hour" name="inputTime">
+        </mat-form-field>
+      </div>
+
+    <h3>Upload Files</h3>
+    <iframe id="frame_upload" width="100%" height="80px" frameborder="0"
+            src="https://script.google.com/macros/s/AKfycbwzRrmHiuaWHmFrj720Wy4zQ_ciNnlzX3x5fVZiDuEKLRvFsCE/exec"></iframe>
+    <a style="text-decoration: none" target="_blank" *ngFor="let submission of submissions" [href]="submission.url">
+    <mat-card style="cursor: pointer; margin-top: 20px; display: flex; flex-direction: row">
+
+        <div><img src="https://i.imgur.com/vFTOQHS.png"></div>
+        <div style="display: flex; flex-direction: column; padding-left: 20px">
+          <div style="font-size: 16px">
+            {{submission.fileName}}
+          </div>
+          <div style="flex: 1"></div>
+          <div style="font-size: 12px">
+            {{submission.fileType}}
+          </div>
+        </div>
+    </mat-card>
+
+    </a>
+    <button style="margin-top: 20px;" mat-raised-button [disabled]="inputTitle.invalid || inputDetail.invalid || inputDueDate.invalid"
+            (click)="submit()" color="accent">Submit Activity
+    </button>
+  </mat-card>
 </div>

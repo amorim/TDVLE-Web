@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Post} from '../model/post.model';
 import {PostService} from "./post.service";
 import {MatDialog, PageEvent} from '@angular/material';
@@ -7,7 +7,7 @@ import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Masonry} from "@lucasolivamorim/ng-masonry-grid";
+import {Masonry, MasonryGridItem} from "@lucasolivamorim/ng-masonry-grid";
 
 
 @Component({
@@ -20,7 +20,7 @@ export class PostComponent implements AfterViewInit {
 
   masonry: Masonry;
   length = 0;
-  pageSize = 100;
+  pageSize = 25;
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   pageEvent: PageEvent = new PageEvent;
@@ -30,7 +30,7 @@ export class PostComponent implements AfterViewInit {
   posts: Post[] = [];
   postsReady = false;
 
-  constructor(private postService: PostService, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
+  constructor(private postService: PostService, private ref: ChangeDetectorRef, private userService: UserService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
     let param = route.snapshot.queryParams['page'];
     if (!param) {
       param = 0;
@@ -68,11 +68,10 @@ export class PostComponent implements AfterViewInit {
   onNgMasonryInit($event) {
     this.masonry = $event;
     if (this.masonry) {
-      this.masonry.setAddStatus('append');
+      this.masonry.setAddStatus('add');
 
       setTimeout(() => {
-        console.log("call");
-        this.masonry.reOrderItems();
+
       }, 5000);
     }
   }
@@ -81,9 +80,13 @@ export class PostComponent implements AfterViewInit {
   }
 
   alterPage() {
+    this.masonry.removeAllItems();
+    this.postsReady = false;
+    this.ref.detectChanges();
     this.navigate(this.pageEvent.pageIndex);
     this.postService.getPosts(this.pageEvent.pageSize, this.pageEvent.pageIndex * this.pageEvent.pageSize).subscribe((posts: Post[]) => {
       this.posts = posts;
+      this.postsReady = true;
     });
   }
 

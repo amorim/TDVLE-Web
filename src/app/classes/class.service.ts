@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Class} from '../model/class.model';
 import {Constants} from '../shared/constants';
 import {Quiz} from '../model/quiz.model';
+import {Activity} from "../model/activity.model";
 
 @Injectable()
 export class ClassService {
@@ -33,5 +34,21 @@ export class ClassService {
 
   createQuiz(quiz: Quiz, classId) {
     return this.http.post(Constants.url + '/class/' + classId + '/quiz/create', quiz);
+  }
+
+  createActivity(activity: Activity, classId) {
+    return this.http.post(Constants.url + '/class/' + classId + '/activity/create', activity);
+  }
+
+  getActivity(id) {
+    return this.http.get(Constants.url + '/activity/' + id);
+  }
+
+  getSubmissions(id) {
+    return this.http.get(Constants.url + '/activity/' + id + '/submissions');
+  }
+
+  sendSubmission(id, submissions) {
+    return this.http.post(Constants.url + '/activity/' + id + '/submissions', submissions);
   }
 }

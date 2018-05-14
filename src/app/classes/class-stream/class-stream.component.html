@@ -1,12 +1,14 @@
+<div style="width: 100%">
 <ng-masonry-grid
-  [masonryOptions]="{ addStatus: 'prepend',horizontalOrder: true, isFitWidth: true, percentPosition: true }"
-  style="margin: 0 auto;">
-  <ng-masonry-grid-item style="max-width: 400px" *ngFor="let item of streamItems; let i = index">
+  style="margin: 0 auto;"
+  [masonryOptions]="{ addStatus: 'add',horizontalOrder: true, isFitWidth: true  }"
+  >
+  <ng-masonry-grid-item style="width: 300px" *ngFor="let item of streamItems; let i = index">
     <mat-card [routerLink]="[item.uri]" class="postcard grid-item">
       <mat-card-header>
-        <ngx-avatar mat-card-avatar size="40" src="{{item.clazz.teacher.avatar}}" initialsSize="1" routerLink="/profile/{{item.clazz.teacher.id}}" name={{item.clazz.teacher.name}}></ngx-avatar>
+        <ngx-avatar mat-card-avatar size="40" src="{{item.clazz.teacher.avatar}}" initialsSize="1" [routerLink]="['/profile', item.clazz.teacher.id]" name="{{item.clazz.teacher.name}}"></ngx-avatar>
         <mat-card-title>{{item.title}}</mat-card-title>
-        <mat-card-subtitle>Prazo: {{item.dueDate | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+        <mat-card-subtitle>Due: {{item.dueDate | date: 'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
       </mat-card-header>
       <div class="fill">
         <mat-card-content style="margin: 20px 0 20px 0" [innerHTML]="item.detail | nl2br | linky"></mat-card-content>
@@ -14,14 +16,13 @@
     </mat-card>
   </ng-masonry-grid-item>
 </ng-masonry-grid>
+</div>
 
-<mat-toolbar class="toobar">
+<mat-toolbar  *ngxPermissionsOnly="['ROLE_ADMIN', 'ROLE_TEACHER']" class="toobar">
   <mat-toolbar-row>
-    <button mat-fab (click)="createQuiz()" color="accent"><mat-icon>add</mat-icon></button>
+    <button mat-fab  (click)="createQuiz()" color="accent"><mat-icon>format_list_bulleted</mat-icon></button>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <button mat-fab (click)="createActivity()" color="accent"><mat-icon>home</mat-icon></button>
+    <button style="margin-top: 10px" mat-fab (click)="createActivity()" color="accent"><mat-icon>attach_file</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
-
-<router-outlet></router-outlet>

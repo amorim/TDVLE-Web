@@ -27,6 +27,7 @@
     "@lucasolivamorim/ng-masonry-grid": "1.2.6",
     "@lucasolivamorim/ngx-avatar": "^2.9.1",
     "@lucasolivamorim/nl2br-pipe": "1.0.4",
+    "@lucasolivamorim/amazing-time-picker": "^1.5.3",
     "@types/jquery": "^3.3.1",
     "ajv": "^6.4.0",
     "angular-linky": "^1.2.2",

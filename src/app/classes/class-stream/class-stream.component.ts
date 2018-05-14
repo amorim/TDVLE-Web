@@ -13,7 +13,7 @@ import {ShowCreateStreamItemDialogComponent} from './show-create-stream-item-dia
 })
 export class ClassStreamComponent implements OnInit {
 
-  streamItems: StreamItem[];
+  streamItems: StreamItem[] = [];
   classId = 0;
 
   constructor(private classService: ClassService, private route: ActivatedRoute, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) {
@@ -22,9 +22,15 @@ export class ClassStreamComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.classId = Number(id);
-    this.classService.getClass(id).subscribe((streamItems: any) => {
-      console.log(streamItems);
-      this.streamItems = streamItems;
+    this.classService.getClass(id).subscribe((streamItems: any[]) => {
+      streamItems.sort((a, b) => {
+        if (a.dueDate < b.dueDate)
+          return 1;
+        if (a.dueDate > b.dueDate)
+          return -1;
+        return 0;
+      });
+      this.streamItems.push(...streamItems);
     });
   }
 
@@ -34,10 +40,6 @@ export class ClassStreamComponent implements OnInit {
 
   createActivity() {
     this.router.navigate(['/classes/' + this.classId + '/createActivity'], {},);
-  }
-
-  accessStream(s) {
-
   }
 
 }
