@@ -9,17 +9,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ClassReportComponent implements OnInit {
 
-  report: any = {};
   loading = true;
 
   constructor(private classService: ClassService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.classService.getReport(id).subscribe(r => {
-      this.report = r;
+    this.classService.downloadReportData(id).subscribe(state => {
       this.loading = false;
-    })
+    });
   }
 
 }

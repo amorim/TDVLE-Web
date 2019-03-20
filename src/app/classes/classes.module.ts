@@ -25,6 +25,7 @@ import {ClassActivityTeacherComponent} from "./class-activity-teacher/class-acti
 import { ClassReportComponent } from './class-report/class-report.component';
 import { ReportOverviewComponent } from './class-report/report-overview/report-overview.component';
 import {MatProgressSpinnerModule} from "@angular/material";
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
@@ -41,7 +42,8 @@ import {MatProgressSpinnerModule} from "@angular/material";
     LinkyModule,
     AmazingTimePickerModule,
     NgxPermissionsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxChartsModule
   ],
   entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent, ShowCreateStreamItemDialogComponent],
   providers: [ClassService],

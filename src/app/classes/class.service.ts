@@ -3,10 +3,13 @@ import {Injectable} from '@angular/core';
 import {Class} from '../model/class.model';
 import {Constants} from '../shared/constants';
 import {Quiz} from '../model/quiz.model';
-import {Activity} from "../model/activity.model";
+import {Activity} from '../model/activity.model';
+import {Observable, Observer} from 'rxjs';
 
 @Injectable()
 export class ClassService {
+
+  reportData: any = {};
 
   constructor(private http: HttpClient) {
 
@@ -74,6 +77,15 @@ export class ClassService {
   }
 
   getReport(classId) {
-    return this.http.get(Constants.url + '/class/' + classId + '/reporte');
+    return;
+  }
+
+  downloadReportData(id: string) {
+    return Observable.create((observer: Observer<boolean>) => {
+      this.http.get(Constants.url + '/class/' + id + '/reporte').subscribe(r => {
+        this.reportData = r;
+        observer.next(true);
+      });
+    });
   }
 }
