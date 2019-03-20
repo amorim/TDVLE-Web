@@ -7,13 +7,13 @@ import {UserService} from "../user/user.service";
 import {Like} from "../model/like.model";
 import {ImageUploadComponent} from '../image-upload/image-upload.component';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Masonry, MasonryGridItem} from "@lucasolivamorim/ng-masonry-grid";
+import {Masonry, MasonryGridItem} from "ng-masonry-grid";
 
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css', '../../../node_modules/@lucasolivamorim/ng-masonry-grid/ng-masonry-grid.css']
+  styleUrls: ['./post.component.css', '../../../node_modules/ng-masonry-grid/ng-masonry-grid.css']
 })
 
 export class PostComponent implements AfterViewInit {

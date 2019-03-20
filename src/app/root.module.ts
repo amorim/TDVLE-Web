@@ -15,7 +15,7 @@ import { PostComponent } from './post/post.component';
 import {MaterialModule} from "./shared/material.module";
 import {UserModule} from "./user/user.module";
 import {TimeAgoPipe} from 'time-ago-pipe';
-import {AvatarModule} from "@lucasolivamorim/ngx-avatar";
+import {AvatarModule} from "ngx-avatar";
 import { PeopleComponent } from './people/people.component';
 import { FindPeopleComponent } from './people/find-people/find-people.component';
 import { FollowersComponent } from './people/followers/followers.component';
@@ -34,8 +34,8 @@ import {SingleAppComponent} from "./apps/single-app/single-app.component";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {NgxPermissionsModule} from 'ngx-permissions';
-import {NgMasonryGridModule} from "@lucasolivamorim/ng-masonry-grid";
-import {Nl2BrPipeModule} from "@lucasolivamorim/nl2br-pipe";
+import {NgMasonryGridModule} from "ng-masonry-grid";
+import {Nl2BrPipeModule} from "nl2br-pipe";
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {ClassesComponent} from './classes/classes.component';
 import {SingleClassComponent} from './single-class/single-class.component';
@@ -51,9 +51,11 @@ import {EditAuthorityComponent} from './edit-authority/edit-authority.component'
 import {CreateQuizComponent} from './classes/quiz/create-quiz/create-quiz.component';
 import {QuizComponent} from './classes/quiz/quiz.component';
 import {AnswersQuizComponent} from './classes/quiz/answers-quiz/answers-quiz.component';
-import {AmazingTimePickerModule} from '@lucasolivamorim/amazing-time-picker';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
 import {CallbackComponent} from "./shared/callbackupload.component";
 import {ClassActivityTeacherComponent} from "./classes/class-activity-teacher/class-activity-teacher.component";
+import {ClassReportComponent} from "./classes/class-report/class-report.component";
+import {ReportOverviewComponent} from "./classes/class-report/report-overview/report-overview.component";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -77,6 +79,10 @@ const appRoutes: Routes = [
     { path: 'classes/:id', redirectTo: 'classes/:id/stream', pathMatch: 'full'},
     { path: 'classes/:id/stream', component: ClassStreamComponent},
     { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
+      { path: 'classes/:id/report', component: ClassReportComponent, children: [
+          {path: '', redirectTo: 'overview', pathMatch: 'full'},
+          { path: 'overview', component: ReportOverviewComponent}
+        ]},
     { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
     { path: 'classes/:classId/activity/:activityId/teacher', component: ClassActivityTeacherComponent},
     { path: 'callbackFileUpload', component: CallbackComponent},

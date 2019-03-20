@@ -72,4 +72,8 @@ export class ClassService {
   evaluate(classId, quizId, evaluation) {
     return this.http.post(Constants.url + '/class/' + classId + '/quiz/' + quizId + '/answers/evaluate', evaluation);
   }
+
+  getReport(classId) {
+    return this.http.get(Constants.url + '/class/' + classId + '/reporte');
+  }
 }

@@ -28,6 +28,9 @@
     <button mat-fab  (click)="createQuiz()" color="accent"><mat-icon>format_list_bulleted</mat-icon></button>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <button style="margin-top: 10px" mat-fab (click)="createActivity()" color="accent"><mat-icon>attach_file</mat-icon></button>
+    <button mat-fab (click)="createActivity()" color="accent"><mat-icon>attach_file</mat-icon></button>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <button mat-fab [routerLink]="['/classes', classId, 'report']" color="accent"><mat-icon>bar_chart</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
