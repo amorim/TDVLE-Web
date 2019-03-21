@@ -1,11 +1,11 @@
 <div class="report-container">
-  <h1>Class Report Overview</h1>
+  <h1>Class Report: Data by Activities</h1>
   <mat-card class="card-overview" id="card1">
     <mat-card-header>
       <mat-form-field style="width: 100%">
         <mat-label>Select an activity for detailed information</mat-label>
         <mat-select [(value)]="selectedActivity">
-          <mat-option *ngFor="let act of report.byActivity; let i = index" [value]="i">
+          <mat-option *ngFor="let act of report.byActivity.submissions; let i = index" [value]="i">
             {{act.name}}
           </mat-option>
         </mat-select>
@@ -14,10 +14,28 @@
     <mat-card-content class="reportmatcontent">
       <div class="report-text">
         <p>To the right you'll have the total number of activities on this class compared to how many students submitted it.</p>
-        <p>Currently, {{report.byActivity[selectedActivity].chartData[0].value}} assignments have been delivered, but {{report.byActivity[selectedActivity].chartData[1].value}} are still missing.</p>
+        <p>Currently, {{report.byActivity.submissions[selectedActivity].chartData[0].value}} assignments have been delivered, but {{report.byActivity.submissions[selectedActivity].chartData[1].value}} are still missing.</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
       </div>
-      <ngx-charts-pie-chart [view]="chartViews[0]" [scheme]="schemes[0]" class="chart-canvas" id="chart1" [doughnut]="true" [arcWidth]="0.25" [results]="report.byActivity[selectedActivity].chartData" [labels]="true"></ngx-charts-pie-chart>
+      <ngx-charts-pie-chart [view]="chartViews[0]" [scheme]="schemes[0]" class="chart-canvas" id="chart1" [doughnut]="true" [arcWidth]="0.25" [results]="report.byActivity.submissions[selectedActivity].chartData" [labels]="true"></ngx-charts-pie-chart>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card-overview" id="card2">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>File submissions Histogram</mat-card-title>
+      <mat-card-subtitle>Shows the distribution of files submitted in this activity</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="reportmatcontent">
+      <ngx-charts-bar-vertical [view]="chartViews[1]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="true"  [scheme]="schemes[1]" class="chart-canvas" id="chart2" [results]="report.byActivity.files[selectedActivity].fileHistogram"></ngx-charts-bar-vertical>
+
+      <div class="report-text">
+        <p>To the left you'll have the distribution of files submitted in this activity.</p>
+        <p>The mean number of files submitted is {{report.overview.gradesMean}}%.</p>
+        <p>You can find further details with respect to students or activities in the more detailed sections.</p>
+      </div>
+
     </mat-card-content>
   </mat-card>
 </div>
