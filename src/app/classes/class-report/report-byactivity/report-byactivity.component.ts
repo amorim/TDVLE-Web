@@ -1,17 +1,18 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ClassService} from '../../class.service';
+import {AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ClassService} from "../../class.service";
+
 
 declare let ResizeSensor, $: any;
 
 @Component({
-  selector: 'app-report-overview',
-  templateUrl: './report-overview.component.html',
-  styleUrls: ['./report-overview.component.scss']
+  selector: 'app-report-byactivity',
+  templateUrl: './report-byactivity.component.html',
+  styleUrls: ['./report-byactivity.component.scss']
 })
+export class ReportByactivityComponent implements OnInit, AfterViewInit {
 
-
-export class ReportOverviewComponent implements OnInit, AfterViewInit {
   report: any;
+  selectedActivity = 0;
   chartViews = [[200, 200], [200, 200], [200, 200]];
   schemes = ['natural', 'vivid', 'cool', 'fire', 'solar', 'air', 'aqua', 'flame'];
 
@@ -20,6 +21,7 @@ export class ReportOverviewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit() {

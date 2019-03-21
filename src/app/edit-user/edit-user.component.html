@@ -36,7 +36,9 @@
           <mat-checkbox (change)="authority.enabled = !authority.enabled" [checked]="authority.enabled">{{authority.description}}</mat-checkbox>
         </div>
       </div>
-
+      <div style="margin-bottom: 20px;">
+        Your request needs to be approved by an admin, unless you're an admin yourself.
+      </div>
       <button mat-raised-button (click)="update()" (onkeypress)="onKeyPress($event)" color="accent">Update</button>
     </form>
   </mat-card>

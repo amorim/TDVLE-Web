@@ -56,6 +56,7 @@ import {CallbackComponent} from "./shared/callbackupload.component";
 import {ClassActivityTeacherComponent} from "./classes/class-activity-teacher/class-activity-teacher.component";
 import {ClassReportComponent} from "./classes/class-report/class-report.component";
 import {ReportOverviewComponent} from "./classes/class-report/report-overview/report-overview.component";
+import {ReportByactivityComponent} from "./classes/class-report/report-byactivity/report-byactivity.component";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -81,7 +82,8 @@ const appRoutes: Routes = [
     { path: 'classes/:id/createActivity', component: CreateActivityComponent}, { path: 'classes/:id/createQuiz', component: CreateQuizComponent},
       { path: 'classes/:id/report', component: ClassReportComponent, children: [
           {path: '', redirectTo: 'overview', pathMatch: 'full'},
-          { path: 'overview', component: ReportOverviewComponent}
+          { path: 'overview', component: ReportOverviewComponent},
+          { path: 'activity', component: ReportByactivityComponent}
         ]},
     { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
     { path: 'classes/:classId/activity/:activityId/teacher', component: ClassActivityTeacherComponent},
