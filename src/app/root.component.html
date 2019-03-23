@@ -51,6 +51,11 @@
           <span style="width: 20px;"></span>{{url.desc}}
           <span style="width: 20px;"></span>
         </a>
+        <a *ngxPermissionsOnly="['ROLE_TEACHER']" mat-list-item (click)="disposeSidenav()" [routerLink]="['/material']">
+          <mat-icon>attach_money</mat-icon>
+          <span style="width: 20px;"></span>Material
+          <span style="width: 20px;"></span>
+        </a>
       </mat-nav-list>
     </mat-sidenav>
     <div class="routerOutlet">

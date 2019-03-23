@@ -42,7 +42,7 @@
     <mat-card-content class="reportmatcontent">
       <div class="report-text">
         <p>To the right you'll have the distribution of grades in this class.</p>
-        <p>The mean grade is {{report.overview.gradesMean}}%.</p>
+        <p>The mean grade is {{report.overview.gradesMean | number : '1.2-2'}}%.</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
       </div>
       <ngx-charts-bar-vertical [view]="chartViews[2]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="true"  [scheme]="schemes[2]" class="chart-canvas" id="chart3" [results]="report.overview.gradesHistogram"></ngx-charts-bar-vertical>

@@ -27,11 +27,13 @@ import { ReportOverviewComponent } from './class-report/report-overview/report-o
 import {MatProgressSpinnerModule} from "@angular/material";
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ReportByactivityComponent } from './class-report/report-byactivity/report-byactivity.component';
+import { ReportByStudentComponent } from './class-report/report-by-student/report-by-student.component';
+import { MaterialComponent } from './material/material.component';
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
   ClassStreamComponent,
-  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent, AnswersQuizComponent, ClassActivityTeacherComponent, ClassReportComponent, ReportOverviewComponent, ReportByactivityComponent],
+  CreateActivityComponent, ShowCreateStreamItemDialogComponent, CreateQuizComponent, ShowCreateProblemDialogComponent, QuizComponent, AnswersQuizComponent, ClassActivityTeacherComponent, ClassReportComponent, ReportOverviewComponent, ReportByactivityComponent, ReportByStudentComponent, MaterialComponent],
   imports: [
     CommonModule,
     FormsModule,

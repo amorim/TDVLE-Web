@@ -1,7 +1,7 @@
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as Cloudinary from 'cloudinary-core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RootComponent } from './root.component';
@@ -57,6 +57,8 @@ import {ClassActivityTeacherComponent} from "./classes/class-activity-teacher/cl
 import {ClassReportComponent} from "./classes/class-report/class-report.component";
 import {ReportOverviewComponent} from "./classes/class-report/report-overview/report-overview.component";
 import {ReportByactivityComponent} from "./classes/class-report/report-byactivity/report-byactivity.component";
+import {ReportByStudentComponent} from "./classes/class-report/report-by-student/report-by-student.component";
+import {MaterialComponent} from "./classes/material/material.component";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -83,13 +85,15 @@ const appRoutes: Routes = [
       { path: 'classes/:id/report', component: ClassReportComponent, children: [
           {path: '', redirectTo: 'overview', pathMatch: 'full'},
           { path: 'overview', component: ReportOverviewComponent},
-          { path: 'activity', component: ReportByactivityComponent}
+          { path: 'activity', component: ReportByactivityComponent},
+          { path: 'student', component: ReportByStudentComponent}
         ]},
     { path: 'classes/:classId/activity/:activityId', component: ClassActivityComponent},
     { path: 'classes/:classId/activity/:activityId/teacher', component: ClassActivityTeacherComponent},
     { path: 'callbackFileUpload', component: CallbackComponent},
     { path: 'classes/:classId/quiz/:quizId', component: QuizComponent},
-    { path: 'classes/:classId/quiz/:quizId/answers', component: AnswersQuizComponent}
+    { path: 'classes/:classId/quiz/:quizId/answers', component: AnswersQuizComponent},
+    { path: 'material', component: MaterialComponent}
     ]
   }];
 

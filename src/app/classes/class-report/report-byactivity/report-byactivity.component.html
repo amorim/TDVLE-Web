@@ -28,11 +28,11 @@
       <mat-card-subtitle>Shows the distribution of files submitted in this activity</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="reportmatcontent">
-      <ngx-charts-bar-vertical [view]="chartViews[1]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="true"  [scheme]="schemes[1]" class="chart-canvas" id="chart2" [results]="report.byActivity.files[selectedActivity].fileHistogram"></ngx-charts-bar-vertical>
+      <ngx-charts-bar-vertical [view]="chartViews[1]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="false"  [scheme]="schemes[1]" class="chart-canvas" id="chart2" [results]="report.byActivity.files[selectedActivity].fileHistogram"></ngx-charts-bar-vertical>
 
       <div class="report-text">
         <p>To the left you'll have the distribution of files submitted in this activity.</p>
-        <p>The mean number of files submitted is {{report.byActivity.files[selectedActivity].mean}}.</p>
+        <p>The mean number of files submitted is {{report.byActivity.files[selectedActivity].mean | number : '1.2-2'}}.</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
       </div>
 

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import {AppComponent} from "./app.component";
 import {RouterModule} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
@@ -8,11 +8,13 @@ import {RootComponent} from "./root.component";
 import {MaterialModule} from "./shared/material.module";
 import {FormsModule} from "@angular/forms";
 import {RegisterComponent} from "./register/register.component";
+import localeUs from '@angular/common/locales/en';
 
 const routes = [
   {path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent }
 ];
+
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ const routes = [
   ],
   declarations: [LoginComponent, AppComponent],
   bootstrap: [AppComponent],
-  exports: [AppComponent, LoginComponent]
+  exports: [AppComponent, LoginComponent],
+  providers: []
 })
+
 export class AppModule { }

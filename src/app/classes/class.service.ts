@@ -88,4 +88,8 @@ export class ClassService {
       });
     });
   }
+
+  generateBoletao() {
+    return this.http.post(Constants.url + '/class/material', {}, { responseType: 'blob' });
+  }
 }
