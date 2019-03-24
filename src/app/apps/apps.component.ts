@@ -38,7 +38,7 @@ export class AppsComponent implements OnInit {
       appsService.count().subscribe(count => {
         this.length = count['appsCount'];
         this.pageEvent.length = this.length;
-        console.log(this.apps);
+
       });
     });
   }
@@ -61,7 +61,7 @@ export class AppsComponent implements OnInit {
   approveApp(app: App) {
     this.appsService.approveRequest(app.id).subscribe(done => {
       app.approved = true;
-      console.log(done);
+
     });
   }
 

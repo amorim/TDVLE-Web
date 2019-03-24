@@ -24,7 +24,7 @@ export class ShowEnterClassDialogComponent implements OnInit {
 
   enter() {
     this.classService.enterClass(this.classAccessCode).subscribe(clazz => {
-      console.log('Entered class:', clazz);
+
       this.dialogRef.close([true, clazz]);
     });
   }

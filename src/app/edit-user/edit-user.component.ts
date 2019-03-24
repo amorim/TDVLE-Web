@@ -20,7 +20,7 @@ export class EditUserComponent implements OnInit {
       this.user = user;
     });
     this.userService.getAuthorities().subscribe((authorities: Authority[]) => {
-      console.log(authorities);
+
       this.authorities = authorities;
     });
   }
@@ -48,7 +48,6 @@ export class EditUserComponent implements OnInit {
   openDialog(toEdit): void {
     let dialogRef = this.dialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: toEdit}});
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.insertUserImage(toEdit, result);
     });
   }

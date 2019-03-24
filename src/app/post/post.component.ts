@@ -76,7 +76,7 @@ export class PostComponent implements AfterViewInit {
     }
   }
   masonryLayoutComplete($event) {
-    console.log("complete");
+
   }
 
   alterPage() {
@@ -97,7 +97,7 @@ export class PostComponent implements AfterViewInit {
   openDialog(toEdit): void {
     let dialogRef = this.dialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: toEdit}});
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+
       this.postObj.image = result;
     });
   }

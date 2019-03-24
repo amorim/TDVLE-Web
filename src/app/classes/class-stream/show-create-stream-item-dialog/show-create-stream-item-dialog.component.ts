@@ -33,10 +33,10 @@ export class ShowCreateStreamItemDialogComponent implements OnInit {
     if (this.selected.valueOf() === '0') {
       this.quiz.title = this.streamItem.title;
       this.quiz.detail = this.streamItem.detail;
-      console.log(this.quiz);
-      console.log(this.data.classId);
+
+
       this.classService.createQuiz(this.quiz, this.data.classId).subscribe(streamItem => {
-        console.log('Created streamItem:', streamItem);
+
         this.dialogRef.close([true, streamItem]);
       });
     } else {

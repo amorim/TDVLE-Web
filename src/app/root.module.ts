@@ -59,6 +59,9 @@ import {ReportOverviewComponent} from "./classes/class-report/report-overview/re
 import {ReportByactivityComponent} from "./classes/class-report/report-byactivity/report-byactivity.component";
 import {ReportByStudentComponent} from "./classes/class-report/report-by-student/report-by-student.component";
 import {MaterialComponent} from "./classes/material/material.component";
+import {ConfigComponent} from "./config/config.component";
+import {MatProgressSpinnerModule, MatTreeModule} from "@angular/material";
+import {ConfigService} from "./config/config.service";
 
 const appRoutes: Routes = [
   {  path: '', component: RootComponent, canActivate: [AuthGuard], children: [
@@ -93,7 +96,8 @@ const appRoutes: Routes = [
     { path: 'callbackFileUpload', component: CallbackComponent},
     { path: 'classes/:classId/quiz/:quizId', component: QuizComponent},
     { path: 'classes/:classId/quiz/:quizId/answers', component: AnswersQuizComponent},
-    { path: 'material', component: MaterialComponent}
+    { path: 'material', component: MaterialComponent},
+    { path: 'config', component: ConfigComponent}
     ]
   }];
 
@@ -119,7 +123,8 @@ const appRoutes: Routes = [
     ShowCreateClassDialogComponent,
     ShowEnterClassDialogComponent,
     EditAuthorityComponent,
-    CallbackComponent
+    CallbackComponent,
+    ConfigComponent
   ],
   entryComponents: [ImageUploadComponent],
   imports: [
@@ -143,13 +148,16 @@ const appRoutes: Routes = [
     NgMasonryGridModule,
     Nl2BrPipeModule,
     LinkyModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    MatTreeModule,
+    MatProgressSpinnerModule
   ],
   providers: [ImageUploadService, HttpClient, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true,
-  }]
+  },
+  ConfigService]
 })
 
 export class RootModule { }

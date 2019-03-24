@@ -1,4 +1,4 @@
-<div class="container" [ngStyle]="{'background-image': 'url(' + user.background + ')'}"></div>
+<div class="container" *ngIf="user.background" [ngStyle]="{'background-image': 'url(' + user.background + ')'}"></div>
 <br>
 <div>
   <mat-card class="usercard">

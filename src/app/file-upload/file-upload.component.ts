@@ -21,9 +21,9 @@ export class FileUploadComponent implements OnInit {
 
   onFileChanged(event) {
     this.file = event.target.files[0];
-    console.log(this.file);
+
     this.http.post(this.driveUploaderLike, this.file).subscribe((lol: any) => {
-      console.log(lol);
+
     }); // NEEDS TO FIX THIS
   }
 

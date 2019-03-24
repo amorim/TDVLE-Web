@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
         this.userService.getUser(id).subscribe((subUser: User) => {
           this.user = subUser;
           this.isLoggedUser = user.id === subUser.id;
-          console.log(this.isLoggedUser);
+
           this.fetchPosts();
         });
       } else {

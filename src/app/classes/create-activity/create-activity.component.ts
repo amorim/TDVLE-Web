@@ -53,7 +53,7 @@ export class CreateActivityComponent implements OnInit, AfterViewInit {
       return;
     }
     this.activity.teacherSubmissions = this.submissions;
-    console.log(this.activity);
+
     this.classService.createActivity(this.activity, this.route.snapshot.params['id']).subscribe(act => {
       this.snackBar.open('Activity created', 'Dismiss', {duration: 2000});
       this.router.navigate(['../'], {relativeTo: this.route});

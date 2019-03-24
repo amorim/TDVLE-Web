@@ -22,10 +22,10 @@ export class RegisterComponent implements OnInit {
     this.userService.registerUser(this.userRegister).subscribe(user => {
       this.snackBar.open('Registered user successfully', 'Dismiss', {duration: 2000});
       this.router.navigate(['/login']);
-      console.log('Registred user:', user);
+
     }, (error: any) => {
       this.snackBar.open('User already exists', 'Dismiss', {duration: 2000});
-      console.log('Already registered');
+
     });
   }
 

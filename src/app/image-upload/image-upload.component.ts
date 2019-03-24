@@ -38,7 +38,7 @@ export class ImageUploadComponent implements OnInit {
   ngOnInit(): void {
     var dialog = document.getElementsByClassName('myDialog');// .getElementById('dialogContainer');
     this.cropperSettings.canvasWidth = dialog[0].clientWidth;
-    console.log(this.cropperSettings.canvasWidth);
+
   }
 
   onNoClick(): void {

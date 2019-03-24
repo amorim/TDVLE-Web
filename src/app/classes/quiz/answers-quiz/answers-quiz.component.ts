@@ -22,14 +22,14 @@ export class AnswersQuizComponent implements OnInit {
     this.quizId = Number(this.route.snapshot.paramMap.get('quizId'));
     this.classService.getAnswers(this.classId, this.quizId).subscribe((quizAnswers: QuizAnswer[]) => {
       this.quizAnswers = quizAnswers;
-      console.log(this.evaluations);
+
       for (const qa of this.quizAnswers) {
         qa.answers.sort((a, b) => {if (a.problemId < b.problemId) {return(-1);} if (a.problemId > b.problemId) {return(1);} return(0);});
         this.evaluations.push(new Evaluation());
         this.evaluations[this.evaluations.length - 1].quizAnswer = qa;
       }
-      console.log(this.evaluations);
-      console.log('sorted' + this.quizAnswers.toString());
+
+
     });
     this.classService.getQuiz(this.classId, this.quizId).subscribe((quiz: Quiz) => {
       this.quiz = quiz['quiz'];
@@ -39,7 +39,7 @@ export class AnswersQuizComponent implements OnInit {
           p.alternatives.sort((a, b) => {if (a.alternativeId < b.alternativeId) {return(-1);} if (a.alternativeId > b.alternativeId) {return(1);} return(0);});
         }
       }
-      console.log(this.quiz);
+
     });
   }
 

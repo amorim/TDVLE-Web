@@ -29,6 +29,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ReportByactivityComponent } from './class-report/report-byactivity/report-byactivity.component';
 import { ReportByStudentComponent } from './class-report/report-by-student/report-by-student.component';
 import { MaterialComponent } from './material/material.component';
+import {NgxPayPalModule} from "ngx-paypal";
+import { ConfigComponent } from '../config/config.component';
 @NgModule({
   declarations: [ClassesComponent,
   ClassActivityComponent,
@@ -46,7 +48,8 @@ import { MaterialComponent } from './material/material.component';
     AmazingTimePickerModule,
     NgxPermissionsModule,
     MatProgressSpinnerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgxPayPalModule
   ],
   entryComponents: [ShowCreateClassDialogComponent, ShowEnterClassDialogComponent, ShowCreateStreamItemDialogComponent],
   providers: [ClassService],

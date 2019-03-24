@@ -33,7 +33,7 @@ export class SingleAppComponent implements OnInit {
   approveApp(app: App) {
     this.appsService.approveRequest(app.id).subscribe(done => {
       app.approved = true;
-      console.log(done);
+
     });
   }
 

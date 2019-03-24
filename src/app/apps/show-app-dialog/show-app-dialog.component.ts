@@ -24,7 +24,7 @@ export class ShowAppDialogComponent implements OnInit {
 
   request() {
     this.appsService.requestIntegration(this.appObj).subscribe(app => {
-      console.log('App requested:', app);
+
       this.dialogRef.close(true);
     });
   }
@@ -32,7 +32,7 @@ export class ShowAppDialogComponent implements OnInit {
   uploadDialog() {
     let imageDialogRef = this.imageDialog.open(ImageUploadComponent, {width: 'auto', data: {toEdit: 'App Image'}});
     imageDialogRef.afterClosed().subscribe(result => {
-      console.log('Image Upload dialog was closed');
+
       this.appObj.image = result;
     });
   }

@@ -52,7 +52,7 @@ export class QuizComponent implements OnInit {
   }
 
   prepareAnswer() {
-    console.log(this.quiz);
+
     if (!this.quiz.problems)
       return;
     for (const p of this.quiz.problems) {
@@ -69,7 +69,7 @@ export class QuizComponent implements OnInit {
 
   changeChoiceId(answer, alternatives) {
     answer.choiceId = alternatives[answer.choice - 1].alternativeId;
-    console.log('choosen:' + answer.choiceId);
+
   }
 
   submit() {

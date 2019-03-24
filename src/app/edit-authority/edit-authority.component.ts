@@ -24,7 +24,7 @@ export class EditAuthorityComponent implements OnInit {
       this.user = user;
     });
     this.userService.getAuthoritiesFromUser(id).subscribe((authorities: Authority[]) => {
-      console.log(authorities);
+
       this.authorities = authorities;
     });
   }

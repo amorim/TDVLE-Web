@@ -25,7 +25,7 @@ export class ShowCreateClassDialogComponent implements OnInit {
 
   create() {
     this.classService.createClass(this.clazz).subscribe(clazz => {
-      console.log('Created class:', clazz);
+
       this.dialogRef.close([true, clazz]);
     });
   }
