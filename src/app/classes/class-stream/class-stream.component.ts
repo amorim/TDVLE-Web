@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ShowCreateClassDialogComponent} from '../show-create-class-dialog/show-create-class-dialog.component';
 import {ShowCreateStreamItemDialogComponent} from './show-create-stream-item-dialog/show-create-stream-item-dialog.component';
+import {ConfigService} from "../../config/config.service";
 
 @Component({
   selector: 'app-class-stream',
@@ -15,8 +16,12 @@ export class ClassStreamComponent implements OnInit {
 
   streamItems: StreamItem[] = [];
   classId = 0;
+  config: any;
 
-  constructor(private classService: ClassService, private route: ActivatedRoute, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private classService: ClassService, private route: ActivatedRoute, public dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private configService: ConfigService) {
+    this.configService.downloadSettings().subscribe(s => {
+      this.config = s;
+    });
   }
 
   ngOnInit() {

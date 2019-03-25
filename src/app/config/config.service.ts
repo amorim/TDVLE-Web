@@ -27,6 +27,7 @@ export class ConfigService {
   }
 
   updateSettings(s) {
+    this.settings = s;
     return this.http.post(Constants.url + '/features', s);
   }
 }

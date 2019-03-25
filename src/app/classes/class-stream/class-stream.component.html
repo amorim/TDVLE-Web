@@ -24,13 +24,13 @@
 </div>
 
 <mat-toolbar  *ngxPermissionsOnly="['ROLE_TEACHER']" class="toobar">
-  <mat-toolbar-row>
-    <button mat-fab  (click)="createQuiz()" color="accent"><mat-icon>format_list_bulleted</mat-icon></button>
+  <mat-toolbar-row *ngIf="config && config[3].children[0].enabled">
+    <button mat-fab  (click)="createQuiz()"  color="accent"><mat-icon>format_list_bulleted</mat-icon></button>
   </mat-toolbar-row>
-  <mat-toolbar-row>
+  <mat-toolbar-row *ngIf="config && config[3].children[1].enabled">
     <button mat-fab (click)="createActivity()" color="accent"><mat-icon>attach_file</mat-icon></button>
   </mat-toolbar-row>
-  <mat-toolbar-row>
+  <mat-toolbar-row *ngIf="config && (config[1].children[0].enabled || config[1].children[1].enabled)" >
     <button mat-fab [routerLink]="['/classes', classId, 'report']" color="accent"><mat-icon>bar_chart</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>

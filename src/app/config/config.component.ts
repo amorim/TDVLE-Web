@@ -171,6 +171,9 @@ export class ConfigComponent implements OnInit {
     }
     this.configService.updateSettings(this.classed).subscribe(r => {
       this.snackBar.open("Installation completed", "Dismiss", {duration: 3000});
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
     });
   }
 

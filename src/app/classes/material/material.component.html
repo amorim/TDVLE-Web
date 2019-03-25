@@ -18,7 +18,7 @@
       </mat-form-field>
       Grand Total: {{finalValue}}
       <h4>Please choose a payment method</h4>
-      <div
+      <div *ngIf="config && config[0].children[1].enabled"
         style="margin-bottom: 16px; display: flex; flex-direction: column; align-items: center; width: 100%; height: 82px;"
         >
         <img *ngIf="!loadingBoleto" (click)="geraBoleto()" style="height: 82px; cursor: pointer;" src="https://i.imgur.com/OjyyCIk.png">
@@ -31,7 +31,7 @@
           </mat-progress-spinner>
         </div>
       </div>
-      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      <ngx-paypal *ngIf="config && config[0].children[0].enabled" [config]="payPalConfig"></ngx-paypal>
     </div>
     <div *ngIf="loading" style="display: flex; flex-direction: column; align-items: center;">
       <mat-progress-spinner

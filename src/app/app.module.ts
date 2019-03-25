@@ -9,11 +9,41 @@ import {MaterialModule} from "./shared/material.module";
 import {FormsModule} from "@angular/forms";
 import {RegisterComponent} from "./register/register.component";
 import localeUs from '@angular/common/locales/en';
+import {Tasks} from "./classes/Tasks";
+import {Activities} from "./classes/Activities";
+import {Quizzes} from "./classes/Quizzes";
+import {SocialFeatures} from "./SocialFeatures";
+import {ForumModule} from "./ForumModule";
+import {EmbeddedModule} from "./EmbeddedModule";
 
 const routes = [
   {path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent }
 ];
+
+
+function loadMobileInterface() {
+  applicationInterface['load'].mobile();
+}
+
+function loadDesktopInterface() {
+  applicationInterface['load'].desktop();
+}
+
+// vinculacao dinamica das bibliotecas adequadas a cada interface
+let applicationInterface = {
+  "dynamicSelector": {
+    "if-useragent-mobile": loadMobileInterface(),
+    "if-useragent-desktop": loadDesktopInterface()
+  },
+  "moduleLoaderConfig": {
+    "if-activity-feature-enabled": new Activities(),
+    "if-quiz-feature-enabled": new Quizzes()
+  },
+  "overloaded": {
+    "overloadedClass": new SocialFeatures()
+  }
+};
 
 
 @NgModule({
@@ -32,5 +62,6 @@ const routes = [
   exports: [AppComponent, LoginComponent],
   providers: []
 })
+
 
 export class AppModule { }

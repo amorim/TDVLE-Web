@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSidenav, MatSnackBar} from '@angular/material';
 import {User} from "./model/user.model";
@@ -8,6 +8,7 @@ import {Constants} from './shared/constants';
 import {Router} from "@angular/router";
 import {AuthService} from "./auth/auth.service";
 import {NgxPermissionsService} from "ngx-permissions";
+import {ConfigService} from "./config/config.service";
 
 @Component({
   selector: 'app-app',
@@ -30,7 +31,9 @@ export class RootComponent implements OnDestroy {
     {path: '/classes', icon: 'forum', desc: 'Classes'}
   ];
 
-  constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar, private permissionService: NgxPermissionsService) {
+  config: any;
+
+  constructor (private userService: UserService, private router: Router, private authService: AuthService, private snackBar: MatSnackBar, private permissionService: NgxPermissionsService, private configService: ConfigService) {
     this.userService.getAuthenticatedUser().subscribe((au: User) => {
       this.authenticatedUser = au;
       let perm = [];
@@ -44,6 +47,16 @@ export class RootComponent implements OnDestroy {
     });
     this.getNotifications();
     this.intervalId = setInterval(() => { this.getNotifications(); }, Constants.notificationUpdateTime);
+    this.configService.downloadSettings().subscribe(s => {
+      this.config = s;
+      if (!this.config[2].children[1].enabled) {
+        this.urls = [
+          {path: '/profile', icon: 'person', desc: 'Profile'},
+          {path: '/apps', icon: 'apps', desc: 'Apps'},
+          {path: '/classes', icon: 'forum', desc: 'Classes'}
+        ];
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -90,5 +103,9 @@ export class RootComponent implements OnDestroy {
     this.authService.logout();
     this.snackBar.open('Logged Out', 'Dismiss', {duration: 2000});
     this.router.navigate(['/login']);
+  }
+
+  goToForum() {
+    window.open("https://casaamorim.no-ip.biz:5000/forum",'_blank');
   }
 }

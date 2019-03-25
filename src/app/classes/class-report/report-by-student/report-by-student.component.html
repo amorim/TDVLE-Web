@@ -12,12 +12,12 @@
       </mat-form-field>
     </mat-card-header>
     <mat-card-content class="reportmatcontent">
-      <div class="report-text">
+      <div class="report-text" *ngIf="config && config[1].children[0].enabled">
         <p>To the right you'll have a distribution of how many activities your student finished compared to how many are missing.</p>
         <p>Currently, {{report.byStudent[selectedStudent].name}} delivered {{report.byStudent[selectedStudent].general[0].value}} assignments, but {{report.byStudent[selectedStudent].general[1].value}} are still missing.</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
       </div>
-      <ngx-charts-pie-chart [view]="chartViews[0]" [scheme]="schemes[0]" class="chart-canvas" id="chart1" [doughnut]="true" [arcWidth]="0.25" [results]="report.byStudent[selectedStudent].general" [labels]="true"></ngx-charts-pie-chart>
+      <ngx-charts-pie-chart *ngIf="config && config[1].children[1].enabled" [view]="chartViews[0]" [scheme]="schemes[0]" class="chart-canvas" id="chart1" [doughnut]="true" [arcWidth]="0.25" [results]="report.byStudent[selectedStudent].general" [labels]="true"></ngx-charts-pie-chart>
     </mat-card-content>
   </mat-card>
 
@@ -28,9 +28,9 @@
       <mat-card-subtitle>Shows which activities have been delivered and those that are still missing</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="reportmatcontent">
-      <ngx-charts-heat-map [view]="[chartViews[1][0], 200]" [tooltipDisabled]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Activities'" [showXAxisLabel]="true"  [scheme]="'vivid'" class="chart-canvas" id="chart2" [results]="report.byStudent[selectedStudent].heatMap"></ngx-charts-heat-map>
+      <ngx-charts-heat-map *ngIf="config && config[1].children[1].enabled" [view]="[chartViews[1][0], 200]" [tooltipDisabled]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Activities'" [showXAxisLabel]="true"  [scheme]="'vivid'" class="chart-canvas" id="chart2" [results]="report.byStudent[selectedStudent].heatMap"></ngx-charts-heat-map>
 
-      <div class="report-text">
+      <div class="report-text" *ngIf="config && config[1].children[0].enabled">
         <p>To the left you'll have a hitmap representing which activities have been delivered or not by {{report.byStudent[selectedStudent].name}}.</p>
         <p>The rate of assignment delivery for {{report.byStudent[selectedStudent].name}} is {{report.byStudent[selectedStudent].meanDeliveryRate | number : '1.2-2'}}</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
@@ -46,12 +46,12 @@
       <mat-card-subtitle>Shows the distribution of quiz grades for {{report.byStudent[selectedStudent].name}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="reportmatcontent">
-      <div class="report-text">
+      <div class="report-text" *ngIf="config && config[1].children[0].enabled">
         <p>To the right you'll have the distribution of quiz grades for {{report.byStudent[selectedStudent].name}}.</p>
         <p>The mean grade is {{report.byStudent[selectedStudent].meanGrade | number : '1.2-2'}}%.</p>
         <p>You can find further details with respect to students or activities in the more detailed sections.</p>
       </div>
-      <ngx-charts-bar-vertical [view]="chartViews[2]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="true"  [scheme]="schemes[2]" class="chart-canvas" id="chart3" [results]="report.byStudent[selectedStudent].gradeHistogram"></ngx-charts-bar-vertical>
+      <ngx-charts-bar-vertical  *ngIf="config && config[1].children[1].enabled" [view]="chartViews[2]" [xAxis]="true" [showXAxisLabel]="true" [roundEdges]="true"  [scheme]="schemes[2]" class="chart-canvas" id="chart3" [results]="report.byStudent[selectedStudent].gradeHistogram"></ngx-charts-bar-vertical>
 
     </mat-card-content>
   </mat-card>

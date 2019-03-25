@@ -1,5 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ClassService} from "../../class.service";
+import {ConfigService} from "../../../config/config.service";
 
 declare let ResizeSensor, $: any;
 
@@ -14,9 +15,13 @@ export class ReportByStudentComponent implements OnInit, AfterViewInit {
   selectedStudent = 0;
   chartViews = [[200, 200], [200, 200], [200, 200]];
   schemes = ['natural', 'vivid', 'cool', 'fire', 'solar', 'air', 'aqua', 'flame'];
+  config: any;
 
-  constructor(private classService: ClassService, private ref: ChangeDetectorRef) {
+  constructor(private classService: ClassService, private ref: ChangeDetectorRef, private configService: ConfigService) {
     this.report = classService.reportData;
+    this.configService.downloadSettings().subscribe(s => {
+      this.config = s;
+    });
   }
 
   ngOnInit() {

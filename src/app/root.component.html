@@ -7,7 +7,7 @@
     <span class="fill-space"></span>
 
 
-    <button mat-icon-button [matMenuTriggerFor]="notifications" (click)="readNotifications()">
+    <button *ngIf="config && config[2].children[1].enabled" mat-icon-button [matMenuTriggerFor]="notifications" (click)="readNotifications()">
       <mat-icon *ngIf="this.notificationCount == 0" class="mat-24" matTooltip="Notifications"
                 aria-label="Notifications">notifications
       </mat-icon>
@@ -51,11 +51,23 @@
           <span style="width: 20px;"></span>{{url.desc}}
           <span style="width: 20px;"></span>
         </a>
-        <a *ngxPermissionsOnly="['ROLE_TEACHER']" mat-list-item (click)="disposeSidenav()" [routerLink]="['/material']">
-          <mat-icon>attach_money</mat-icon>
-          <span style="width: 20px;"></span>Material
+        <a mat-list-item *ngIf="config && config[2].children[0].enabled" (click)="goToForum()">
+          <mat-icon>people</mat-icon>
+          <span style="width: 20px;"></span>Forum
           <span style="width: 20px;"></span>
         </a>
+        <div *ngIf="config && (config[0].children[0].enabled || config[0].children[1].enabled)">
+        <a *ngxPermissionsOnly="['ROLE_TEACHER']"  mat-list-item (click)="disposeSidenav()" [routerLink]="['/material']">
+          <mat-icon>attach_money</mat-icon>
+          <span style="width: 20px;"></span>Class Supplies
+          <span style="width: 20px;"></span>
+        </a>
+        </div>
+        <a *ngxPermissionsOnly="['ROLE_ADMIN']" mat-list-item (click)="disposeSidenav()" [routerLink]="['/config']">
+        <mat-icon>settings</mat-icon>
+        <span style="width: 20px;"></span>Feature Editor
+        <span style="width: 20px;"></span>
+      </a>
       </mat-nav-list>
     </mat-sidenav>
     <div class="routerOutlet">

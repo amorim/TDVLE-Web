@@ -5,6 +5,7 @@ import {ICreateOrderRequest, IPayPalConfig} from "ngx-paypal";
 import {DecimalPipe} from "@angular/common";
 import {decimalChecker} from "@swimlane/ngx-charts";
 import {MatSnackBar} from "@angular/material";
+import {ConfigService} from "../../config/config.service";
 
 
 @Component({
@@ -23,8 +24,12 @@ export class MaterialComponent implements OnInit {
   finalValue = '';
   decimalPipe: DecimalPipe;
   costByClass = {};
+  config: any;
 
-  constructor(private classService: ClassService, private snackBar: MatSnackBar) {
+  constructor(private classService: ClassService, private snackBar: MatSnackBar, private configService: ConfigService) {
+    this.configService.downloadSettings().subscribe(s => {
+      this.config = s;
+    });
     classService.getClasses(10000, 0).subscribe((c: any[]) => {
       this.classes = c;
       this.selectedClass = this.classes[0];
@@ -108,11 +113,11 @@ export class MaterialComponent implements OnInit {
 
   geraBoleto() {
     this.loadingBoleto = true;
-    this.snackBar.open("Please wait while we generate the Boleto", "Dismiss", {duration: 3000});
+    this.snackBar.open("Please wait while we generate the Boleto.ts", "Dismiss", {duration: 3000});
     this.classService.generateBoletao({value: this.finalValue.replace(",", "")}).subscribe(b => {
       let boleto = new Blob([b], { type: 'application/pdf' });
       saveAs(boleto, 'boleto.pdf');
-      this.snackBar.open("Boleto download in progress", "Dismiss", {duration: 4000});
+      this.snackBar.open("Boleto.ts download in progress", "Dismiss", {duration: 4000});
       this.loadingBoleto = false;
     });
   }
