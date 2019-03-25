@@ -15,6 +15,8 @@ import {Quizzes} from "./classes/Quizzes";
 import {SocialFeatures} from "./SocialFeatures";
 import {ForumModule} from "./ForumModule";
 import {EmbeddedModule} from "./EmbeddedModule";
+import {PaymentMethod} from "./classes/material/model/PaymentMethod";
+import {ReportFeatures} from "./classes/class-report/model/ReportFeatures";
 
 const routes = [
   {path: 'login', component: LoginComponent},
@@ -42,6 +44,12 @@ let applicationInterface = {
   },
   "overloaded": {
     "overloadedClass": new SocialFeatures()
+  },
+  "inheritanceModuleLoader": {
+    "byInheritance": [
+      window['moduleLoader'].findImplementation(PaymentMethod),
+      window['moduleLoader'].findImplementation(ReportFeatures)
+      ]
   }
 };
 
